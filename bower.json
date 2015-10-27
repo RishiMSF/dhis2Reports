@@ -1,0 +1,14 @@
+{
+  "name": "Hmis dossier ",
+  "description": "dossier report for HMIS",
+  "version": "0.0.0",
+  "private": true,
+  "dependencies": {
+    "angular": "1.4.x",
+    "angular-mocks": "1.4.x",
+    "jquery": "~2.x",
+    "bootstrap": "~3.x",
+    "angular-route": "1.4.x",
+    "angular-resource": "1.4.x"
+  }
+}

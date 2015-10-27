@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html ng-app="HmisReport">
+	<head>
+		<meta charset="UTF-8">
+		<title>Dossiers</title>
+        <script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
+  <!--       <script type="text/javascript" src="http://localhost:8989/dhis/dhis-web-commons/javascripts/jQuery/ui/jquery-ui.min.js"></script>
+         <script type="text/javascript" src="http://localhost:8989/dhis/dhis-web-commons/javascripts/jQuery/jquery.plugin.min.js"></script>-->
+		<script type="text/javascript" src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="bower_components/angular/angular.js"></script>
+        <script type="text/javascript" src="bower_components/angular-resource/angular-resource.min.js"></script>
+        
+        <script src="js/app.js"></script>
+        <script src="js/controller.js"></script>
+        <script src="js/services.js"></script>
+		<link type="text/css" rel="stylesheet" media="screen" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+	</head>
+	<body ng-controller="HmisReportCtrl">
+		<div id="headerPanel" class="HmisReportpanel">
+			<h1>HMIS OCBA 2015</h1>
+			<h2>{{hmisTitle}}</h2>
+			<p> number of elements: {{elementGroup.dataElements.length}}</p>
+
+
+			<table class="table table-condensed">
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th>Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="de in elementGroup.dataElements | orderBy: 'name'">
+						<td>{{de}}</td>
+						<td>{{de.description}}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</body>
+</html>	
