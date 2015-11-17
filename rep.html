@@ -22,6 +22,9 @@
 			<p> number of elements: {{elements.dataElements.length}}</p>
 			<p> number of elements: {{elementGroups.dataElementGroups.length}}</p> 
 
+			<select id="selectorElementGroup" name="select">
+  				<option ng-repeat="grp in elementGroups.dataElementGroups | orderBy: 'name'" value='{{grp.name}}'>{{grp.name}}</option> 
+			</select>
 
 			<table class="table table-condensed">
 				<thead>
