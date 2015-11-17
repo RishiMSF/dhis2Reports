@@ -1,0 +1,22 @@
+{
+	"version":"0.1",
+	"name":"HMIS  Report",
+	"description":"Dossiers",
+	"launch_path":"index.html",
+	"icons":{"16":null,
+	"48":"img/Logo_48.png",
+	"128":null
+	},
+	"developer":{
+	"url":"",
+	"name":"Rishi Sukul - MSFOCBA",
+	"email":"rishi.sukul@barcelona.msf.org"
+	},
+	"installs_allowed_from":null,
+	"default_locale":"en",
+	"activities": {
+		"dhis": {
+	  		"href": "*"
+		}
+	}
+}
