@@ -18,12 +18,11 @@
 	<body ng-controller="HmisReportCtrl">
 		<div id="headerPanel" class="HmisReportpanel">
 			<h1>HMIS OCBA 2015</h1>
-			<h2>{{hmisTitle}}</h2>
-			<p> number of elements: {{elements.dataElements.length}}</p>
-			<p> number of elements: {{elementGroups.dataElementGroups.length}}</p> 
-
-			<select id="selectorElementGroup" name="select">
-  				<option ng-repeat="grp in elementGroups.dataElementGroups | orderBy: 'name'" value='{{grp.name}}'>{{grp.name}}</option> 
+			<h2><tt>{{selected.name}}</tt> </h2>
+			<p> number of element groups: {{elementGroups.dataElementGroups.length}}</p> 
+			<p> number of elements in selected group: {{elements.dataElements.length}}</p>
+			
+			<select ng-options="grp.name for grp in elementGroups.dataElementGroups" name="select" ng-model="selected" ng-change="getElement()">
 			</select>
 
 			<table class="table table-condensed">
