@@ -22,10 +22,13 @@
 			<p> number of element groups: {{elementGroups.dataElementGroups.length}}</p> 
 			<p> number of elements in selected group: {{elements.dataElements.length}}</p>
 			
-			<select ng-options="grp.name for grp in elementGroups.dataElementGroups" name="select" ng-model="selected" ng-change="getElement()">
+			<select ng-options="grp.name for grp in elementGroups.dataElementGroups" name="select" id="drpBoxElementGrp" ng-model="selected" ng-change="getElement()">
 			</select>
 
-			<table class="table table-condensed">
+			<select ng-options="set.displayName for set in dataSets.dataSets" name="select" id="drpBoxElementGrp" ng-model="selectedSet" ng-change="getDataSections()">
+			</select>
+
+			<table id="ElementsByElementGrp" class="table table-condensed">
 				<thead>
 					<tr>
 						<th>Name</th>
@@ -39,6 +42,12 @@
 					</tr>
 				</tbody>
 			</table>
+
+			<ul>
+    			<li ng-repeat="section in dataset.sections">
+      			<span>{{section.name}}</span>
+         		</li>
+  			</ul>
 		</div>
 	</body>
 </html>	

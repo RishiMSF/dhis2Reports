@@ -3,12 +3,18 @@ var HmisReport = angular.module('HmisReportCtrl', []);
 
 			
 
-HmisReport.controller('HmisReportCtrl', ['$scope', 'Elements', 'ElementsGrps',function($scope, Elements, ElementsGrps){
+HmisReport.controller('HmisReportCtrl', ['$scope', 'Elements', 'ElementsGrps','DataSets', 'DataSet', function($scope, Elements, ElementsGrps, DataSets, DataSet){
 	$scope.hmisTitle = 'DIAGNOSTIC - DOSSIER';
 	$scope.elementGroups = ElementsGrps.get();
+	$scope.dataSets = DataSets.get();
 
 	$scope.getElement = function(){
 		$scope.elements = Elements.get({elementGrpId:$scope.selected.id});
+	};
+
+	$scope.getDataSections = function(){
+		$scope.dataset = DataSet.get({dataSetId:$scope.selectedSet.id});
+		//$scope.sections = $scope.dataSet.sections;
 	};
 
 	$scope.setTitle = function(elementGroupName){
