@@ -3,51 +3,51 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>Dossiers</title>
-        <script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
-  <!--       <script type="text/javascript" src="http://localhost:8989/dhis/dhis-web-commons/javascripts/jQuery/ui/jquery-ui.min.js"></script>
-         <script type="text/javascript" src="http://localhost:8989/dhis/dhis-web-commons/javascripts/jQuery/jquery.plugin.min.js"></script>-->
+		<script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
+		<!--       <script type="text/javascript" src="http://localhost:8989/dhis/dhis-web-commons/javascripts/jQuery/ui/jquery-ui.min.js"></script>
+		<script type="text/javascript" src="http://localhost:8989/dhis/dhis-web-commons/javascripts/jQuery/jquery.plugin.min.js"></script>-->
 		<script type="text/javascript" src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-        <script type="text/javascript" src="bower_components/angular/angular.js"></script>
-        <script type="text/javascript" src="bower_components/angular-resource/angular-resource.min.js"></script>
-        
-        <script src="js/app.js"></script>
-        <script src="js/controller.js"></script>
-        <script src="js/services.js"></script>
+		<script type="text/javascript" src="bower_components/angular/angular.js"></script>
+		<script type="text/javascript" src="bower_components/angular-resource/angular-resource.min.js"></script>
+		
+		<script src="js/app.js"></script>
+		<script src="js/controller.js"></script>
+		<script src="js/services.js"></script>
 		<link type="text/css" rel="stylesheet" media="screen" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
 	</head>
 	<body ng-controller="HmisReportCtrl">
 		<div id="headerPanel" class="HmisReportpanel">
 			<h1>HMIS OCBA 2015</h1>
 			<h2><tt>{{selected.name}}</tt> </h2>
-			<p> number of element groups: {{elementGroups.dataElementGroups.length}}</p> 
-			<p> number of elements in selected group: {{elements.dataElements.length}}</p>
-			
-			<select ng-options="grp.name for grp in elementGroups.dataElementGroups" name="select" id="drpBoxElementGrp" ng-model="selected" ng-change="getElement()">
-			</select>
-
+			<p> number of datasets: {{dataSets.dataSets.length}}</p>
+			<p> number of sections in dataset: {{dataset.sections.length}}</p>
 			<select ng-options="set.displayName for set in dataSets.dataSets" name="select" id="drpBoxElementGrp" ng-model="selectedSet" ng-change="getDataSections()">
 			</select>
-
-			<table id="ElementsByElementGrp" class="table table-condensed">
-				<thead>
-					<tr>
-						<th>Name</th>
-						<th>Description</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr ng-repeat="de in elements.dataElements | orderBy: 'name'">
-						<td>{{de.name}}</td>
-						<td>{{de.description}}</td>
-					</tr>
-				</tbody>
-			</table>
-
+			
 			<ul>
-    			<li ng-repeat="section in dataset.sections">
-      			<span>{{section.name}}</span>
-         		</li>
-  			</ul>
+				<div class="section" ng-repeat="section in dataset.sections" >
+					<h3 ng-init="getElementsSection(section.id)">{{section.name}}, {{section.id}}</h3>
+					<p> number of elements in section: {{sectionElements.dataElements.length}}</p>
+					<table   class="sectionElementsTable table table-striped">
+						<thead>
+							<tr >
+								<th>Name</th>
+								<th>id</th>
+								<th>short name</th>
+								<th>description</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="sectionElement in  sectionElements.dataElements | orderBy: 'name'">
+								<td>{{sectionElement.name}}</td>
+								<td>{{sectionElement.id}}</td>
+								<td>{{sectionElement.displayShortName}}</td>
+								<td>{{sectionElement.displayDescription}}</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</ul>
 		</div>
 	</body>
-</html>	
+</html>
