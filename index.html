@@ -15,39 +15,43 @@
 		<script src="js/services.js"></script>
 		<link type="text/css" rel="stylesheet" media="screen" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
 	</head>
-	<body ng-controller="HmisReportCtrl">
-		<div id="headerPanel" class="HmisReportpanel">
-			<h1>HMIS OCBA 2015</h1>
-			<h2><tt>{{selected.name}}</tt> </h2>
-			<p> number of datasets: {{dataSets.dataSets.length}}</p>
-			<p> number of sections in dataset: {{dataset.sections.length}}</p>
-			<select ng-options="set.displayName for set in dataSets.dataSets" name="select" id="drpBoxElementGrp" ng-model="selectedSet" ng-change="getDataSections()">
-			</select>
-			
-			<ul>
-				<div class="section" ng-repeat="section in dataset.sections" >
-					<h3 ng-init="getElementsSection(section.id)">{{section.name}}, {{section.id}}</h3>
-					<p> number of elements in section: {{sectionElements.dataElements.length}}</p>
-					<table   class="sectionElementsTable table table-striped">
-						<thead>
-							<tr >
-								<th>Name</th>
-								<th>id</th>
-								<th>short name</th>
-								<th>description</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr ng-repeat="sectionElement in  sectionElements.dataElements | orderBy: 'name'">
-								<td>{{sectionElement.name}}</td>
-								<td>{{sectionElement.id}}</td>
-								<td>{{sectionElement.displayShortName}}</td>
-								<td>{{sectionElement.displayDescription}}</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-			</ul>
+	<body ng-controller="HmisReportCtrl" class="container-fluid">
+		<div class="col-md-12">
+			<div id="headerPanel" class="col-md-12">
+				<h1>HMIS OCBA 2015</h1>
+				<h2><tt>{{selected.name}}</tt> </h2>
+				<p> number of datasets: {{dataSets.dataSets.length}}</p>
+				<p> number of sections in dataset: {{dataset.sections.length}}</p>
+				<select ng-options="set.displayName for set in dataSets.dataSets" name="select" id="drpBoxElementGrp" ng-model="selectedSet" ng-change="getDataSections()">
+				</select>
+			</div>
+			<div id="sectionscontainer" class="col-md-12">
+				<ul>
+					<div class="section col-md-12" ng-repeat="section in dataset.sections" >
+						<h3 ng-init="getElementsSection(section.id)">{{section.name}}</h3>
+						<p> number of elements in section: {{sectionElements.dataElements.length}}</p>
+						<table   class="sectionElementsTable table table-striped">
+							<thead>
+								<tr >
+									<th>Name</th>
+									<th>id</th>
+									<th>short name</th>
+									<th>description</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-repeat="sectionElement in  sectionElements.dataElements | orderBy: 'name'">
+									<td>{{sectionElement.name}}</td>
+									<td>{{sectionElement.id}}</td>
+									<td>{{sectionElement.displayShortName}}</td>
+									<td>{{sectionElement.displayDescription}}</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</ul>
+			</div>
 		</div>
-	</body>
+	</div>
+</body>
 </html>
