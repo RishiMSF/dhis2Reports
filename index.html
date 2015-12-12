@@ -27,9 +27,9 @@
 			</div>
 			<div id="sectionscontainer" class="col-md-12">
 				<ul>
-					<div class="section col-md-12" ng-repeat="section in dataset.sections" >
-						<h3 ng-init="getElementsSection(section.id)">{{section.name}}</h3>
-						<p> number of elements in section: {{sectionElements.dataElements.length}}</p>
+					<div class="section col-md-12" ng-repeat="section in dataset.sections">
+						<h3 ng-init="currentSectionElements=getElementsSection(section.id)" ng-model="currentSectionElements" >{{section.name}}</h3>
+						<p> number of elements in section: {{currentSectionElements.dataElements.length}}</p>
 						<table   class="sectionElementsTable table table-striped">
 							<thead>
 								<tr >
@@ -40,7 +40,7 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr ng-repeat="sectionElement in  sectionElements.dataElements | orderBy: 'name'">
+								<tr ng-repeat="sectionElement in  currentSectionElements.dataElements | orderBy: 'name'">
 									<td>{{sectionElement.name}}</td>
 									<td>{{sectionElement.id}}</td>
 									<td>{{sectionElement.displayShortName}}</td>
