@@ -4,11 +4,12 @@
   "version": "0.0.0",
   "private": true,
   "dependencies": {
-    "angular": "1.4.x",
-    "angular-mocks": "1.4.x",
+    "angular": "1.4.7",
+    "angular-mocks": "1.4.7",
+    "angular-sanitize": "1.4.7",
     "jquery": "~2.x",
     "bootstrap": "~3.x",
-    "angular-route": "1.4.x",
-    "angular-resource": "1.4.x"
+    "angular-route": "1.4.7",
+    "angular-resource": "1.4.7" 
   }
 }

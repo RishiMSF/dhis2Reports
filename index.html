@@ -10,6 +10,8 @@
 		<script type="text/javascript" src="bower_components/angular/angular.js"></script>
 		<script type="text/javascript" src="bower_components/angular-resource/angular-resource.min.js"></script>
 		
+		<script type="text/javascript" src="bower_components/angular-sanitize/angular-sanitize.min.js"></script>
+		
 		<script src="js/app.js"></script>
 		<script src="js/controller.js"></script>
 		<script src="js/services.js"></script>
@@ -22,8 +24,12 @@
 				<h2><tt>{{selected.name}}</tt> </h2>
 				<p> number of datasets: {{dataSets.dataSets.length}}</p>
 				<p> number of sections in dataset: {{dataset.sections.length}}</p>
-				<select ng-options="set.displayName for set in dataSets.dataSets" name="select" id="drpBoxElementGrp" ng-model="selectedSet" ng-change="getDataSections()">
+				<select ng-options="set.displayName for set in dataSets.dataSets" name="select" id="drpBoxDataSet" ng-model="selectedSet" 
+					ng-change="getDataSections()">
 				</select>
+			</div>
+			<div id="DossierTextContainer"  class="col-md-12">
+				 <span ng-bind-html="dossierRow.rows[0][0]"><span>
 			</div>
 			<div id="sectionscontainer" class="col-md-12">
 				<ul>
