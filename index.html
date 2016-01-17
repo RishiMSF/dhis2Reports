@@ -25,7 +25,7 @@
 				<p> number of datasets: {{dataSets.dataSets.length}}</p>
 				<p> number of sections in dataset: {{dataset.sections.length}}</p>
 				<select ng-options="set.displayName for set in dataSets.dataSets" name="select" id="drpBoxDataSet" ng-model="selectedSet" 
-					ng-change="getDataSections()">
+					ng-change="getDataSectionsAndDossierText()">
 				</select>
 			</div>
 			<div id="DossierTextContainer"  class="col-md-12">

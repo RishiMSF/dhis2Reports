@@ -45,7 +45,6 @@ function($resource){
 
 hmisReportServices.factory('DossierValue', ['$resource',
 function($resource){
-  console.log("qry DossierValue = " + qryDossierValue);
   return $resource(qryDossierValue, {dataSetCode:'@dataSetCode'}, {
       query: {method:'GET',  isArray:true}
     });
