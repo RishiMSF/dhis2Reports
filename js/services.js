@@ -4,6 +4,10 @@ var qryDataSets = 'http://localhost:8989/dhis/api//dataSets.json?fields=id,displ
 var qryDataSet = 'http://localhost:8989/dhis/api/dataSets/:dataSetId.json';
 var qryDataElemenetsInSection = 'http://localhost:8989/dhis/api/sections/:sectionId/dataElements.json';
 var qryDossierValue = 'http://localhost:8989/dhis/api/sqlViews/FbUqezq7Aqp/data?criteria=code::dataSetCode';
+var qryIndicators = 'http://localhost:8989/dhis/api/sqlViews/d5JlCcexwOE/data?criteria=grpname::dataSetName';
+
+//var qryIndicatorGrpId = 'http://localhost:8989/dhis/api/indicatorGroups.json?fields=id&paging=false&translate=true&filter=name:eq::dataSetName';
+
 
 var hmisReportServices = angular.module('hmisReportServices', ['ngResource']);
 
@@ -50,5 +54,18 @@ function($resource){
     });
 }]);
 
+hmisReportServices.factory('Indicators', ['$resource',
+function($resource){
+  return $resource(qryIndicators, {dataSetName:'@dataSetName'}, {
+      query: {method:'GET',  isArray:false}
+    });
+}]);
 
+
+// hmisReportServices.factory('IndicatorGrpId', ['$resource',
+// function($resource){
+//   return $resource(qryIndicatorGrpId, {dataSetName:'@dataSetName'}, {
+//       query: {method:'GET',  isArray:false}
+//     });
+// }]);
 

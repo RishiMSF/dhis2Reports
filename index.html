@@ -40,22 +40,46 @@
 							<thead>
 								<tr >
 									<th>Name</th>
-									<th>id</th>
-									<th>short name</th>
+									<!-- <th>id</th>
+									<th>short name</th> -->
 									<th>description</th>
 								</tr>
 							</thead>
 							<tbody>
 								<tr ng-repeat="sectionElement in  currentSectionElements.dataElements | orderBy: 'name'">
 									<td>{{sectionElement.name}}</td>
-									<td>{{sectionElement.id}}</td>
-									<td>{{sectionElement.displayShortName}}</td>
+<!-- 									<td>{{sectionElement.id}}</td>
+ 									<td>{{sectionElement.displayShortName}}</td>
+ 	-->
 									<td>{{sectionElement.displayDescription}}</td>
 								</tr>
 							</tbody>
 						</table>
 					</div>
 				</ul>
+			</div>
+			<div id="IndicatorGrpContrainer" class="col-md-12" style="display:none">
+						<h3>Indicators</h3>
+						<p> number of indicators in Group: {{indicators.rows.length}}</p>
+						<table   class="indicatorTable table table-striped">
+							<thead>
+								<tr >
+									<th>Name</th>
+									<th>Description</th>
+									<th>Numerator</th>
+									<th>Denominator</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-repeat="indicator in  indicators.rows | orderBy: 'name'">
+									<td>{{indicator[2]}}</td>
+									<td>{{indicator[1]}}</td>
+									<td>{{indicator[5]}}</td>
+									<td>{{indicator[6]}}</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
 			</div>
 		</div>
 	</div>
