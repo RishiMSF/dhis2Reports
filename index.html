@@ -34,7 +34,7 @@
 			<div id="sectionscontainer" class="col-md-12">
 				<ul>
 					<div class="section col-md-12" ng-repeat="section in dataset.sections">
-						<h3 ng-init="currentSectionElements=getElementsSection(section.id)" ng-model="currentSectionElements" >{{section.name}}</h3>
+						<h3 ng-init="currentSectionElements=getElementsSection(section.id)">{{currentSectionElements.displayName}}</h3>
 						<p> number of elements in section: {{currentSectionElements.dataElements.length}}</p>
 						<table   class="sectionElementsTable table table-striped">
 							<thead>
@@ -46,12 +46,10 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr ng-repeat="sectionElement in  currentSectionElements.dataElements | orderBy: 'name'">
-									<td>{{sectionElement.displayName}}</td>
-<!-- 									<td>{{sectionElement.id}}</td>
- 									<td>{{sectionElement.displayShortName}}</td>
- 	-->
-									<td>{{sectionElement.displayDescription}}</td>
+								<input type="hidden" >
+								<tr ng-repeat="sectionElement in currentSectionElements.dataElements | orderBy: 'name'">
+									<td ng-init="currentElement=getElement(sectionElement.id)">{{currentElement.displayName}}</td>
+									<td>{{currentElement.displayDescription}}</td>
 								</tr>
 							</tbody>
 						</table>
