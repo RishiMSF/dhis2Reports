@@ -1,15 +1,18 @@
-var qryElementGrps = 'http://localhost:8989/dhis/api/dataElementGroups.json?paging=false&fields=[name,id]';
-var qryElements = 'http://localhost:8989/dhis/api/dataElementGroups/:elementGrpId.json';
-var qryDataSets = 'http://localhost:8989/dhis/api//dataSets.json?fields=id,displayName,code&paging=false&translate=true';
-var qryDataSet = 'http://localhost:8989/dhis/api/dataSets/:dataSetId.json';
-var qryDataElemenetsInSection = 'http://localhost:8989/dhis/api/sections/:sectionId/dataElements.json';
-var qryDossierValue = 'http://localhost:8989/dhis/api/sqlViews/FbUqezq7Aqp/data?criteria=code::dataSetCode';
-var qryIndicators = 'http://localhost:8989/dhis/api/sqlViews/d5JlCcexwOE/data?criteria=grpname::dataSetName';
+var dhisUrl = window.location.href.split('/api/')[0] + '/api/';
+
+var qryElementGrps = dhisUrl + 'dataElementGroups.json?paging=false&fields=[name,id]&paging=false&translate=true';
+var qryElements = dhisUrl + 'dataElementGroups/:elementGrpId.json&paging=false&translate=true';
+var qryDataSets = dhisUrl + 'dataSets.json?fields=id,displayName,code&paging=false&translate=true';
+var qryDataSet = dhisUrl + 'dataSets/:dataSetId.json&paging=false&translate=true';
+var qryDataElemenetsInSection = dhisUrl + 'sections/:sectionId/dataElements.json&paging=false&translate=true';
+var qryDossierValue = dhisUrl + 'sqlViews/FbUqezq7Aqp/data?criteria=code::dataSetCode&translate=true';
+var qryIndicators = dhisUrl + 'sqlViews/d5JlCcexwOE/data?criteria=grpname::dataSetName&translate=true';
+
 
 //var qryIndicatorGrpId = 'http://localhost:8989/dhis/api/indicatorGroups.json?fields=id&paging=false&translate=true&filter=name:eq::dataSetName';
-
-
 var hmisReportServices = angular.module('hmisReportServices', ['ngResource']);
+
+
 
 hmisReportServices.factory('Elements', ['$resource',
 function($resource){
