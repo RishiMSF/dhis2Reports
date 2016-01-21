@@ -40,8 +40,8 @@
 							<thead>
 								<tr >
 									<th>Name</th>
-									<!-- <th>id</th>
-									<th>short name</th> -->
+									<!-- <th>id</th>-->
+									<th>Form name</th> 
 									<th>description</th>
 								</tr>
 							</thead>
@@ -49,6 +49,7 @@
 								<input type="hidden" >
 								<tr ng-repeat="sectionElement in currentSectionElements.dataElements | orderBy: 'name'">
 									<td ng-init="currentElement=getElement(sectionElement.id)">{{currentElement.displayName}}</td>
+									<td>{{currentElement.displayFormName}}</td>
 									<td>{{currentElement.displayDescription}}</td>
 								</tr>
 							</tbody>
