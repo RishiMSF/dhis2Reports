@@ -1,11 +1,12 @@
 var HmisReport = angular.module('HmisReportCtrl',['ngSanitize']);
 
-HmisReport.controller('HmisReportCtrl', ['$scope','Element', 'DataSets', 'DataSet', 'ElementsInSection', 'DossierValue', 'Indicators', function($scope, Element, DataSets, DataSet, ElementsInSection, DossierValue, Indicators){
+HmisReport.controller('HmisReportCtrl', ['$scope','Element', 'DataSets', 'DataSet', 'ElementsInSection', 'DossierValue', 'Indicators', 'IndicatorGrps','IndicatorGrp', function($scope, Element, DataSets, DataSet, ElementsInSection, DossierValue, Indicators, IndicatorGrps, IndicatorGrp){
 	$scope.hmisTitle = '';
 	//$scope.elementGroups = ElementsGrps.get();
 	$scope.dataSets = DataSets.get();
+	$scope.indicatorGrps = IndicatorGrps.get();
+	//console.log($scope.indicatorGrps.indicatorGroups.length);
 
-	
 	$scope.getDataSectionsAndDossierText = function(){
 		$scope.dataset = DataSet.get({dataSetId:$scope.selectedSet.id});
 		$scope.dataSetCodeWithoutNumber = removeLevelOfDataSetCode($scope.selectedSet.code);
@@ -29,6 +30,12 @@ HmisReport.controller('HmisReportCtrl', ['$scope','Element', 'DataSets', 'DataSe
 
 	$scope.getElement = function(elementId){
 		return $scope.element = Element.get({elementId:elementId});
+	}
+
+	$scope.getIndicatorGrp = function(){
+		console.log("grp id : " + $scope.selectedGrp.id);
+		return $scope.indicatorGrp = IndicatorGrp.get({indicatorGrpId:$scope.selectedGrp.id});  
+		//console.log("number of indicators: " + $scope.indicatorsGrp..length);
 	}
 }]);
 
@@ -66,8 +73,11 @@ HmisReport.controller('HmisReportCtrl', ['$scope','Element', 'DataSets', 'DataSe
 // });
 
 
-//TO DO
-// How to show Services in  drop down, based on what (minus level ?)
+//TO DO this week
+// 
 // Data Indicator groups show all in different page
-// Adding ZZDossier for each language  -- means that I have to read the language selected and query the related data element
+// use description and split it up in two coulmns for nominator and denominator
 
+//To do adter this week
+// Adding ZZDossier for each language  -- means that I have to read the language selected and query the related data element
+//Select dataset with most elements  -- How to show Services in  drop down, based on what (minus level text ?)
