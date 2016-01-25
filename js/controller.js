@@ -13,7 +13,6 @@ HmisReport.controller('HmisReportCtrl', ['$scope', '$rootScope','DataSets', 'Dat
 		$scope.dataSetCodeWithoutNumber = removeLevelOfDataSetCode($scope.selectedSet.code);
 		$scope.dossierRow = DossierValue.get({dataSetCode:$scope.dataSetCodeWithoutNumber});	
 		//$scope.indicators = Indicators.get({dataSetName:$scope.selectedSet.displayName});
-		$("#IndicatorGrpContrainer").show();
 	};
 
 	removeLevelOfDataSetCode = function(datasetCode){
@@ -41,9 +40,8 @@ HmisReport.controller('HmisReportCtrl', ['$scope', '$rootScope','DataSets', 'Dat
 	}
 
 	$scope.getIndicatorGrp = function(){
-		//console.log("grp id : " + $scope.selectedGrp.id);
-		return $scope.indicatorGrp = IndicatorGrp.get({indicatorGrpId:$scope.selectedGrp.id});  
-		//console.log("number of indicators: " + $scope.indicatorsGrp..length);
+		$scope.indicatorGrp = IndicatorGrp.get({indicatorGrpId:$scope.selectedGrp.id}); 
+		$("#IndicatorGrpContainer").show(); 
 	}
 }]);
 

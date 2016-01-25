@@ -13,18 +13,20 @@
 		<script src="js/controller.js"></script>
 		<script src="js/services.js"></script>
 
+		<link href='https://fonts.googleapis.com/css?family=Rajdhani:500' rel='stylesheet' type='text/css'>
+		<link type="text/css" rel="stylesheet" media="screen" href="css/Dossier.css">
 		<link type="text/css" rel="stylesheet" media="screen" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
 	</head>
 	<body ng-controller="HmisReportCtrl" class="container-fluid">
-		<div>
-			<ul id="dossierTabs" role="tablist" class="nav nav-pills col-md-12">
-				<li role="presentation"  class="active col-md-2"><a role="tab" data-toggle="pill" aria-controls="dataSetPanel" href="#dataSetPanel">DataSets</a></li>
-				<li role="presentation"  class="col-md-2"><a role="tab" data-toggle="pill" aria-controls="indicatorPanel" href="#indicatorPanel">Data indicators</a></li>
+		<div id="main">
+			<ul id="dossierTabs" role="tablist" class="nav nav-tabs col-md-12">
+				<li role="presentation"  class="active col-md-2"><a role="tab" data-toggle="tab" aria-controls="dataSetPanel" href="#dataSetPanel">DataSets</a></li>
+				<li role="presentation"  class="col-md-2"><a role="tab" data-toggle="tab" aria-controls="indicatorPanel" href="#indicatorPanel">Data indicators</a></li>
 			</ul>
 			<div class="tab-content">
 			<div id="dataSetPanel" role="tabpanel" class="tab-pane active" >
 				<div id="headerPanel" class="col-md-12">
-					<h1>HMIS OCBA 2015</h1>
+					<h1>HMIS DataSets</h1>
 					<h2><tt>{{selected.name}}</tt> </h2>
 					<p> number of datasets: {{dataSets.dataSets.length}}</p>
 					<p> number of sections in dataset: {{dataset.sections.length}}</p>
@@ -46,8 +48,7 @@
 									<tr >
 										<th>Name</th>
 										<th>Form name</th> 
-										<th>description</th>
-										<th>id</th>
+										<th>Description</th>
 									</tr>
 								</thead>
 								<tbody> 
@@ -55,7 +56,6 @@
 										<td>{{dataElement.displayName}}</td>
 										<td>{{dataElement.displayFormName}}</td>
 										<td>{{dataElement.displayDescription}}</td>
-										<td>{{dataElement.id}}</td>
 									</tr>
 								</tbody>
 							</table>
@@ -65,19 +65,22 @@
 				</div>
 		</div>
 		<div role="tabpanel" class="tab-pane" id="indicatorPanel">
-			<h2><tt>{{selected.displayName}}</tt> </h2>
-				<p>{{indicatorGrps.indicatorGroups.length}}</p>
+			<div id="headerPanel" class="col-md-12">
+				<h1>HMIS Indicator Groups</h1>
+				<h2><tt>{{selected.displayName}}</tt> </h2>
+				<p>Number of Indicator Groups: {{indicatorGrps.indicatorGroups.length}}</p>
+				<p>Number of Indicators in Group: {{indicatorGrp.indicators.length}}</p>
+				
 				<select ng-options="grp.displayName for grp in indicatorGrps.indicatorGroups" name="select" id="drpBoxIndicatorGrps" ng-model="selectedGrp"
 					ng-change="getIndicatorGrp()">
 				</select>
-				{{indicatorGrp.indicators.length}}
-				<div id="IndicatorGrpContainer" class="col-md-12">
+				<div id="IndicatorGrpContainer" style="display:none" class="col-md-12">
+					
 					<h3>{{selectedGrp.displayName}}</h3>
 						<table   class="indicatorTable table table-striped">
 							<thead>
 								<tr >
 									<th>Name</th>
-									<th>Form Name</th>
 									<th>Description</th>
 									<th>Numerator</th>
 									<th>Denominator</th>
@@ -86,8 +89,7 @@
 							<tbody>
 								<tr ng-repeat="indicator in  indicatorGrp.indicators | orderBy: 'name'">
 									<td>{{indicator.displayName}}</td>
-									<td>{{indicator.displayFormName}}</td>
-									<td>{{indicator.description}}</td>
+									<td>{{indicator.displayDescription}}</td>
 									<td></td>
 									<td></td>
 								</tr>
@@ -95,6 +97,7 @@
 						</table>
 
 				</div>
+			</div>
 		</div>
 		</div>
 	</div>	
