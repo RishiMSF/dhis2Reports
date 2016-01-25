@@ -1,6 +1,6 @@
 {
 	"version":"0.1",
-	"name":"HMIS  Report",
+	"name":"Dossiers",
 	"description":"Dossiers",
 	"launch_path":"index.html",
 	"icons":{"16":null,

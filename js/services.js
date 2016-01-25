@@ -13,7 +13,7 @@ var qryDataElements = dhisUrl + 'dataElements.json?fields=displayName,displayFor
 var qryDossierValue = dhisUrl + 'sqlViews/FbUqezq7Aqp/data?criteria=code::dataSetCode&translate=true';
 
 var qryIndicators = dhisUrl + 'sqlViews/d5JlCcexwOE/data?criteria=grpname::dataSetName&translate=true';
-var qryIndicatorGrps= dhisUrl + 'indicatorGroups.json?paging=false';
+var qryIndicatorGrps= dhisUrl + 'indicatorGroups.json?fields=id,displayName&paging=false';
 var qryIndicatorGrp= dhisUrl + 'indicators.json?fields=displayName,displayFormName,displayDescription&filter=indicatorGroups.id\\:eq::indicatorGrpId&paging=false';
 
 //var qryIndicatorGrpId = 'http://localhost:8989/dhis/api/indicatorGroups.json?fields=id&paging=false&translate=true&filter=name:eq::dataSetName';
