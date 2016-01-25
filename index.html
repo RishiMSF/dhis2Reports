@@ -3,84 +3,100 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>Dossiers</title>
-		<script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
-		<!--       <script type="text/javascript" src="http://localhost:8989/dhis/dhis-web-commons/javascripts/jQuery/ui/jquery-ui.min.js"></script>
-		<script type="text/javascript" src="http://localhost:8989/dhis/dhis-web-commons/javascripts/jQuery/jquery.plugin.min.js"></script>-->
-		<script type="text/javascript" src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-		<script type="text/javascript" src="bower_components/angular/angular.js"></script>
-		<script type="text/javascript" src="bower_components/angular-resource/angular-resource.min.js"></script>
-		
-		<script type="text/javascript" src="bower_components/angular-sanitize/angular-sanitize.min.js"></script>
-		
+		<script src="bower_components/jquery/dist/jquery.min.js"></script>
+		<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+		<script src="bower_components/angular/angular.js"></script>
+		<script src="bower_components/angular-resource/angular-resource.min.js"></script>
+		<script src="bower_components/angular-sanitize/angular-sanitize.min.js"></script>
+
 		<script src="js/app.js"></script>
 		<script src="js/controller.js"></script>
 		<script src="js/services.js"></script>
+
 		<link type="text/css" rel="stylesheet" media="screen" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
 	</head>
 	<body ng-controller="HmisReportCtrl" class="container-fluid">
-		<div class="col-md-12">
-			<div id="headerPanel" class="col-md-12">
-				<h1>HMIS OCBA 2015</h1>
-				<h2><tt>{{selected.name}}</tt> </h2>
-				<p> number of datasets: {{dataSets.dataSets.length}}</p>
-				<p> number of sections in dataset: {{dataset.sections.length}}</p>
-				<select ng-options="set.displayName for set in dataSets.dataSets" name="select" id="drpBoxDataSet" ng-model="selectedSet" 
-					ng-change="getDataSectionsAndDossierText()">
+		<div>
+			<ul id="dossierTabs" role="tablist" class="nav nav-pills col-md-12">
+				<li role="presentation"  class="active col-md-2"><a role="tab" data-toggle="pill" aria-controls="dataSetPanel" href="#dataSetPanel">DataSets</a></li>
+				<li role="presentation"  class="col-md-2"><a role="tab" data-toggle="pill" aria-controls="indicatorPanel" href="#indicatorPanel">Data indicators</a></li>
+			</ul>
+			<div class="tab-content">
+			<div id="dataSetPanel" role="tabpanel" class="tab-pane active" >
+				<div id="headerPanel" class="col-md-12">
+					<h1>HMIS OCBA 2015</h1>
+					<h2><tt>{{selected.name}}</tt> </h2>
+					<p> number of datasets: {{dataSets.dataSets.length}}</p>
+					<p> number of sections in dataset: {{dataset.sections.length}}</p>
+					<select ng-options="set.displayName for set in dataSets.dataSets" name="select" id="drpBoxDataSet" ng-model="selectedSet" 
+					 	ng-change="getDataSectionsAndDossierText()">
+					</select>
+				</div>
+				<div id="DossierTextContainer"  class="col-md-12">
+					<span ng-bind-html="dossierRow.rows[0][0]"></span>
+				</div>
+				<div id="sectionscontainer" class="col-md-12">
+					<ul>
+						<div class="section col-md-12" ng-repeat="section in sections.sections | filter:filterByDataSet">
+							<div>
+							<h3>{{section.displayName}}</h3>
+							<p> number of elements in section: {{section.dataElements.length}}</p>
+							<table  ng-init="getElementsInSection(section)" class="sectionElementsTable table table-striped">
+								<thead>
+									<tr >
+										<th>Name</th>
+										<th>Form name</th> 
+										<th>description</th>
+										<th>id</th>
+									</tr>
+								</thead>
+								<tbody> 
+									<tr ng-repeat="dataElement in dataElements.dataElements">
+										<td>{{dataElement.displayName}}</td>
+										<td>{{dataElement.displayFormName}}</td>
+										<td>{{dataElement.displayDescription}}</td>
+										<td>{{dataElement.id}}</td>
+									</tr>
+								</tbody>
+							</table>
+							</div>
+						</div>
+					</ul>
+				</div>
+		</div>
+		<div role="tabpanel" class="tab-pane" id="indicatorPanel">
+			<h2><tt>{{selected.displayName}}</tt> </h2>
+				<p>{{indicatorGrps.indicatorGroups.length}}</p>
+				<select ng-options="grp.displayName for grp in indicatorGrps.indicatorGroups" name="select" id="drpBoxIndicatorGrps" ng-model="selectedGrp"
+					ng-change="getIndicatorGrp()">
 				</select>
-			</div>
-			<div id="DossierTextContainer"  class="col-md-12">
-				 <span ng-bind-html="dossierRow.rows[0][0]"><span>
-			</div>
-			<div id="sectionscontainer" class="col-md-12">
-				<ul>
-					<div class="section col-md-12" ng-repeat="section in dataset.sections">
-						<h3 ng-init="currentSectionElements=getElementsSection(section.id)">{{currentSectionElements.displayName}}</h3>
-						<p> number of elements in section: {{currentSectionElements.dataElements.length}}</p>
-						<table   class="sectionElementsTable table table-striped">
-							<thead>
-								<tr >
-									<th>Name</th>
-									<!-- <th>id</th>-->
-									<th>Form name</th> 
-									<th>description</th>
-								</tr>
-							</thead>
-							<tbody>
-								<input type="hidden" >
-								<tr ng-repeat="sectionElement in currentSectionElements.dataElements | orderBy: 'name'">
-									<td ng-init="currentElement=getElement(sectionElement.id)">{{currentElement.displayName}}</td>
-									<td>{{currentElement.displayFormName}}</td>
-									<td>{{currentElement.displayDescription}}</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-				</ul>
-			</div>
-			<div id="IndicatorGrpContrainer" class="col-md-12" style="display:none">
-						<h3>Indicators</h3>
-						<p> number of indicators in Group: {{indicators.rows.length}}</p>
+				{{indicatorGrp.indicators.length}}
+				<div id="IndicatorGrpContainer" class="col-md-12">
+					<h3>{{selectedGrp.displayName}}</h3>
 						<table   class="indicatorTable table table-striped">
 							<thead>
 								<tr >
 									<th>Name</th>
+									<th>Form Name</th>
 									<th>Description</th>
 									<th>Numerator</th>
 									<th>Denominator</th>
 								</tr>
 							</thead>
 							<tbody>
-								<tr ng-repeat="indicator in  indicators.rows | orderBy: 'name'">
-									<td>{{indicator[2]}}</td>
-									<td>{{indicator[1]}}</td>
-									<td>{{indicator[5]}}</td>
-									<td>{{indicator[6]}}</td>
+								<tr ng-repeat="indicator in  indicatorGrp.indicators | orderBy: 'name'">
+									<td>{{indicator.displayName}}</td>
+									<td>{{indicator.displayFormName}}</td>
+									<td>{{indicator.description}}</td>
+									<td></td>
+									<td></td>
 								</tr>
 							</tbody>
 						</table>
-					</div>
-			</div>
+
+				</div>
 		</div>
-	</div>
-</body>
+		</div>
+	</div>	
+	</body>
 </html>

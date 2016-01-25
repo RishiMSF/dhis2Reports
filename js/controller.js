@@ -1,10 +1,12 @@
 var HmisReport = angular.module('HmisReportCtrl',['ngSanitize']);
 
-HmisReport.controller('HmisReportCtrl', ['$scope','Element', 'DataSets', 'DataSet', 'ElementsInSection', 'DossierValue', 'Indicators', 'IndicatorGrps','IndicatorGrp', function($scope, Element, DataSets, DataSet, ElementsInSection, DossierValue, Indicators, IndicatorGrps, IndicatorGrp){
+HmisReport.controller('HmisReportCtrl', ['$scope', '$rootScope','DataSets', 'DataSet', 'Elements', 'DossierValue', 'Indicators', 'IndicatorGrps','IndicatorGrp', 'Sections', function($scope, $rootScope, DataSets, DataSet, Elements, DossierValue, Indicators, IndicatorGrps, IndicatorGrp, Sections){
 	$scope.hmisTitle = '';
 	//$scope.elementGroups = ElementsGrps.get();
 	$scope.dataSets = DataSets.get();
 	$scope.indicatorGrps = IndicatorGrps.get();
+	$scope.sections = Sections.get();
+	$rootScope.dataElements = {};
 	//console.log($scope.indicatorGrps.indicatorGroups.length);
 
 	$scope.getDataSectionsAndDossierText = function(){
@@ -13,7 +15,6 @@ HmisReport.controller('HmisReportCtrl', ['$scope','Element', 'DataSets', 'DataSe
 		$scope.dossierRow = DossierValue.get({dataSetCode:$scope.dataSetCodeWithoutNumber});	
 		//$scope.indicators = Indicators.get({dataSetName:$scope.selectedSet.displayName});
 		$("#IndicatorGrpContrainer").show();
-
 	};
 
 	removeLevelOfDataSetCode = function(datasetCode){
@@ -24,12 +25,49 @@ HmisReport.controller('HmisReportCtrl', ['$scope','Element', 'DataSets', 'DataSe
 		}
 	};
 
-	$scope.getElementsSection = function(sectionId){
-		return $scope.sectionElements = ElementsInSection.get({sectionId:sectionId});
-	};
+	$scope.setCurrentSection = function(section){
+		console.log($scope.currentSection.displayName);
+	}
 
-	$scope.getElement = function(elementId){
-		return $scope.element = Element.get({elementId:elementId});
+	$scope.filterByDataSet = function(sc){
+		var inDataSet = false;
+		//console.log($scope.sections.length);	
+		angular.forEach($scope.dataset.sections, function(dsSection){
+			if (sc.id === dsSection.id) {
+				inDataSet = true;
+			}
+		});
+		return inDataSet;
+		//return dataElement.id && .indexOf(dataElement.id) !== -1;		
+	}
+
+	$scope.getElementsInSection = function(section){
+		var elementIds;
+
+		$rootScope.dataElements = {};
+
+		angular.forEach(section.dataElements, function(element,key){
+			if (key!=0){			
+				elementIds = elementIds + "," + element.id;
+			}else{
+				elementIds = element.id;
+			}
+		});
+
+		$rootScope.dataElements = Elements.get({IdList:"[" + elementIds + "]"});
+		
+	}
+
+	$scope.filterBySection = function(dataElement){
+		var inSection = false;
+
+		angular.forEach($scope.currentSection.dataElements, function(sectionElement){
+			if (sectionElement.id === dataElement.id) {
+				inSection = true;
+			}
+		});
+		return inSection;
+		//return dataElement.id && .indexOf(dataElement.id) !== -1;		
 	}
 
 	$scope.getIndicatorGrp = function(){
@@ -38,6 +76,8 @@ HmisReport.controller('HmisReportCtrl', ['$scope','Element', 'DataSets', 'DataSe
 		//console.log("number of indicators: " + $scope.indicatorsGrp..length);
 	}
 }]);
+
+
 
 // HmisReport.config(function ($translateProvider) {
 	  
