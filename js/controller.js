@@ -5,11 +5,11 @@ HmisReport.controller('HmisReportCtrl', ['$scope', '$rootScope','DataSets', 'Dat
 	//$scope.elementGroups = ElementsGrps.get();
 	$scope.dataSets = DataSets.get();
 	$scope.indicatorGrps = IndicatorGrps.get();
-	$scope.sections = Sections.get();
 	//console.log($scope.indicatorGrps.indicatorGroups.length);
 
 	$scope.getDataSectionsAndDossierText = function(){
 		$scope.dataset = DataSet.get({dataSetId:$scope.selectedSet.id});
+		$scope.sections = Sections.get();
 		$scope.dataSetCodeWithoutNumber = removeLevelOfDataSetCode($scope.selectedSet.code);
 		$scope.dossierRow = DossierValue.get({dataSetCode:$scope.dataSetCodeWithoutNumber});	
 		//$scope.indicators = Indicators.get({dataSetName:$scope.selectedSet.displayName});
