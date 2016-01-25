@@ -6,7 +6,6 @@ HmisReport.controller('HmisReportCtrl', ['$scope', '$rootScope','DataSets', 'Dat
 	$scope.dataSets = DataSets.get();
 	$scope.indicatorGrps = IndicatorGrps.get();
 	$scope.sections = Sections.get();
-	$rootScope.dataElements = {};
 	//console.log($scope.indicatorGrps.indicatorGroups.length);
 
 	$scope.getDataSectionsAndDossierText = function(){
@@ -25,9 +24,9 @@ HmisReport.controller('HmisReportCtrl', ['$scope', '$rootScope','DataSets', 'Dat
 		}
 	};
 
-	$scope.setCurrentSection = function(section){
-		console.log($scope.currentSection.displayName);
-	}
+	// $scope.setCurrentSection = function(section){
+	// 	console.log($scope.currentSection.displayName);
+	// }
 
 	$scope.filterByDataSet = function(sc){
 		var inDataSet = false;
@@ -41,10 +40,18 @@ HmisReport.controller('HmisReportCtrl', ['$scope', '$rootScope','DataSets', 'Dat
 		//return dataElement.id && .indexOf(dataElement.id) !== -1;		
 	}
 
-	$scope.getElementsInSection = function(section){
+	$scope.getIndicatorGrp = function(){
+		//console.log("grp id : " + $scope.selectedGrp.id);
+		return $scope.indicatorGrp = IndicatorGrp.get({indicatorGrpId:$scope.selectedGrp.id});  
+		//console.log("number of indicators: " + $scope.indicatorsGrp..length);
+	}
+}]);
+
+HmisReport.controller('SectionController', ['$scope', 'Elements',function($scope,Elements){
+    $scope.getElementsInSection = function(section){
 		var elementIds;
 
-		$rootScope.dataElements = {};
+		$scope.dataElements = {};
 
 		angular.forEach(section.dataElements, function(element,key){
 			if (key!=0){			
@@ -54,30 +61,10 @@ HmisReport.controller('HmisReportCtrl', ['$scope', '$rootScope','DataSets', 'Dat
 			}
 		});
 
-		$rootScope.dataElements = Elements.get({IdList:"[" + elementIds + "]"});
+		$scope.dataElements = Elements.get({IdList:"[" + elementIds + "]"});
 		
 	}
-
-	$scope.filterBySection = function(dataElement){
-		var inSection = false;
-
-		angular.forEach($scope.currentSection.dataElements, function(sectionElement){
-			if (sectionElement.id === dataElement.id) {
-				inSection = true;
-			}
-		});
-		return inSection;
-		//return dataElement.id && .indexOf(dataElement.id) !== -1;		
-	}
-
-	$scope.getIndicatorGrp = function(){
-		console.log("grp id : " + $scope.selectedGrp.id);
-		return $scope.indicatorGrp = IndicatorGrp.get({indicatorGrpId:$scope.selectedGrp.id});  
-		//console.log("number of indicators: " + $scope.indicatorsGrp..length);
-	}
 }]);
-
-
 
 // HmisReport.config(function ($translateProvider) {
 	  
