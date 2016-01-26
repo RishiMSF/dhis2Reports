@@ -30,7 +30,7 @@
 					<h2><tt>{{selected.name}}</tt> </h2>
 					<p> number of datasets: {{dataSets.dataSets.length}}</p>
 					<p> number of sections in dataset: {{dataset.sections.length}}</p>
-					<select ng-options="set.displayName for set in dataSets.dataSets" name="select" id="drpBoxDataSet" ng-model="selectedSet" 
+					<select ng-options="set.displayName for set in dataSets.dataSets | orderBy: 'displayName'" name="select" id="drpBoxDataSet" ng-model="selectedSet" 
 					 	ng-change="getDataSectionsAndDossierText()">
 					</select>
 				</div>
@@ -39,7 +39,7 @@
 				</div>
 				<div id="sectionscontainer" class="col-md-12">
 					<ul>
-						<div class="section col-md-12" ng-repeat="s in sections.sections | filter:filterByDataSet">
+						<div class="section col-md-12" ng-repeat="s in sections.sections | filter:filterByDataSet | orderBy: 'displayName'">
 							<div>
 							<h3>{{s.displayName}}</h3>
 							<p> number of elements in section: {{s.dataElements.length}}</p>
@@ -52,7 +52,7 @@
 									</tr>
 								</thead>
 								<tbody> 
-									<tr ng-repeat="dataElement in dataElements.dataElements">
+									<tr ng-repeat="dataElement in dataElements.dataElements | orderBy: 'displayName'">
 										<td>{{dataElement.displayName}}</td>
 										<td>{{dataElement.displayFormName}}</td>
 										<td>{{dataElement.displayDescription}}</td>
@@ -71,7 +71,7 @@
 				<p>Number of Indicator Groups: {{indicatorGrps.indicatorGroups.length}}</p>
 				<p>Number of Indicators in Group: {{indicatorGrp.indicators.length}}</p>
 				
-				<select ng-options="grp.displayName for grp in indicatorGrps.indicatorGroups" name="select" id="drpBoxIndicatorGrps" ng-model="selectedGrp"
+				<select ng-options="grp.displayName for grp in indicatorGrps.indicatorGroups | orderBy: 'displayName'" name="select" id="drpBoxIndicatorGrps" ng-model="selectedGrp"
 					ng-change="getIndicatorGrp()">
 				</select>
 				<div id="IndicatorGrpContainer" style="display:none" class="col-md-12">
@@ -87,7 +87,7 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr ng-repeat="indicator in  indicatorGrp.indicators | orderBy: 'name'">
+								<tr ng-repeat="indicator in  indicatorGrp.indicators | orderBy: 'displayName'">
 									<td>{{indicator.displayName}}</td>
 									<td>{{indicator.displayDescription}}</td>
 									<td></td>
