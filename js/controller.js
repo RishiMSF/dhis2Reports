@@ -43,6 +43,40 @@ HmisReport.controller('HmisReportCtrl', ['$scope', '$rootScope','DataSets', 'Dat
 		$scope.indicatorGrp = IndicatorGrp.get({indicatorGrpId:$scope.selectedGrp.id}); 
 		$("#IndicatorGrpContainer").show(); 
 	}
+
+	$scope.getNuminator = function(indicator){
+		var re = /(NUM:)(.*)(DENOM:)/;
+		var result = re.exec(indicator.displayDescription);
+		if (result!== null)
+			return result.length > 1 ? result[2] : "x";
+	}
+
+	$scope.getDenominator = function(indicator){
+		var re = /(DENOM:)(.*)/;
+		var result = re.exec(indicator.displayDescription);
+		if (result!== null)
+			return result.length > 1 ? result[2] : "x";
+	}
+
+	$scope.getDescription = function(indicator){
+		var re = /(.*)(NUM:)/;
+		var result = re.exec(indicator.displayDescription);
+		if (result!== null)
+			return result[1];
+		else
+			return indicator.displayDescription;
+			
+		//return (indicator.displayDescription).split("NUM:")[0];
+	}
+
+
+	// $scope.fillNominatorDenominator = function(){
+	// 	console.log("fillNominatorDenominator...")
+	// 	angular.forEach($scope.indicatorGrp.indicators, function(indicator){
+	// 		console.log("indicator description = " + indicator.displayDescription);	
+	// 	})
+		
+	// }
 }]);
 
 HmisReport.controller('SectionController', ['$scope', 'Elements',function($scope,Elements){
@@ -62,6 +96,8 @@ HmisReport.controller('SectionController', ['$scope', 'Elements',function($scope
 		$scope.dataElements = Elements.get({IdList:"[" + elementIds + "]"});
 		
 	}
+
+	
 }]);
 
 // HmisReport.config(function ($translateProvider) {

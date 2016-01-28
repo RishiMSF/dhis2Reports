@@ -89,9 +89,9 @@
 							<tbody>
 								<tr ng-repeat="indicator in  indicatorGrp.indicators | orderBy: 'displayName'">
 									<td>{{indicator.displayName}}</td>
-									<td>{{indicator.displayDescription}}</td>
-									<td></td>
-									<td></td>
+									<td>{{getDescription(indicator)}}</td>
+									<td>{{getNuminator(indicator)}}</td>
+									<td>{{getDenominator(indicator)}}</td>
 								</tr>
 							</tbody>
 						</table>
