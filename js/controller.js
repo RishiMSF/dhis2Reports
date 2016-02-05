@@ -1,4 +1,4 @@
-var HmisReport = angular.module('HmisReportCtrl',['ngSanitize']);
+var HmisReport = angular.module('HmisReportCtrl',['ngSanitize','pascalprecht.translate']);
 
 HmisReport.controller('HmisReportCtrl', ['$scope', '$rootScope','DataSets', 'DataSet', 'Elements', 'DossierValue', 'Indicators', 'IndicatorGrps','IndicatorGrp', 'Sections', function($scope, $rootScope, DataSets, DataSet, Elements, DossierValue, Indicators, IndicatorGrps, IndicatorGrp, Sections){
 	$scope.hmisTitle = '';
@@ -47,36 +47,30 @@ HmisReport.controller('HmisReportCtrl', ['$scope', '$rootScope','DataSets', 'Dat
 	$scope.getNuminator = function(indicator){
 		var re = /(NUM:)(.*)(DENOM:)/;
 		var result = re.exec(indicator.displayDescription);
-		if (result!== null)
+		if (result!== null){
 			return result.length > 1 ? result[2] : "x";
+		}
 	}
 
 	$scope.getDenominator = function(indicator){
 		var re = /(DENOM:)(.*)/;
 		var result = re.exec(indicator.displayDescription);
-		if (result!== null)
+		if (result!== null){
 			return result.length > 1 ? result[2] : "x";
+		}
 	}
 
 	$scope.getDescription = function(indicator){
 		var re = /(.*)(NUM:)/;
 		var result = re.exec(indicator.displayDescription);
-		if (result!== null)
+		if (result!== null){
 			return result[1];
-		else
+		}
+		else{
 			return indicator.displayDescription;
-			
-		//return (indicator.displayDescription).split("NUM:")[0];
+		}
 	}
 
-
-	// $scope.fillNominatorDenominator = function(){
-	// 	console.log("fillNominatorDenominator...")
-	// 	angular.forEach($scope.indicatorGrp.indicators, function(indicator){
-	// 		console.log("indicator description = " + indicator.displayDescription);	
-	// 	})
-		
-	// }
 }]);
 
 HmisReport.controller('SectionController', ['$scope', 'Elements',function($scope,Elements){
@@ -100,38 +94,38 @@ HmisReport.controller('SectionController', ['$scope', 'Elements',function($scope
 	
 }]);
 
-// HmisReport.config(function ($translateProvider) {
+HmisReport.config(function ($translateProvider) {
 	  
-// 	  $translateProvider.useStaticFilesLoader({
-//         prefix: 'languages/',
-//         suffix: '.json'
-//     });
+	  $translateProvider.useStaticFilesLoader({
+        prefix: 'languages/',
+        suffix: '.json'
+    });
 	  
-// 	  $translateProvider.registerAvailableLanguageKeys(
-// 			    ['es', 'fr', 'en', 'pt'],
-// 			    {
-// 			        'en*': 'en',
-// 			        'es*': 'es',
-// 					'fr*': 'fr',
-// 					'pt*': 'pt',
-// 			        '*': 'en' // must be last!
-// 			    }
-// 			);
+	  $translateProvider.registerAvailableLanguageKeys(
+			    ['es', 'fr', 'en', 'pt'],
+			    {
+			        'en*': 'en',
+			        'es*': 'es',
+					'fr*': 'fr',
+					'pt*': 'pt',
+			        '*': 'en' // must be last!
+			    }
+			);
 	  
-// 	  $translateProvider.fallbackLanguage(['en']);
+	  $translateProvider.fallbackLanguage(['en']);
 
-// 	  jQuery.ajax({ url: ApiUrl + '/userSettings/keyUiLocale/', contentType: 'text/plain', method: 'GET', dataType: 'text', async: false}).success(function (uiLocale) {
-// 		  if (uiLocale == ''){
-// 			  $translateProvider.determinePreferredLanguage();
-// 		  }
-// 		  else{
-// 			  $translateProvider.use(uiLocale);
-// 		  }
-//     }).fail(function () {
-//   	  $translateProvider.determinePreferredLanguage();
-// 	  });
+	  jQuery.ajax({ url: dhisUrl + 'userSettings/keyUiLocale/', contentType: 'text/plain', method: 'GET', dataType: 'text', async: false}).success(function (uiLocale) {
+		  if (uiLocale == ''){
+			  $translateProvider.determinePreferredLanguage();
+		  }
+		  else{
+			  $translateProvider.use(uiLocale);
+		  }
+    }).fail(function () {
+  	  $translateProvider.determinePreferredLanguage();
+	  });
 	  
-// });
+});
 
 
 //TO DO this week

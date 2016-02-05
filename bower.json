@@ -10,6 +10,7 @@
     "jquery": "~2.x",
     "bootstrap": "~3.x",
     "angular-route": "1.4.7",
-    "angular-resource": "1.4.7" 
+    "angular-resource": "1.4.7", 
+    "angular-translate": "2.9.0"
   }
 }
