@@ -2,10 +2,10 @@
 <html ng-app="HmisReport">
 	<head>
 		<meta charset="UTF-8">
-		<title>Dossiers</title>
+		<title>{{'Dossiers' | translate}}</title>
 		<script src="bower_components/jquery/dist/jquery.min.js"></script>
 		<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-		<script src="bower_components/angular/angular.js"></script>
+		<script src="bower_components/angular/angular.min.js"></script>
 		<script src="bower_components/angular-resource/angular-resource.min.js"></script>
 		<script src="bower_components/angular-sanitize/angular-sanitize.min.js"></script>
 		<script src="bower_components/angular-translate/angular-translate.min.js"></script>
@@ -23,16 +23,16 @@
 	<body ng-controller="HmisReportCtrl" class="container-fluid">
 		<div id="main">
 			<ul id="dossierTabs" role="tablist" class="nav nav-tabs col-md-12">
-				<li role="presentation"  class="active col-md-2"><a role="tab" data-toggle="tab" aria-controls="dataSetPanel" href="#dataSetPanel">DataSets</a></li>
-				<li role="presentation"  class="col-md-2"><a role="tab" data-toggle="tab" aria-controls="indicatorPanel" href="#indicatorPanel">Data indicators</a></li>
+				<li role="presentation"  class="active col-md-2"><a role="tab" data-toggle="tab" aria-controls="dataSetPanel" href="#dataSetPanel">{{'DataSets' | translate}}</a></li>
+				<li role="presentation"  class="col-md-2"><a role="tab" data-toggle="tab" aria-controls="indicatorPanel" href="#indicatorPanel">{{'indicators' | translate}}</a></li>
 			</ul>
 			<div class="tab-content">
 			<div id="dataSetPanel" role="tabpanel" class="tab-pane active" >
 				<div id="headerPanel" class="col-md-12">
-					<h1>HMIS DataSets</h1>
+					<h1>{{'HMIS DataSets' | translate}}</h1>
 					<h2><tt>{{selected.name}}</tt> </h2>
-					<p> number of datasets: {{dataSets.dataSets.length}}</p>
-					<p> number of sections in dataset: {{dataset.sections.length}}</p>
+					<p>{{'number of datasets' | translate}}: {{dataSets.dataSets.length}}</p>
+					<p>{{'number of sections in dataset' | translate}}: {{dataset.sections.length}}</p>
 					<select ng-options="set.displayName for set in dataSets.dataSets | orderBy: 'displayName'" name="select" id="drpBoxDataSet" ng-model="selectedSet" 
 					 	ng-change="getDataSectionsAndDossierText()">
 					</select>
@@ -45,13 +45,13 @@
 						<div class="section col-md-12" ng-repeat="s in sections.sections | filter:filterByDataSet | orderBy: 'displayName'">
 							<div>
 							<h3>{{s.displayName}}</h3>
-							<p> number of elements in section: {{s.dataElements.length}}</p>
+							<p>{{'number of elements in section' | translate}}: {{s.dataElements.length}}</p>
 							<table  ng-init="getElementsInSection(s)" ng-controller="SectionController" class="sectionElementsTable table table-striped">
 								<thead>
 									<tr >
-										<th>Name</th>
-										<th>Form name</th> 
-										<th>Description</th>
+										<th>{{'NameElement'| translate}}</th>
+										<th>{{'FormNameElement'| translate}}</th> 
+										<th>{{'DescriptionElement'| translate}}</th>
 									</tr>
 								</thead>
 								<tbody> 
@@ -69,10 +69,10 @@
 		</div>
 		<div role="tabpanel" class="tab-pane" id="indicatorPanel">
 			<div id="headerPanel" class="col-md-12">
-				<h1>HMIS Indicator Groups</h1>
+				<h1>{{'HMIS Indicator Groups' | translate}}</h1>
 				<h2><tt>{{selected.displayName}}</tt> </h2>
-				<p>Number of Indicator Groups: {{indicatorGrps.indicatorGroups.length}}</p>
-				<p>Number of Indicators in Group: {{indicatorGrp.indicators.length}}</p>
+				<p>{{'Number of Indicator Groups' | translate}}: {{indicatorGrps.indicatorGroups.length}}</p>
+				<p>{{'Number of Indicators in Group' | translate}}: {{indicatorGrp.indicators.length}}</p>
 				
 				<select ng-options="grp.displayName for grp in indicatorGrps.indicatorGroups | orderBy: 'displayName'" name="select" id="drpBoxIndicatorGrps" ng-model="selectedGrp"
 					ng-change="getIndicatorGrp()">
@@ -83,10 +83,10 @@
 						<table   class="indicatorTable table table-striped">
 							<thead>
 								<tr >
-									<th>Name</th>
-									<th>Description</th>
-									<th>Numerator</th>
-									<th>Denominator</th>
+									<th>{{'Nameindicator' | translate}}</th>
+									<th>{{'DescriptionIndicator' | translate}}</th>
+									<th>{{'NumeratorIndicator' | translate}}</th>
+									<th>{{'DenominatorIndicator' | translate}}</th>
 								</tr>
 							</thead>
 							<tbody>
