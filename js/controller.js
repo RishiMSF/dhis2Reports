@@ -1,4 +1,4 @@
-var HmisReport = angular.module('HmisReportCtrl',['ngSanitize','pascalprecht.translate']);
+var HmisReport = angular.module('HmisReportCtrl',['ngSanitize','pascalprecht.translate','ui.tinymce']);
 
 HmisReport.controller('HmisReportCtrl', ['$scope', '$rootScope','DataSets', 'DataSet', 'Elements', 'DossierValue', 'Indicators', 'IndicatorGrps','IndicatorGrp', 'Sections', function($scope, $rootScope, DataSets, DataSet, Elements, DossierValue, Indicators, IndicatorGrps, IndicatorGrp, Sections){
 	$scope.hmisTitle = '';
@@ -11,7 +11,7 @@ HmisReport.controller('HmisReportCtrl', ['$scope', '$rootScope','DataSets', 'Dat
 		$scope.dataset = DataSet.get({dataSetId:$scope.selectedSet.id});
 		$scope.sections = Sections.get();
 		$scope.dataSetCodeWithoutNumber = removeLevelOfDataSetCode($scope.selectedSet.code);
-		//$scope.dossierRow = DossierValue.get({dataSetCode:$scope.dataSetCodeWithoutNumber});	
+		$scope.dossierRow = DossierValue.get({dataSetCode:$scope.dataSetCodeWithoutNumber});	
 		//$scope.indicators = Indicators.get({dataSetName:$scope.selectedSet.displayName});
 	};
 
@@ -128,11 +128,11 @@ HmisReport.config(function ($translateProvider) {
 });
 
 
-//TO DO this week
+//TO DO:
 // 
-// Data Indicator groups show all in different page
-// use description and split it up in two coulmns for nominator and denominator
-
-//To do adter this week
-// Adding ZZDossier for each language  -- means that I have to read the language selected and query the related data element
-//Select dataset with most elements  -- How to show Services in  drop down, based on what (minus level text ?)
+//Utilize dossiers from new OU strucutre 
+//Include into translate function global location field to be used for retrieving right dossier text
+//Utilize data service attribute, set only on the datasets ones we want to see (largest ammount of elements)
+//service code pased on dataset code without level and period
+//add edit authorization
+//Enable editor for use 
