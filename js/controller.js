@@ -86,16 +86,17 @@ HmisReport.controller('HmisReportCtrl', ['$scope', '$rootScope', '$translate', '
 		}
 	}
 
-	$scope.getServiceData = function(){
-		$scope.serviceDataSets = ServiceDataSets.get({serviceCode:$scope.selectedService.code}); 
-	}
 
 }]);
 
 
-// HmisReport.controller('ServiceController',['$scope','']){
-
-// }
+HmisReport.controller('ServiceController',['$scope','Services','ServiceDataSets', function($scope,Services,ServiceDataSets){
+	$scope.services = Services.get();
+	
+	$scope.getServiceData = function(){
+		$scope.serviceDataSets = ServiceDataSets.get({serviceCode:$scope.selectedService.code}); 
+	}
+}]);
 
 HmisReport.controller('SectionController', ['$scope', 'Elements',function($scope,Elements){
     $scope.getElementsInSection = function(section){
