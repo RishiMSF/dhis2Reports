@@ -26,7 +26,8 @@
 		<div id="main">
 			<ul id="dossierTabs" role="tablist" class="nav nav-tabs col-md-12">
 				<li role="presentation"  class="active col-md-2"><a role="tab" data-toggle="tab" aria-controls="dataSetPanel" href="#dataSetPanel">{{'DataSets' | translate}}</a></li>
-				<li role="presentation"  class="col-md-2"><a role="tab" data-toggle="tab" aria-controls="indicatorPanel" href="#indicatorPanel">{{'indicators' | translate}}</a></li>
+				<li role="presentation"  class="col-md-2"><a role="tab" data-toggle="tab" aria-controls="indicatorPanel" href="#indicatorPanel">{{'Indicators' | translate}}</a></li>
+				<li role="presentation"  class="col-md-2"><a role="tab" data-toggle="tab" aria-controls="servicePanel" href="#servicePanel">{{'Services' | translate}}</a></li>
 			</ul>
 			<div class="tab-content">
 			<div id="dataSetPanel" role="tabpanel" class="tab-pane active" >
@@ -102,6 +103,17 @@
 						</table>
 
 				</div>
+			</div>
+		</div>
+		<div role="tabpanel" class="tab-pane" id="servicePanel">
+			<div id="headerPanelService" class="col-md-12">
+				<h1>{{'Health Services' | translate}}</h1>
+				<p>{{'Number of Services' | translate}}: {{services.dataElements.length}}</p>
+				<p>{{'Number of DataSets in Service' | translate}}: {{serviceDataSets.dataSets.length}}</p>
+				
+				<select ng-options="service.displayDescription for service in services.dataElements | orderBy: 'displayName'" name="selectService" id="drpBoxServices" ng-model="selectedService"
+					ng-change="getServiceData()">
+				</select>
 			</div>
 		</div>
 		</div>

@@ -1,26 +1,41 @@
 var HmisReport = angular.module('HmisReportCtrl',['ngSanitize','pascalprecht.translate','ui.tinymce']);
 
-HmisReport.controller('HmisReportCtrl', ['$scope', '$rootScope','DataSets', 'DataSet', 'Elements', 'DossierValue', 'Indicators', 'IndicatorGrps','IndicatorGrp', 'Sections', function($scope, $rootScope, DataSets, DataSet, Elements, DossierValue, Indicators, IndicatorGrps, IndicatorGrp, Sections){
+HmisReport.controller('HmisReportCtrl', ['$scope', '$rootScope', '$translate', '$q', 'DataSets', 'DataSet', 'Elements', 'Dossier', 'Indicators', 'IndicatorGrps','IndicatorGrp', 'Sections', 'Services','ServiceDataSets', function($scope, $rootScope, $translate, $q, DataSets, DataSet, Elements, Dossier, Indicators, IndicatorGrps, IndicatorGrp, Sections, Services,ServiceDataSets){
+	
 	$scope.hmisTitle = '';
 	//$scope.elementGroups = ElementsGrps.get();
 	$scope.dataSets = DataSets.get();
 	$scope.indicatorGrps = IndicatorGrps.get();
+	$scope.services = Services.get();	
+	// $scope.DossierLanguageOUId = function(){
+	// 	 $scope.DossierLanguageId = OrgUnitLanguage.get({languageCode:$translate.use()});
+		 
+	// 	 $scope.DossierLanguageId.$promise.then(function (result) {
+ //    		$scope.DossierLanguageId = result;
+
+	// 	 	return $scope.DossierLanguageId.organisationUnits[0].id;
+	// 	 });
+	// };
+
 	//console.log($scope.indicatorGrps.indicatorGroups.length);
 
 	$scope.getDataSectionsAndDossierText = function(){
 		$scope.dataset = DataSet.get({dataSetId:$scope.selectedSet.id});
 		$scope.sections = Sections.get();
 		$scope.dataSetCodeWithoutNumber = removeLevelOfDataSetCode($scope.selectedSet.code);
-		$scope.dossierRow = DossierValue.get({dataSetCode:$scope.dataSetCodeWithoutNumber});	
-		//$scope.indicators = Indicators.get({dataSetName:$scope.selectedSet.displayName});
+		console.log("service code: " + $scope.dataSetCodeWithoutNumber);
+
+		$scope.dossierRow = Dossier.get({languageCode:$translate.use(),serviceCode:$scope.dataSetCodeWithoutNumber});	
+		//console.log("Dossier language id: " + $scope.DossierLanguageOUId());
 	};
 
+
+
 	removeLevelOfDataSetCode = function(datasetCode){
-		if (datasetCode.match(".*\\d$")){
-			return datasetCode.slice(0,-1);
-		}else{
-			return datasetCode;
-		}
+		var re= /([A-Z]+)(_)([A-Z]+)([wm]*)(_)([\d]+)$/
+		var result = re.exec(datasetCode);
+		
+		return result == null ? datasetCode : result[1]+result[2]+result[3];
 	};
 
 	// $scope.setCurrentSection = function(section){
@@ -71,7 +86,16 @@ HmisReport.controller('HmisReportCtrl', ['$scope', '$rootScope','DataSets', 'Dat
 		}
 	}
 
+	$scope.getServiceData = function(){
+		$scope.serviceDataSets = ServiceDataSets.get({serviceCode:$scope.selectedService.code}); 
+	}
+
 }]);
+
+
+// HmisReport.controller('ServiceController',['$scope','']){
+
+// }
 
 HmisReport.controller('SectionController', ['$scope', 'Elements',function($scope,Elements){
     $scope.getElementsInSection = function(section){
@@ -87,11 +111,8 @@ HmisReport.controller('SectionController', ['$scope', 'Elements',function($scope
 			}
 		});
 
-		$scope.dataElements = Elements.get({IdList:"[" + elementIds + "]"});
-		
+		$scope.dataElements = Elements.get({IdList:"[" + elementIds + "]"});	
 	}
-
-	
 }]);
 
 HmisReport.config(function ($translateProvider) {
@@ -116,10 +137,10 @@ HmisReport.config(function ($translateProvider) {
 
 	  jQuery.ajax({ url: dhisUrl + 'userSettings/keyUiLocale/', contentType: 'text/plain', method: 'GET', dataType: 'text', async: false}).success(function (uiLocale) {
 		  if (uiLocale == ''){
-			  $translateProvider.determinePreferredLanguage();
+			 $translateProvider.determinePreferredLanguage();
 		  }
 		  else{
-			  $translateProvider.use(uiLocale);
+			 $translateProvider.use(uiLocale);
 		  }
     }).fail(function () {
   	  $translateProvider.determinePreferredLanguage();
@@ -130,9 +151,8 @@ HmisReport.config(function ($translateProvider) {
 
 //TO DO:
 // 
-//Utilize dossiers from new OU strucutre 
-//Include into translate function global location field to be used for retrieving right dossier text
-//Utilize data service attribute, set only on the datasets ones we want to see (largest ammount of elements)
-//service code pased on dataset code without level and period
-//add edit authorization
-//Enable editor for use 
+//Dossier Elements will contain service  code, the dataset with the most amount of elements will have this service code as well 
+// if service code refers to more than one dataset all these datasets elements will have to be added to the dossier
+// indicatorgroup will have service code as well, if the same service code belongs to more than one indicatorgroup then these indicagtor groups have to be added to the dossier.
+//dropdown will show form name  of dossier data elements as service
+//for title in service tab the description will be used.
