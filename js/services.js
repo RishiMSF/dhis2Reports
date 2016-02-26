@@ -14,7 +14,7 @@ var qryDataElements = dhisUrl + 'dataElements.json?fields=displayName,displayFor
 
 var qryServices = dhisUrl +  'dataElements.json?fields=id,displayDescription,code&paging=false&filter=name\\:like\\:ZZD';
 var qryDossier  = dhisUrl + 'sqlViews/ehqwjoIcBmn/data.json?var=languageCode::languageCode&var=serviceCode::serviceCode';
-var qryServiceDataSets = dhisUrl + 'dataSets?fields=name,id,[attributeValues]&filter=attributeValues.value\\:eq\\::serviceCode';
+var qryServiceDataSets = dhisUrl + 'dataSets?fields=name,id,sections,[attributeValues]&filter=attributeValues.value\\:eq\\::serviceCode';
 
 var qryIndicators = dhisUrl + 'sqlViews/d5JlCcexwOE/data?criteria=grpname::dataSetName&translate=true';
 var qryIndicatorGrps= dhisUrl + 'indicatorGroups.json?fields=id,displayName&paging=false';
