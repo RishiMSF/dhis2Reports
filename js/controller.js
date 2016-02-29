@@ -1,104 +1,21 @@
 var HmisReport = angular.module('HmisReportCtrl',['ngSanitize','pascalprecht.translate','ui.tinymce']);
 
-HmisReport.controller('HmisReportCtrl', ['$scope', '$rootScope', '$translate', '$q', 'DataSets', 'DataSet', 'Elements', 'Dossier', 'Indicators', 'IndicatorGrps','IndicatorGrp', 'Sections', 'Services','ServiceDataSets', function($scope, $rootScope, $translate, $q, DataSets, DataSet, Elements, Dossier, Indicators, IndicatorGrps, IndicatorGrp, Sections, Services,ServiceDataSets){
+HmisReport.controller('HmisReportCtrl', ['$scope','Services', function($scope,Sections, Services){
 	
-	$scope.hmisTitle = '';
-	//$scope.elementGroups = ElementsGrps.get();
-	$scope.dataSets = DataSets.get();
-	$scope.indicatorGrps = IndicatorGrps.get();
-	$scope.services = Services.get();	
-	// $scope.DossierLanguageOUId = function(){
-	// 	 $scope.DossierLanguageId = OrgUnitLanguage.get({languageCode:$translate.use()});
-		 
-	// 	 $scope.DossierLanguageId.$promise.then(function (result) {
- //    		$scope.DossierLanguageId = result;
-
-	// 	 	return $scope.DossierLanguageId.organisationUnits[0].id;
-	// 	 });
-	// };
-
-	//console.log($scope.indicatorGrps.indicatorGroups.length);
-
-	$scope.getDataSectionsAndDossierText = function(){
-		$scope.dataset = DataSet.get({dataSetId:$scope.selectedSet.id});
-		$scope.sections = Sections.get();
-		$scope.dataSetCodeWithoutNumber = removeLevelOfDataSetCode($scope.selectedSet.code);
-		console.log("service code: " + $scope.dataSetCodeWithoutNumber);
-
-		$scope.dossierRow = Dossier.get({languageCode:$translate.use(),serviceCode:$scope.dataSetCodeWithoutNumber});	
-		//console.log("Dossier language id: " + $scope.DossierLanguageOUId());
-	};
-
-
-
-	removeLevelOfDataSetCode = function(datasetCode){
-		var re= /([A-Z]+)(_)([A-Z]+)([wm]*)(_)([\d]+)$/
-		var result = re.exec(datasetCode);
-		
-		return result == null ? datasetCode : result[1]+result[2]+result[3];
-	};
-
-	// $scope.setCurrentSection = function(section){
-	// 	console.log($scope.currentSection.displayName);
-	// }
-
-	$scope.filterByDataSet = function(sc){
-		var inDataSet = false;
-		//console.log($scope.sections.length);	
-		angular.forEach($scope.dataset.sections, function(dsSection){
-			if (sc.id === dsSection.id) {
-				inDataSet = true;
-			}
-		});
-		return inDataSet;
-		//return dataElement.id && .indexOf(dataElement.id) !== -1;		
-	}
-
-	$scope.getIndicatorGrp = function(){
-		$scope.indicatorGrp = IndicatorGrp.get({indicatorGrpId:$scope.selectedGrp.id}); 
-		$("#IndicatorGrpContainer").show(); 
-	}
-
-	$scope.getNuminator = function(indicator){
-		var re = /(NUM:)(.*)(DENOM:)/;
-		var result = re.exec(indicator.displayDescription);
-		if (result!== null){
-			return result.length > 1 ? result[2] : "x";
-		}
-	}
-
-	$scope.getDenominator = function(indicator){
-		var re = /(DENOM:)(.*)/;
-		var result = re.exec(indicator.displayDescription);
-		if (result!== null){
-			return result.length > 1 ? result[2] : "x";
-		}
-	}
-
-	$scope.getDescription = function(indicator){
-		var re = /(.*)(NUM:)/;
-		var result = re.exec(indicator.displayDescription);
-		if (result!== null){
-			return result[1];
-		}
-		else{
-			return indicator.displayDescription;
-		}
-	}
-
+	//$scope.services = Services.get();	
 
 }]);
 
-
-HmisReport.controller('ServiceController',['$scope','Services','ServiceDataSets','Dossier', '$translate', 'Sections', function($scope,Services,ServiceDataSets,Dossier,$translate, Sections){
+HmisReport.controller('ServiceController',['$scope','Services','ServiceDataSets','Dossier', '$translate', 'Sections', 'Services', function($scope,Services,ServiceDataSets,Dossier,$translate, Sections){
 	$scope.services = Services.get();
-	$scope.sections = Sections.get();
+	//$scope.sections = Sections.get();
 
 	$scope.getServiceData = function(){
 		$scope.serviceDataSets = ServiceDataSets.get({serviceCode:$scope.selectedService.code}, function(serviceDataSets){
 			$scope.numberOfSections = countSections($scope.serviceDataSets);	
 			$scope.dossier = Dossier.get({languageCode:$translate.use(),serviceCode:$scope.selectedService.code});
-
+			$scope.serviceDataSets = ServiceDataSets.get({serviceCode:$scope.selectedService.code});
+			console.log("length datasets "+$scope.serviceDataSets.length)
 			//$scope.dossier = Dossier.get({languageCode:})
 		}); 
 	}
@@ -113,7 +30,6 @@ HmisReport.controller('ServiceController',['$scope','Services','ServiceDataSets'
 		return count;
 	}
 
-// foreach dataset foreach section ....
 	$scope.filterByDataSet = function(sc){
 		var inDataSet = false;
 		//console.log($scope.sections.length);	

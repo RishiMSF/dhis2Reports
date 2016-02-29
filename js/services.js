@@ -12,9 +12,15 @@ var qryDataSet = dhisUrl + 'dataSets/:dataSetId.json?paging=false&translate=true
 //var qryDataElemenetsInSection = dhisUrl + 'dataElements.json?fields=dataSets[id,sections],displayName,displayFormName,id,displayDescription&filter=dataSets.sections.id\\:eq::sectionId&filter=dataSets.id\\:eq::dataSetId&paging=false&translate=true';
 var qryDataElements = dhisUrl + 'dataElements.json?fields=displayName,displayFormName,displayDescription,id&paging=false&filter=id\\:in::IdList';
 
+
+//Health Service tab
+var qryServiceSections = dhisUrl + 'sections.json?fields=displayName,id&paging=false&filter=dataSet.id\\:eq\\::datasetId'; 
 var qryServices = dhisUrl +  'dataElements.json?fields=id,displayDescription,code&paging=false&filter=name\\:like\\:ZZD';
 var qryDossier  = dhisUrl + 'sqlViews/ehqwjoIcBmn/data.json?var=languageCode::languageCode&var=serviceCode::serviceCode';
-var qryServiceDataSets = dhisUrl + 'dataSets?fields=name,id,sections,[attributeValues]&filter=attributeValues.value\\:eq\\::serviceCode';
+//only id because section Displynames are not transleted in these datasets(childeren aren't translated) (otherwise could have done all in one call :/ )
+var qryServiceDataSets = dhisUrl + 'dataSets.json?fields=id,displayName,sections[id]&paging=false&filter=attributeValues.value\\:eq\\::serviceCode';
+
+
 
 var qryIndicators = dhisUrl + 'sqlViews/d5JlCcexwOE/data?criteria=grpname::dataSetName&translate=true';
 var qryIndicatorGrps= dhisUrl + 'indicatorGroups.json?fields=id,displayName&paging=false';
