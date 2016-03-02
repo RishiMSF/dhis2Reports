@@ -44,29 +44,31 @@ HmisReport.controller('ServiceController',['$scope','Services','ServiceDataSets'
 }]);
 
 
-HmisReport.controller('SectionController', ['$scope','ServiceSections',function($scope, ServiceSections){
+HmisReport.controller('SectionController', ['$scope','ServiceSections', function($scope, ServiceSections){
     $scope.getSections = function(id){
 		$scope.sections = ServiceSections.get({datasetId:id});
 		console.log("test");
 		//return $scope.serviceSections;
 	}
-
- //    $scope.getElementsInSection = function(section){
-	// 	var elementIds;
-
-	// 	$scope.dataElements = {};
-
-	// 	angular.forEach(section.dataElements, function(element,key){
-	// 		if (key!=0){			
-	// 			elementIds = elementIds + "," + element.id;
-	// 		}else{
-	// 			elementIds = element.id;
-	// 		}
-	// 	});
-
-	// 	$scope.dataElements = Elements.get({IdList:"[" + elementIds + "]"});	
-	// }
 }]);
+
+HmisReport.controller('ElementsTableController',['$scope','Elements',function($scope,Elements){
+	$scope.getElementsInSection = function(section){
+		var elementIds;
+
+		$scope.dataElements = {};
+
+		angular.forEach(section.dataElements, function(element,key){
+			if (key!=0){			
+				elementIds += "," + element.id;
+			}else{
+				elementIds = element.id;
+			}
+		});
+
+		$scope.dataElements = Elements.get({IdList:"[" + elementIds + "]"});	
+	}
+}])
 
 HmisReport.config(function ($translateProvider) {
 	  

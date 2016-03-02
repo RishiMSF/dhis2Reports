@@ -53,7 +53,23 @@
 							<div id="sectionContainer" ng-controller="SectionController" ng-init="getSections(serviceDataSet.id)">	
 								<div id="sectionTableContainer" class="col-md-12" ng-repeat="section in sections.sections">
 									<h3>{{section.displayName}}</h3>
-									
+									<p>Number of elements in section: {{section.dataElements.length}}</p>
+									<table ng-controller="ElementsTableController" ng-init="getElementsInSection(section)" class="sectionElementsTable table table-striped">
+										<thead>
+											<tr >
+												<th>{{'NameElement'| translate}}</th>
+												<th>{{'FormNameElement'| translate}}</th> 
+												<th>{{'DescriptionElement'| translate}}</th>
+											</tr>
+										</thead>
+										<tbody> 
+											<tr ng-repeat="dataElement in dataElements.dataElements | orderBy: 'displayName'">
+												<td>{{dataElement.displayName}}</td>
+												<td>{{dataElement.displayFormName}}</td>
+												<td>{{dataElement.displayDescription}}</td>
+											</tr>
+										</tbody>
+									</table>
 								</div>
 							</div>
 						</div>

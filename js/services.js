@@ -5,11 +5,13 @@ var dhisUrl = window.location.href.split('/api/')[0] + '/api/';
 var qryPing = dhisUrl + 'system/ping';
 
 //Health Service tab
-var qryServiceSections = dhisUrl + 'sections.json?fields=displayName,id&paging=false&filter=dataSet.id\\:eq\\::datasetId'; 
+var qryServiceSections = dhisUrl + 'sections.json?fields=displayName,id,dataElements[id]&paging=false&filter=dataSet.id\\:eq\\::datasetId'; 
 var qryServices = dhisUrl +  'dataElements.json?fields=id,displayDescription,code&paging=false&filter=name\\:like\\:ZZD';
 var qryDossier  = dhisUrl + 'sqlViews/ehqwjoIcBmn/data.json?var=languageCode::languageCode&var=serviceCode::serviceCode';
 //only id because section Displynames are not transleted in these datasets(childeren aren't translated) (otherwise could have done all in one call :/ )
 var qryServiceDataSets = dhisUrl + 'dataSets.json?fields=id,displayName,sections[id]&paging=false&filter=attributeValues.value\\:eq\\::serviceCode';
+
+var qryDataElements = dhisUrl + 'dataElements.json?fields=displayName,displayFormName,displayDescription,id,section[id]&paging=false&filter=id\\:in::IdList';
 
 
 //var qryIndicatorGrpId = 'http://localhost:8989/dhis/api/indicatorGroups.json?fields=id&paging=false&translate=true&filter=name:eq::dataSetName';
@@ -126,6 +128,13 @@ hmisReportServices.factory('ServiceSections', ['$resource',
 function($resource){
   return $resource(qryServiceSections, {datasetId:'@datasetId'}, {
       query: {method:'GET',  isArray:false}
+    });
+}]);
+
+hmisReportServices.factory('Elements', ['$resource',
+function($resource){
+  return $resource(qryDataElements, {IdList:'@IdList'}, {
+      query: {method:'GET',  isArray:true}
     });
 }]);
 
