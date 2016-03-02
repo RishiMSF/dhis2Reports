@@ -41,44 +41,22 @@
 						<p>{{'Number of DataSets in Service' | translate}}: {{serviceDataSets.dataSets.length}}</p>
 						<p>{{'Number of Sections in Service' | translate}}: {{numberOfSections}}</p>
 
-					<select ng-options="service.displayDescription for service in services.dataElements | orderBy: 'displayName'" name="selectService" id="drpBoxServices" ng-model="selectedService"
-					ng-change="getServiceData()">
-					</select>
-					<div id="DossierTextContainer"  class="col-md-12">
-						<span ng-bind-html="dossier.rows[0][0]"></span>
-					</div>
+						<select ng-options="service.displayDescription for service in services.dataElements | orderBy: 'displayName'" name="selectService" id="drpBoxServices" ng-model="selectedService"
+						ng-change="getServiceData()">
+						</select>
+						<div id="DossierTextContainer"  class="col-md-12">
+							<span ng-bind-html="dossier.rows[0][0]"></span>
+						</div>
 
-					<div id="ServiceDataSetContainer" class="col-md-12" ng-repeat="serviceDataSet in serviceDataSets"> 
-						<h2>{{serviceDataSet.displayName}}</h2>
-					</div>
-
-					<!-- <div id="sectionscontainer" class="col-md-12">
-						<ul>
-						<div class="section col-md-12" ng-repeat="s in sections.sections | filter:filterByDataSet | orderBy: 'displayName'">
-							<div>
-							<h3>{{s.displayName}}</h3>
-							<p>{{'number of elements in section' | translate}}: {{s.dataElements.length}}</p>
-							<table  ng-init="getElementsInSection(s)" ng-controller="SectionController" class="sectionElementsTable table table-striped">
-								<thead>
-									<tr >
-										<th>{{'NameElement'| translate}}</th>
-										<th>{{'FormNameElement'| translate}}</th> 
-										<th>{{'DescriptionElement'| translate}}</th>
-									</tr>
-								</thead>
-								<tbody> 
-									<tr ng-repeat="dataElement in dataElements.dataElements | orderBy: 'displayName'">
-										<td>{{dataElement.displayName}}</td>
-										<td>{{dataElement.displayFormName}}</td>
-										<td>{{dataElement.displayDescription}}</td>
-									</tr>
-								</tbody>
-							</table>
+						<div id="serviceDataSetContainer" class="col-md-12" ng-repeat="serviceDataSet in serviceDataSets.dataSets" ng-model="serviceDataSet"> 
+							<h2>{{serviceDataSet.displayName}}</h2>
+							<div id="sectionContainer" ng-controller="SectionController" ng-init="getSections(serviceDataSet.id)">	
+								<div id="sectionTableContainer" class="col-md-12" ng-repeat="section in sections.sections">
+									<h3>{{section.displayName}}</h3>
+									
+								</div>
 							</div>
 						</div>
-						</ul>
-					</div>
- -->
 					</div>
 
 				</div>
