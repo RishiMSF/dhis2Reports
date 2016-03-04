@@ -12,73 +12,12 @@ var qryDossier  = dhisUrl + 'sqlViews/ehqwjoIcBmn/data.json?var=languageCode::la
 var qryServiceDataSets = dhisUrl + 'dataSets.json?fields=id,displayName,sections[id]&paging=false&filter=attributeValues.value\\:eq\\::serviceCode';
 
 var qryDataElements = dhisUrl + 'dataElements.json?fields=displayName,displayFormName,displayDescription,id,section[id]&paging=false&filter=id\\:in::IdList';
+var qryIndicatorGrps= dhisUrl + 'indicatorGroups.json?fields=id,displayName&paging=false&filter=attributeValues.value\\:eq\\::serviceCode';
+var qryIndicatorGrp= dhisUrl + 'indicators.json?fields=displayName,displayFormName,displayDescription&filter=indicatorGroups.id\\:eq\\::indicatorGrpId&paging=false';
 
 
-//var qryIndicatorGrpId = 'http://localhost:8989/dhis/api/indicatorGroups.json?fields=id&paging=false&translate=true&filter=name:eq::dataSetName';
+
 var hmisReportServices = angular.module('hmisReportServices', ['ngResource']);
-
-
-
-// hmisReportServices.factory('Elements', ['$resource',
-// function($resource){
-// 	return $resource(qryElements,{elementGrpId:'@elementGrpId'},{
-// 		query: {method:'GET', isArray:true}
-// 	});
-// }]);
-
-// hmisReportServices.factory('ElementsGrps', ['$resource',
-// function($resource){
-// 	//return $resource(qryElementGrps);
-// 	return $resource(qryElementGrps, {}, {
-//       query: {method:'GET',  isArray:false}
-//     });
-// }]);
-
-hmisReportServices.factory('DataSets', ['$resource',
-function($resource){
-	return $resource(qryDataSets, {}, {
-      query: {method:'GET',  isArray:false}
-    });
-}]);
-
-hmisReportServices.factory('DataSet', ['$resource',
-function($resource){
-	return $resource(qryDataSet, {dataSetId:'@dataSetId'}, {
-      query: {method:'GET',  isArray:true}
-    });
-}]);
-
-hmisReportServices.factory('Sections', ['$resource',
-function($resource){
-  return $resource(qrySections, {}, {
-      query: {method:'GET',  isArray:false}
-    });
-}]);
-
-
-// hmisReportServices.factory('Elements', ['$resource',
-// function($resource){
-// 	return $resource(qryDataElements, {IdList:'@IdList'}, {
-//       query: {method:'GET',  isArray:true}
-//     });
-// }]);
-
-// hmisReportServices.factory('Element', ['$resource',
-// function($resource){
-//   return $resource(qryElement, {elementId:'@elementId'}, {
-//       query: {method:'GET',  isArray:false}
-//     });
-// }]);
-
-
-/*
-hmisReportServices.factory('OrgUnitLanguage', ['$resource',
-function($resource){
-  return $resource(qryOrgUnitLanguage, {languageCode:'@languageCode'}, {
-      query: {method:'GET',  isArray:true}
-    });
-}]);
-*/
 
 hmisReportServices.factory('Dossier', ['$resource',
 function($resource){
@@ -87,21 +26,8 @@ function($resource){
     });
 }]);
 
-hmisReportServices.factory('Indicators', ['$resource',
-function($resource){
-  return $resource(qryIndicators, {dataSetName:'@dataSetName'}, {
-      query: {method:'GET',  isArray:false}
-    });
-}]);
 
-hmisReportServices.factory('IndicatorGrps', ['$resource',
-function($resource){
-  return $resource(qryIndicatorGrps, {}, {
-      query: {method:'GET',  isArray:false}
-    });
-}]);
-
-hmisReportServices.factory('IndicatorGrp', ['$resource',
+hmisReportServices.factory('IndicatorGroup', ['$resource',
 function($resource){
   return $resource(qryIndicatorGrp, {indicatorGrpId:'@indicatorGrpId'}, {
       query: {method:'GET',  isArray:false}
@@ -115,6 +41,14 @@ function($resource){
       query: {method:'GET',  isArray:false}
     });
 }]);
+
+hmisReportServices.factory('IndicatorGroups', ['$resource',
+function($resource){
+  return $resource(qryIndicatorGrps, {serviceCode:'@serviceCode'}, {
+      query: {method:'GET',  isArray:false}
+    });
+}]);
+//qryIndicatorGrps
 
 
 hmisReportServices.factory('Services', ['$resource',
@@ -138,10 +72,4 @@ function($resource){
     });
 }]);
 
-// hmisReportServices.factory('IndicatorGrpId', ['$resource',
-// function($resource){
-//   return $resource(qryIndicatorGrpId, {dataSetName:'@dataSetName'}, {
-//       query: {method:'GET',  isArray:false}
-//     });
-// }]);
 
