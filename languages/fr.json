@@ -1,8 +1,29 @@
 {
-	"IN_PROGRESS": "EN COURS",
-	"PRINT": "Imprimer",
-  	"EXPORT_EXCEL": "Exporter à MS Excel",
-	"HOME": "Accueil",
-	"SELECT_DATASET": "Sélectionnez un ensemble de données",
-  	"ADD_FORM": "Ajouter formulaire"
+	"Dossiers": "Dossiers",
+	"DataSets": "DataSets",
+  "Indicators": "Indicators",
+  "Services": "Services",
+	"HMIS DataSets": "HMIS DataSets",
+	"number of datasets": "number of datasets",
+  "number of sections in dataset": "number of sections in dataset",
+  "Number of elements in section":"Nombre d'éléments dans la section",
+  "HMIS Indicator Groups":"HMIS Indicator Groups",
+
+  "NameElement":"Nom",
+  "FormNameElement":"Nom du formulaire",
+  "DescriptionElement":"Description",
+
+  "Number of Indicator Groups":"Nombre de groupes indicateurs",
+  "Number of indicators in group":"Nombre d'indicateurs dans le groupe",
+  "Indicator Group":"Groupe d'indicateurs",
+  "Nameindicator":"Nom",
+  "DescriptionIndicator":"Description",
+  "NumeratorIndicator":"Numérateur",
+  "DenominatorIndicator":"Dénominateur",
+  
+  "Health Services":"Services de Santé",
+  "Number of Services":"Nombre de services",
+  "Number of DataSets in Service":"Nombre de DataSets dans le service",
+  "Number of Sections in Service":"Nombre de sections en service",
+  "Number of IndicatorGroups in Service":"Nombre de groupes indicateurs en service"
 }
