@@ -42,7 +42,9 @@
 						<select ng-options="service.displayDescription for service in services.dataElements | orderBy: 'displayName'" name="selectService" id="drpBoxServices" ng-model="selectedService"
 						ng-change="getServiceData()">
 						</select>
-
+						<div class="list-group" ng-repeat="i in toc.entries" >
+							<a href="#{{i.entry.id}}" class="list-group-item active">{{i.entry.displayName}}<span class="badge">{{i.entry.dataElements.length}}</span></a>
+						</div>
 						<h1>{{selectedService.displayDescription}}</h1>
 						
 						<div id="DossierTextContainer"  class="col-md-12">
@@ -52,10 +54,11 @@
 						<div id="serviceDataSetContainer" class="col-md-12" ng-repeat="serviceDataSet in serviceDataSets.dataSets" ng-model="serviceDataSet"> 
 							<h2>{{serviceDataSet.displayName}}</h2>
 							<div id="sectionContainer" ng-controller="SectionController" ng-init="getSections(serviceDataSet.id)">	
-								<div id="sectionTableContainer" class="col-md-12" ng-repeat="section in sections.sections">
-									<h3>{{section.displayName}}</h3>
+								
+								<div id="{{serviceDataSet.id}}" class="col-md-12" ng-repeat="section in sections.sections | orderBy: 'displayName'">
+									<h3 id="{{section.id}}">{{section.displayName}}</h3>
 									<p>{{'Number of elements in section'| translate}}: {{section.dataElements.length}}</p>
-									<table ng-controller="ElementsTableController" ng-init="getElementsInSection(section)" class="sectionElementsTable table table-striped">
+									<table  ng-controller="ElementsTableController" ng-init="getElementsInSection(section)" class="sectionElementsTable table table-striped">
 										<thead>
 											<tr >
 												<th>{{'NameElement'| translate}}</th>
@@ -74,7 +77,7 @@
 								</div>
 							</div>
 						</div>
-						<div id="IndicatorGroupsContainer" ng-repeat="indicatorGroup in indicatorGroups.indicatorGroups">
+						<div id="IndicatorGroupsContainer" ng-repeat="indicatorGroup in indicatorGroups.indicatorGroups | orderBy: 'displayName'">
 							<h3>{{'Indicator Group' | translate}}: {{indicatorGroup.displayName}}</h3>
 							<div id="IndicatorGroup" ng-controller="IndicatorController" ng-init="getIndicators(indicatorGroup.id)" ng-model="indicatorGroup" class="col-md-12">
 								<p>{{'Number of indicators in group' | translate}}: {{indicatorGroup.indicators.length}}</p>

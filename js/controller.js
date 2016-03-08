@@ -6,12 +6,11 @@ HmisReport.controller('HmisReportCtrl', ['$scope','Services', function($scope, S
 
 HmisReport.controller('ServiceController',['$scope','$translate','Services','ServiceDataSets','Dossier', 'IndicatorGroups', function($scope,$translate,Services,ServiceDataSets,Dossier,IndicatorGroups){
 	$scope.services = Services.get();
+	$scope.toc={entries:[]};
 	
 	$scope.getServiceData = function(){
 		$scope.indicatorGroups =  IndicatorGroups.get({serviceCode:$scope.selectedService.code});
-
 		$scope.serviceDataSets = ServiceDataSets.get({serviceCode:$scope.selectedService.code}); 
-
 		$scope.dossier = Dossier.get({languageCode:$translate.use(),serviceCode:$scope.selectedService.code});
 	}
 
@@ -25,14 +24,28 @@ HmisReport.controller('ServiceController',['$scope','$translate','Services','Ser
 		});
 		return inDataSet;	
 	}
+
+	addtoTOC = function(items){
+		angular.forEach(items, function(item){
+			$scope.toc.entries.push({
+				'entry':item
+			});
+			//$scope.tocEntries[item.id] = item.displayName;
+			//console.log("in addtoTOC " + item.displayName);
+		});
+	};
+
 }]);
 
 
 HmisReport.controller('SectionController', ['$scope','ServiceSections', function($scope, ServiceSections){
     $scope.getSections = function(id){
-		$scope.sections = ServiceSections.get({datasetId:id});
+		$scope.sections = ServiceSections.get({datasetId:id},function(){
+			addtoTOC($scope.sections.sections);	
+		});
 	}
 }]);
+
 
 HmisReport.controller('ElementsTableController',['$scope','Elements',function($scope,Elements){
 	$scope.getElementsInSection = function(section){
@@ -75,6 +88,8 @@ HmisReport.controller('IndicatorController',['$scope','IndicatorGroup',function(
 		$scope.indicatorGroup = IndicatorGroup.get({indicatorGrpId:id}); 
 	};
 
+	// numinator and denominator description is in indicator description
+	//(translatation doesn't work for denom and num columns) so have be extracted
 	$scope.getNuminator = function(indicator){
 		var re = /(NUM:)(.*)(DENOM:)/;
 		var result = re.exec(indicator.displayDescription);
