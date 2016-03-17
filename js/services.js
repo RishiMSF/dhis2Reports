@@ -15,8 +15,6 @@ var qryDataElements = dhisUrl + 'dataElements.json?fields=displayName,displayFor
 var qryIndicatorGrps= dhisUrl + 'indicatorGroups.json?fields=id,displayName&paging=false&filter=attributeValues.value\\:eq\\::serviceCode';
 var qryIndicatorGrp= dhisUrl + 'indicators.json?fields=displayName,displayFormName,displayDescription&filter=indicatorGroups.id\\:eq\\::indicatorGrpId&paging=false';
 
-
-
 var hmisReportServices = angular.module('hmisReportServices', ['ngResource']);
 
 hmisReportServices.factory('Dossier', ['$resource',
@@ -26,14 +24,12 @@ function($resource){
     });
 }]);
 
-
 hmisReportServices.factory('IndicatorGroup', ['$resource',
 function($resource){
   return $resource(qryIndicatorGrp, {indicatorGrpId:'@indicatorGrpId'}, {
       query: {method:'GET',  isArray:false}
     });
 }]);
-
 
 hmisReportServices.factory('ServiceDataSets', ['$resource',
 function($resource){
@@ -49,7 +45,6 @@ function($resource){
     });
 }]);
 //qryIndicatorGrps
-
 
 hmisReportServices.factory('Services', ['$resource',
 function($resource){

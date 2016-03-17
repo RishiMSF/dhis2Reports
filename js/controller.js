@@ -1,53 +1,61 @@
-var HmisReport = angular.module('HmisReportCtrl',['ngSanitize','pascalprecht.translate','ui.tinymce']);
+var HmisReportcontrollers = angular.module('HmisReportcontrollers',['ngSanitize','pascalprecht.translate','ui.tinymce']);
 
-HmisReport.controller('HmisReportCtrl', ['$scope','Services', function($scope, Services){
-	// master controler, does not do much but when multiple tabs  are enabled again then it will have a function
-}]);
+// HmisReport.controller('HmisReportCtrl', ['$scope','Services', function($scope, Services){
+// 	// master controler, does not do much but when multiple tabs  are enabled again then it will have a function
+// }]);
 
-HmisReport.controller('ServiceController',['$scope','$translate','Services','ServiceDataSets','Dossier', 'IndicatorGroups', function($scope,$translate,Services,ServiceDataSets,Dossier,IndicatorGroups){
+HmisReportcontrollers.controller('ServiceController',['$scope','$translate','Services','ServiceDataSets','Dossier', 'IndicatorGroups', function($scope,$translate,Services,ServiceDataSets,Dossier,IndicatorGroups){
 	$scope.services = Services.get();
-	$scope.toc={entries:[]};
+	$scope.toc={
+				 entries : []
+	};
 	
 	$scope.getServiceData = function(){
+		$scope.toc={entries:[]};
 		$scope.indicatorGroups =  IndicatorGroups.get({serviceCode:$scope.selectedService.code});
 		$scope.serviceDataSets = ServiceDataSets.get({serviceCode:$scope.selectedService.code}); 
 		$scope.dossier = Dossier.get({languageCode:$translate.use(),serviceCode:$scope.selectedService.code});
 	}
 
-	$scope.filterByDataSet = function(sc){
-		var inDataSet = false;
-		//console.log($scope.sections.length);	
-		angular.forEach($scope.dataset.sections, function(dsSection){
-			if (sc.id === dsSection.id) {
-				inDataSet = true;
-			}
-		});
-		return inDataSet;	
-	}
+	// $scope.filterByDataSet = function(sc){
+	// 	var inDataSet = false;
+	// 	//console.log($scope.sections.length);	
+	// 	angular.forEach($scope.dataset.sections, function(dsSection){
+	// 		if (sc.id === dsSection.id) {
+	// 			inDataSet = true;
+	// 		}
+	// 	});
+	// 	return inDataSet;	
+	// }
 
-	addtoTOC = function(items){
-		angular.forEach(items, function(item){
-			$scope.toc.entries.push({
-				'entry':item
-			});
-			//$scope.tocEntries[item.id] = item.displayName;
-			//console.log("in addtoTOC " + item.displayName);
-		});
+	addtoTOC = function(items,parent, type){
+		var index = $scope.toc.entries.push({
+			'parent':parent,
+			 'children': items
+		})
+		// angular.forEach(items, function(item){
+		// 	$scope.toc.parent.entries.push({
+		// 		'entry':item
+		// 	});
+
+		// 	//$scope.tocEntries[item.id] = item.displayName;
+		// 	//console.log("in addtoTOC " + item.displayName);
+		// });
 	};
 
 }]);
 
 
-HmisReport.controller('SectionController', ['$scope','ServiceSections', function($scope, ServiceSections){
-    $scope.getSections = function(id){
-		$scope.sections = ServiceSections.get({datasetId:id},function(){
-			addtoTOC($scope.sections.sections);	
+HmisReportcontrollers.controller('SectionController', ['$scope','ServiceSections', function($scope, ServiceSections){
+    $scope.getSections = function(dataset){
+		$scope.sections = ServiceSections.get({datasetId:dataset.id},function(){
+			addtoTOC($scope.sections.sections,dataset,"dataset");	
 		});
 	}
 }]);
 
 
-HmisReport.controller('ElementsTableController',['$scope','Elements',function($scope,Elements){
+HmisReportcontrollers.controller('ElementsTableController',['$scope','Elements',function($scope,Elements){
 	$scope.getElementsInSection = function(section){
 		var elementIds;
 
@@ -65,7 +73,7 @@ HmisReport.controller('ElementsTableController',['$scope','Elements',function($s
 	}
 }])
 
-HmisReport.controller('ElementsTableController',['$scope','Elements',function($scope,Elements){
+HmisReportcontrollers.controller('ElementsTableController',['$scope','Elements',function($scope,Elements){
 	$scope.getElementsInSection = function(section){
 		var elementIds;
 
@@ -83,9 +91,11 @@ HmisReport.controller('ElementsTableController',['$scope','Elements',function($s
 	}
 }])
 
-HmisReport.controller('IndicatorController',['$scope','IndicatorGroup',function($scope,IndicatorGroup){
+HmisReportcontrollers.controller('IndicatorController',['$scope','IndicatorGroup',function($scope,IndicatorGroup){
 	$scope.getIndicators = function(id){
-		$scope.indicatorGroup = IndicatorGroup.get({indicatorGrpId:id}); 
+		$scope.indicatorGroup = IndicatorGroup.get({indicatorGrpId:id}, function(){
+			addtoTOC($scope.sections.sections,dataset,"indicatorGroup");
+		}); 
 	};
 
 	// numinator and denominator description is in indicator description
@@ -118,7 +128,7 @@ HmisReport.controller('IndicatorController',['$scope','IndicatorGroup',function(
 	}
 }])
 
-HmisReport.config(function ($translateProvider) {
+HmisReportcontrollers.config(function ($translateProvider) {
 	  
 	  $translateProvider.useStaticFilesLoader({
         prefix: 'languages/',

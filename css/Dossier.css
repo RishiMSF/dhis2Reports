@@ -14,3 +14,24 @@ h6 {
  margin-top: 5px;	
   font-family: 'Rajdhani', sans-serif;
 }
+
+a:visited{
+	color:#bbb;
+}
+
+a{
+	text-decoration: underline;
+	color: #696969;
+}
+
+.col-md-12{
+	padding-left: 0px;
+}
+
+.tab-pane{
+	padding-left: 35px;
+}
+
+.clear-fix {
+  overflow: auto;
+}

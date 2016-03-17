@@ -6,6 +6,7 @@
 		<script src="bower_components/jquery/dist/jquery.min.js"></script>
 		<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 		<script src="bower_components/angular/angular.min.js"></script>
+		<script src="bower_components/angular-route/angular-route.min.js"></script>
 		<script src="bower_components/angular-resource/angular-resource.min.js"></script>
 		<script src="bower_components/angular-sanitize/angular-sanitize.min.js"></script>
 		<script src="bower_components/angular-translate/angular-translate.min.js"></script>
@@ -22,10 +23,11 @@
 		<link type="text/css" rel="stylesheet" media="screen" href="css/Dossier.css">
 			
 	</head>
-	<body ng-controller="HmisReportCtrl" class="container-fluid">
-		<div id="main">
+	<body class="container-fluid">
+		<div class="row" id="main">
 			<ul id="dossierTabs" role="tablist" class="nav nav-tabs col-md-12">
-				<li role="presentation"  class="active col-md-2"><a role="tab" data-toggle="tab" aria-controls="servicePanel" href="#servicePanel">{{'Services' | translate}}</a></li>
+				<li role="presentation"  class=" col-md-2"><a role="tab" data-toggle="tab" aria-controls="servicePanel" href="services">{{'Services' | translate}}</a></li>
+				<li role="presentation"  class="active col-md-2"><a role="tab" data-toggle="tab" aria-controls="servicePanel" href="#">Main</a></li>
 			</ul>
 			<div class="tab-content">
 				<div id="dataSetPanel" role="tabpanel" class="tab-pane active" >
@@ -33,76 +35,7 @@
 				<div role="tabpanel" class="tab-pane" id="indicatorPanel">
 				</div>
 				<div role="tabpanel" class="tab-pane active" id="servicePanel" ng-controller="ServiceController">
-					<div id="headerPanelService" class="col-md-12">
-						<h1>{{'Health Services' | translate}}</h1>
-						<p>{{'Number of Services' | translate}}: {{services.dataElements.length}}</p>							
-						<p>{{'Number of DataSets in Service' | translate}}: {{serviceDataSets.dataSets.length}}</p>
-						<p>{{'Number of IndicatorGroups in Service' | translate}}: {{indicatorGroups.indicatorGroups.length}}</p>
-	
-						<select ng-options="service.displayDescription for service in services.dataElements | orderBy: 'displayName'" name="selectService" id="drpBoxServices" ng-model="selectedService"
-						ng-change="getServiceData()">
-						</select>
-						<div class="list-group" ng-repeat="i in toc.entries" >
-							<a href="#{{i.entry.id}}" class="list-group-item active">{{i.entry.displayName}}<span class="badge">{{i.entry.dataElements.length}}</span></a>
-						</div>
-						<h1>{{selectedService.displayDescription}}</h1>
-						
-						<div id="DossierTextContainer"  class="col-md-12">
-							<span ng-bind-html="dossier.rows[0][0]"></span>
-						</div>
-
-						<div id="serviceDataSetContainer" class="col-md-12" ng-repeat="serviceDataSet in serviceDataSets.dataSets" ng-model="serviceDataSet"> 
-							<h2>{{serviceDataSet.displayName}}</h2>
-							<div id="sectionContainer" ng-controller="SectionController" ng-init="getSections(serviceDataSet.id)">	
-								
-								<div id="{{serviceDataSet.id}}" class="col-md-12" ng-repeat="section in sections.sections | orderBy: 'displayName'">
-									<h3 id="{{section.id}}">{{section.displayName}}</h3>
-									<p>{{'Number of elements in section'| translate}}: {{section.dataElements.length}}</p>
-									<table  ng-controller="ElementsTableController" ng-init="getElementsInSection(section)" class="sectionElementsTable table table-striped">
-										<thead>
-											<tr >
-												<th>{{'NameElement'| translate}}</th>
-												<th>{{'FormNameElement'| translate}}</th> 
-												<th>{{'DescriptionElement'| translate}}</th>
-											</tr>
-										</thead>
-										<tbody> 
-											<tr ng-repeat="dataElement in dataElements.dataElements | orderBy: 'displayName'">
-												<td>{{dataElement.displayName}}</td>
-												<td>{{dataElement.displayFormName}}</td>
-												<td>{{dataElement.displayDescription}}</td>
-											</tr>
-										</tbody>
-									</table>
-								</div>
-							</div>
-						</div>
-						<div id="IndicatorGroupsContainer" ng-repeat="indicatorGroup in indicatorGroups.indicatorGroups | orderBy: 'displayName'">
-							<h3>{{'Indicator Group' | translate}}: {{indicatorGroup.displayName}}</h3>
-							<div id="IndicatorGroup" ng-controller="IndicatorController" ng-init="getIndicators(indicatorGroup.id)" ng-model="indicatorGroup" class="col-md-12">
-								<p>{{'Number of indicators in group' | translate}}: {{indicatorGroup.indicators.length}}</p>
-								<table   class="indicatorTable table table-striped">
-									<thead>
-										<tr >
-											<th>{{'Nameindicator' | translate}}</th>
-											<th>{{'DescriptionIndicator' | translate}}</th>
-											<th>{{'NumeratorIndicator' | translate}}</th>
-											<th>{{'DenominatorIndicator' | translate}}</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr ng-repeat="indicator in  indicatorGroup.indicators | orderBy: 'displayName'">
-											<td>{{indicator.displayName}}</td>
-											<td>{{getDescription(indicator)}}</td>
-											<td>{{getNuminator(indicator)}}</td>
-											<td>{{getDenominator(indicator)}}</td>
-										</tr>
-									</tbody>
-								</table>
-							</div>
-						</div>
-					</div>
-
+					
 				</div>
 			</div>
 	</div>	

@@ -6,15 +6,18 @@
 	"HMIS DataSets": "HMIS DataSets",
 	"number of datasets": "number of datasets",
   "number of sections in dataset": "number of sections in dataset",
-  "Number of elements in section":"number of elements in section",
+  "Number of elements in section":"Number of elements in section",
   "HMIS Indicator Groups":"HMIS Indicator Groups",
+
+  "Table Of Content":"Table Of Content",
 
   "NameElement":"Name",
   "FormNameElement":"Form Name",
   "DescriptionElement":"Description",
 
   "Number of Indicator Groups":"Number of Indicator Groups",
-  "Number of Indicators in Group":"Number of Indicators in Group",
+  "Number of indicators in group":"Number of Indicators in Group",
+  "Indicator Group":"Indicator Group",
 
   "Nameindicator":"Name",
   "DescriptionIndicator":"Description",
