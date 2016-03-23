@@ -26,26 +26,23 @@
 		<link type="text/css" rel="stylesheet" media="screen" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
 		<link type="text/css" rel="stylesheet" media="screen" href="css/Dossier.css">
 		
-		<script type="text/javascript">
-    	angular.element(document.getElementsByTagName('head')).append(angular.element('<base href="' + window.location.pathname + '" />'));
-  		</script>	
 	</head>
 	<body ng-app="HmisReport" class="container-fluid">
 	<H1>Hola Que tal?</H1>
 		<div ng-controller="HmisReportCtrl as main"  class="row" id="main">
 			<ul id="dossierTabs" role="tablist" class="nav nav-tabs col-md-12">
-				<li role="presentation"  class=" col-md-2"><a role="tab" data-toggle="tab"  href="services">{{'Services' | translate}}</a></li>
-				<li role="presentation"  class="active col-md-2"><a role="tab" data-toggle="tab"  href="main">Main</a></li>
+				<li role="presentation"  class=" col-md-2"><a role="tab" data-toggle="tab"  href="#services">{{'Services' | translate}}</a></li>
+				<li role="presentation"  class="active col-md-2"><a role="tab" data-toggle="tab"   href="#dataSets">DataSets</a></li>
 			</ul>
 			<div class="view-container">
     			<div ng-view class="view-frame"></div>
   			</div>
   			 <hr />
 
-		  <pre>$location.path() = {{main.$location.path()}}</pre>
+		  <!-- <pre>$location.path() = {{main.$location.path()}}</pre>
 		  <pre>$route.current.templateUrl = {{main.$route.current.templateUrl}}</pre>
 		  <pre>$route.current.params = {{main.$route.current.params}}</pre>
-		  <pre>$routeParams = {{main.$routeParams}}</pre>
+		  <pre>$routeParams = {{main.$routeParams}}</pre> -->
 		</div>	
 	</body>
 </html>

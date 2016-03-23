@@ -1,4 +1,4 @@
-var HmisReport = angular.module('HmisReport',['ngRoute','ngAnimate','HmisReportcontrollers','hmisReportServices']);
+var HmisReport = angular.module('HmisReport',['ngRoute','HmisReportcontrollers','hmisReportServices']);
 
 /*
 HmisReport.config(['$routeProvider',
@@ -19,14 +19,14 @@ HmisReport.config(['$routeProvider',
 HmisReport.config(['$routeProvider','$locationProvider',
 	function($routeProvider, $locationProvider){
 		$routeProvider.
-			when('/main',{
-				templateUrl: 'app/dossierApp.html',
+			when('/dataSets',{
+				templateUrl: 'app/dossierDataSets.html',
         		controller: 'HmisReportCtrl'
 			}).when('/services',{
-				templateUrl: 'app/services.html',
+				templateUrl: 'app/dossierServices.html',
         		controller: 'ServiceController'
 			});
-	$locationProvider.html5Mode(true);		
+	//$locationProvider.html5Mode(true);		
 }]);
 
 // $(document).ready(function(){
