@@ -9,7 +9,6 @@
   "dependencies": {
     "angular-mocks": "1.4.x",
     "angular-sanitize": "1.4.x",
-    "angular-animate": "1.4.x",
     "jquery": "~2.x",
     "bootstrap": "~3.x",
     "angular-route": "1.4.x",

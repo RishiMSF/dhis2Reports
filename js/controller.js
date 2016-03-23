@@ -1,8 +1,11 @@
 var HmisReportcontrollers = angular.module('HmisReportcontrollers',['ngSanitize','pascalprecht.translate','ui.tinymce']);
 
-// HmisReport.controller('HmisReportCtrl', ['$scope','Services', function($scope, Services){
-// 	// master controler, does not do much but when multiple tabs  are enabled again then it will have a function
-// }]);
+HmisReportcontrollers.controller('HmisReportCtrl', ['$scope','$translate','$route', '$routeParams', '$location', function($scope, $translate,$route, $routeParams, $location){
+	// master controler, does not do much but when multiple tabs  are enabled again then it will have a function
+	 this.$route = $route;
+      this.$location = $location;
+      this.$routeParams = $routeParams;
+}]);
 
 HmisReportcontrollers.controller('ServiceController',['$scope','$translate','Services','ServiceDataSets','Dossier', 'IndicatorGroups', function($scope,$translate,Services,ServiceDataSets,Dossier,IndicatorGroups){
 	$scope.services = Services.get();
