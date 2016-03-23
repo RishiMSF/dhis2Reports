@@ -2,13 +2,21 @@ var HmisReportcontrollers = angular.module('HmisReportcontrollers',['ngSanitize'
 
 HmisReportcontrollers.controller('HmisReportCtrl', ['$scope','$translate','$route', '$routeParams', '$location', function($scope, $translate,$route, $routeParams, $location){
 	// master controler, does not do much but when multiple tabs  are enabled again then it will have a function
-	 this.$route = $route;
+	  this.$route = $route;
       this.$location = $location;
       this.$routeParams = $routeParams;
+
+      addtoTOC = function(items,parent, type){
+		var index = $scope.toc.entries.push({
+			'parent':parent,
+			 'children': items
+		})
+	};
 }]);
 
 HmisReportcontrollers.controller('ServiceController',['$scope','$translate','Services','ServiceDataSets','Dossier', 'IndicatorGroups', function($scope,$translate,Services,ServiceDataSets,Dossier,IndicatorGroups){
 	$scope.services = Services.get();
+	$scope.serviceDataSets = {};
 	$scope.toc={
 				 entries : []
 	};
@@ -31,27 +39,17 @@ HmisReportcontrollers.controller('ServiceController',['$scope','$translate','Ser
 	// 	return inDataSet;	
 	// }
 
-	addtoTOC = function(items,parent, type){
-		var index = $scope.toc.entries.push({
-			'parent':parent,
-			 'children': items
-		})
-		// angular.forEach(items, function(item){
-		// 	$scope.toc.parent.entries.push({
-		// 		'entry':item
-		// 	});
-
-		// 	//$scope.tocEntries[item.id] = item.displayName;
-		// 	//console.log("in addtoTOC " + item.displayName);
-		// });
-	};
-
 }]);
 
 
-HmisReportcontrollers.controller('SectionController', ['$scope','ServiceSections', function($scope, ServiceSections){
+HmisReportcontrollers.controller('DataSetController', ['$scope', '$translate','DataSets', function($scope, $translate, DataSets){
+	$scope.dataSets = DataSets.get();
+}]);
+
+
+HmisReportcontrollers.controller('SectionController', ['$scope','Sections', function($scope, Sections){
     $scope.getSections = function(dataset){
-		$scope.sections = ServiceSections.get({datasetId:dataset.id},function(){
+		$scope.sections = Sections.get({datasetId:dataset.id},function(){
 			addtoTOC($scope.sections.sections,dataset,"dataset");	
 		});
 	}
@@ -97,7 +95,7 @@ HmisReportcontrollers.controller('ElementsTableController',['$scope','Elements',
 HmisReportcontrollers.controller('IndicatorController',['$scope','IndicatorGroup',function($scope,IndicatorGroup){
 	$scope.getIndicators = function(id){
 		$scope.indicatorGroup = IndicatorGroup.get({indicatorGrpId:id}, function(){
-			addtoTOC($scope.sections.sections,dataset,"indicatorGroup");
+		//	addtoTOC($scope.indicatorGroup,dataset,"indicatorGroup");
 		}); 
 	};
 

@@ -21,7 +21,7 @@ HmisReport.config(['$routeProvider','$locationProvider',
 		$routeProvider.
 			when('/dataSets',{
 				templateUrl: 'app/dossierDataSets.html',
-        		controller: 'HmisReportCtrl'
+        		controller: 'DataSetController'
 			}).when('/services',{
 				templateUrl: 'app/dossierServices.html',
         		controller: 'ServiceController'
