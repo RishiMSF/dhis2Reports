@@ -14,6 +14,7 @@
 	<div id="DossierTextContainer"  class="col-md-12">
 		<span ng-bind-html="dossier.rows[0][0]"></span>
 	</div>
+
 	<div id="tocContainer" class="col-md-11">
 		<h3 ng-show="selectedService" style="text-decoration: underline;">{{'Table Of Content'| translate}}</h3>
 		<ul  ng-repeat="i in toc.entries | orderBy:'parent.displayName'">
@@ -24,7 +25,7 @@
 			</li>
 		</ul>
 	</div>
-	<div id="serviceDataSetContainer" class="col-md-12" ng-repeat="serviceDataSet in serviceDataSets.dataSets" ng-model="serviceDataSet"> 
+	<div id="serviceDataSetContainer" class="col-md-12" ng-repeat="serviceDataSet in serviceDataSets.dataSets"  ng-model="serviceDataSet"> 
 		<h2 id="{{serviceDataSet.id}}">{{serviceDataSet.displayName}}</h2>
 		<div id="sectionContainer" ng-controller="SectionController" ng-init="getSections(serviceDataSet)">	
 			
@@ -52,7 +53,7 @@
 	</div>
 	<div class="col-md-12" id="IndicatorGroupsContainer" ng-repeat="indicatorGroup in indicatorGroups.indicatorGroups | orderBy: 'displayName'">
 		<h3>{{'Indicator Group' | translate}}: {{indicatorGroup.displayName}}</h3>
-		<div id="IndicatorGroup" ng-controller="IndicatorController" ng-init="getIndicators(indicatorGroup.id)" ng-model="indicatorGroup" class="col-md-12">
+		<div id="IndicatorGroup" ng-controller="IndicatorController" ng-init="getIndicators(indicatorGroup)" ng-model="indicatorGroup" class="col-md-12">
 			<p>{{'Number of indicators in group' | translate}}: {{indicatorGroup.indicators.length}}</p>
 			<table   class="indicatorTable table table-striped">
 				<thead>

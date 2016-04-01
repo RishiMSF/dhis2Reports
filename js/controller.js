@@ -6,13 +6,13 @@ HmisReportcontrollers.controller('HmisReportCtrl', ['$scope','$translate','$rout
       this.$location = $location;
       this.$routeParams = $routeParams;
 
-      $scope.toc={
-        entries : []
-      };
+      // $scope.toc={
+      //   entries : []
+      // };
 
 		
-      addtoTOC = function(items,parent, type){
-		var index = $scope.toc.entries.push({
+      addtoTOC = function(toc,items,parent, type){
+		var index = toc.entries.push({
 			'parent':parent,
 			 'children': items
 		})
@@ -23,18 +23,21 @@ HmisReportcontrollers.controller('ServiceController',['$scope','$translate','Ser
 	//initService = function(){
 		$scope.services = Services.get();
 		$scope.serviceDataSets = {};
-		 $scope.toc={
-        	entries : []
-      	 };
+		 
 	//};
 
 	//initService();
 
 	
 	$scope.getServiceData = function(){
+		$scope.toc={
+        	entries : []
+      	};
+
 		$scope.indicatorGroups =  IndicatorGroups.get({serviceCode:$scope.selectedService.code});
 		$scope.serviceDataSets = ServiceDataSets.get({serviceCode:$scope.selectedService.code}); 
 		$scope.dossier = Dossier.get({languageCode:$translate.use(),serviceCode:$scope.selectedService.code});
+	
 	//	initService();
 	};
 
@@ -60,7 +63,7 @@ HmisReportcontrollers.controller('DataSetController', ['$scope', '$translate','D
 HmisReportcontrollers.controller('SectionController', ['$scope','Sections', function($scope, Sections){
     $scope.getSections = function(dataset){
 		$scope.sections = Sections.get({datasetId:dataset.id},function(){
-			addtoTOC($scope.sections.sections,dataset,"dataset");	
+			addtoTOC($scope.toc,$scope.sections.sections,dataset,"dataset");	
 		});
 	}
 }]);
@@ -103,9 +106,10 @@ HmisReportcontrollers.controller('ElementsTableController',['$scope','Elements',
 }])
 
 HmisReportcontrollers.controller('IndicatorController',['$scope','IndicatorGroup',function($scope,IndicatorGroup){
-	$scope.getIndicators = function(id){
-		$scope.indicatorGroup = IndicatorGroup.get({indicatorGrpId:id}, function(){
-		//	addtoTOC($scope.indicatorGroup,dataset,"indicatorGroup");
+	$scope.getIndicators = function(indicatorGrp){
+		$scope.indicatorGrpParent4Toc = {displayName:"indicatorGroup "+indicatorGrp.displayName,id:indicatorGrp.id}
+		$scope.indicatorGroup = IndicatorGroup.get({indicatorGrpId:indicatorGrp.id}, function(){
+			addtoTOC($scope.toc,null,$scope.indicatorGrpParent4Toc,"indicatorGroup");
 		}); 
 	};
 
