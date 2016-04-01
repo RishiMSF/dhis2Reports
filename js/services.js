@@ -57,7 +57,7 @@ function($resource){
     });
 }]);
 
-hmisReportServices.factory('ServiceSections', ['$resource',
+hmisReportServices.factory('Sections', ['$resource',
 function($resource){
   return $resource(qryServiceSections, {datasetId:'@datasetId'}, {
       query: {method:'GET',  isArray:false}

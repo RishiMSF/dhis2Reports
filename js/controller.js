@@ -6,6 +6,11 @@ HmisReportcontrollers.controller('HmisReportCtrl', ['$scope','$translate','$rout
       this.$location = $location;
       this.$routeParams = $routeParams;
 
+      $scope.toc={
+        entries : []
+      };
+
+		
       addtoTOC = function(items,parent, type){
 		var index = $scope.toc.entries.push({
 			'parent':parent,
@@ -15,18 +20,23 @@ HmisReportcontrollers.controller('HmisReportCtrl', ['$scope','$translate','$rout
 }]);
 
 HmisReportcontrollers.controller('ServiceController',['$scope','$translate','Services','ServiceDataSets','Dossier', 'IndicatorGroups', function($scope,$translate,Services,ServiceDataSets,Dossier,IndicatorGroups){
-	$scope.services = Services.get();
-	$scope.serviceDataSets = {};
-	$scope.toc={
-				 entries : []
-	};
+	//initService = function(){
+		$scope.services = Services.get();
+		$scope.serviceDataSets = {};
+		 $scope.toc={
+        	entries : []
+      	 };
+	//};
+
+	//initService();
+
 	
 	$scope.getServiceData = function(){
-		$scope.toc={entries:[]};
 		$scope.indicatorGroups =  IndicatorGroups.get({serviceCode:$scope.selectedService.code});
 		$scope.serviceDataSets = ServiceDataSets.get({serviceCode:$scope.selectedService.code}); 
 		$scope.dossier = Dossier.get({languageCode:$translate.use(),serviceCode:$scope.selectedService.code});
-	}
+	//	initService();
+	};
 
 	// $scope.filterByDataSet = function(sc){
 	// 	var inDataSet = false;
