@@ -16,6 +16,14 @@ HmisReport.config(['$routeProvider',
 ]);
 */
 
+// HmisReport.run(function($rootScope, $location, $anchorScroll, $routeParams) {
+//   $rootScope.$on('$routeChangeSuccess', function(newRoute, oldRoute) {
+//     $location.hash($routeParams.scrollTo);
+//     $anchorScroll();  
+//   });
+// })
+
+
 HmisReport.config(['$routeProvider','$locationProvider',
 	function($routeProvider, $locationProvider){
 		$routeProvider.
@@ -25,7 +33,9 @@ HmisReport.config(['$routeProvider','$locationProvider',
 			}).when('/services',{
 				templateUrl: 'app/dossierServices.html',
         		controller: 'ServiceController'
-			});
+			}).otherwise({
+        		redirectTo: '/services'
+      		});
 	//$locationProvider.html5Mode(true);		
 }]);
 

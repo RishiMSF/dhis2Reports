@@ -1,22 +1,28 @@
 var HmisReportcontrollers = angular.module('HmisReportcontrollers',['ngSanitize','pascalprecht.translate','ui.tinymce']);
 
-HmisReportcontrollers.controller('HmisReportCtrl', ['$scope','$translate','$route', '$routeParams', '$location', function($scope, $translate,$route, $routeParams, $location){
+HmisReportcontrollers.controller('HmisReportCtrl', ['$scope','$translate','$route', '$location', '$anchorScroll', '$routeParams', function($scope, $translate,$route, $location, $anchorScroll, $routeParams){
 	// master controler, does not do much but when multiple tabs  are enabled again then it will have a function
-	  this.$route = $route;
-      this.$location = $location;
-      this.$routeParams = $routeParams;
+	this.$route = $route;
+    this.$location = $location;
+    this.$routeParams = $routeParams;
 
       // $scope.toc={
       //   entries : []
       // };
 
 		
-      addtoTOC = function(toc,items,parent, type){
+    addtoTOC = function(toc,items,parent, type){
 		var index = toc.entries.push({
 			'parent':parent,
 			 'children': items
 		})
 	};
+
+	$scope.scrollTo = function (id) {
+  		$anchorScroll(id);  
+  		alert(id);
+	}
+
 }]);
 
 HmisReportcontrollers.controller('ServiceController',['$scope','$translate','Services','ServiceDataSets','Dossier', 'IndicatorGroups', function($scope,$translate,Services,ServiceDataSets,Dossier,IndicatorGroups){
