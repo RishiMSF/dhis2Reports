@@ -171,12 +171,3 @@ HmisReportcontrollers.config(function ($translateProvider) {
 	  });
 	  
 });
-
-
-//TO DO:
-// 
-//Dossier Elements will contain service  code, the dataset with the most amount of elements will have this service code as well 
-// if service code refers to more than one dataset all these datasets elements will have to be added to the dossier
-// indicatorgroup will have service code as well, if the same service code belongs to more than one indicatorgroup then these indicagtor groups have to be added to the dossier.
-//dropdown will show form name  of dossier data elements as service
-//for title in service tab the description will be used.
