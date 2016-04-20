@@ -4,13 +4,10 @@
 		<h2><tt>{{selected.name}}</tt> </h2>
 		<p>{{'number of datasets' | translate}}: {{dataSets.dataSets.length}}</p>
 		<p>{{'number of sections in dataset' | translate}}: {{dataset.sections.length}}</p>
-		<select ng-options="set.displayName for set in dataSets.dataSets | orderBy: 'displayName'" name="select" id="drpBoxDataSet" ng-model="selectedSet" 
-		 	ng-change="getDataSectionsAndDossierText()">
+		<select ng-options="set.displayName for set in dataSets.dataSets | orderBy: 'displayName'" ng-change="resetToc()" name="select" id="drpBoxDataSet" ng-model="selectedSet">
 		</select>
 	</div>
-	<div id="DossierTextContainer"  class="col-md-12">
-		<span ng-bind-html="dossierRow.rows[0][0]"></span>
-	</div>
+	
 	<div id="tocContainer" class="col-md-11">
 		<h3 ng-show="selectedService" style="text-decoration: underline;">{{'Table Of Content'| translate}}</h3>
 		<ul  ng-repeat="i in toc.entries | orderBy:'parent.displayName'">
@@ -21,13 +18,14 @@
 			</li>
 		</ul>
 	</div>
-	<div id="sectionscontainer" class="col-md-12">
-		<ul>
-			<div class="section col-md-12" ng-repeat="s in sections.sections | filter:filterByDataSet | orderBy: 'displayName'">
-				<div>
-				<h3>{{s.displayName}}</h3>
-				<p>{{'number of elements in section' | translate}}: {{s.dataElements.length}}</p>
-				<table  ng-init="getElementsInSection(s)" ng-controller="SectionController" class="sectionElementsTable table table-striped">
+
+	<div id="{{selectedSet.id}}" ng-if="selectedSet"  class="col-md-12" > 
+		<h2>{{selectedSet.displayName}}</h2>
+		<div id="sectionContainer" ng-controller="SectionController">	
+			<div  class="col-md-12" ng-repeat="section in sections.sections | orderBy: 'displayName'">
+				<h3 id="{{section.id}}">{{section.displayName}}</h3>
+				<p>{{'Number of elements in section'| translate}}: {{section.dataElements.length}}</p>
+				<table  ng-controller="ElementsTableController" ng-init="getElementsInSection(section)" class="sectionElementsTable table table-striped">
 					<thead>
 						<tr >
 							<th>{{'NameElement'| translate}}</th>
@@ -43,8 +41,7 @@
 						</tr>
 					</tbody>
 				</table>
-				</div>
 			</div>
-		</ul>
+		</div>
 	</div>
 </div>

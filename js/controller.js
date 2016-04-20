@@ -20,7 +20,6 @@ HmisReportcontrollers.controller('HmisReportCtrl', ['$scope','$translate','$rout
 
 	$scope.scrollTo = function (id) {
   		$anchorScroll(id);  
-  		alert(id);
 	}
 
 }]);
@@ -61,37 +60,28 @@ HmisReportcontrollers.controller('ServiceController',['$scope','$translate','Ser
 }]);
 
 
-HmisReportcontrollers.controller('DataSetController', ['$scope', '$translate','DataSets', function($scope, $translate, DataSets){
-	$scope.dataSets = DataSets.get();
+HmisReportcontrollers.controller('DataSetController', ['$scope', '$translate','ServiceDataSets', function($scope, $translate, ServiceDataSets){
+	$scope.dataSets = ServiceDataSets.get();
+	$scope.dropdownChanged = false;
+	
+	$scope.resetToc = function(){
+		$scope.toc={
+        	entries : []
+    	};
+	};
+
 }]);
 
 
 HmisReportcontrollers.controller('SectionController', ['$scope','Sections', function($scope, Sections){
-    $scope.getSections = function(dataset){
-		$scope.sections = Sections.get({datasetId:dataset.id},function(){
-			addtoTOC($scope.toc,$scope.sections.sections,dataset,"dataset");	
-		});
-	}
+	$scope.$watch('selectedSet',function(){
+		console.log("changed");
+		$scope.sections = Sections.get({datasetId:$scope.$parent.selectedSet.id},function(){
+				addtoTOC($scope.toc,$scope.sections.sections,$scope.$parent.selectedSet,"dataset");	
+			});
+	});
 }]);
 
-
-HmisReportcontrollers.controller('ElementsTableController',['$scope','Elements',function($scope,Elements){
-	$scope.getElementsInSection = function(section){
-		var elementIds;
-
-		$scope.dataElements = {};
-
-		angular.forEach(section.dataElements, function(element,key){
-			if (key!=0){			
-				elementIds += "," + element.id;
-			}else{
-				elementIds = element.id;
-			}
-		});
-
-		$scope.dataElements = Elements.get({IdList:"[" + elementIds + "]"});	
-	}
-}])
 
 HmisReportcontrollers.controller('ElementsTableController',['$scope','Elements',function($scope,Elements){
 	$scope.getElementsInSection = function(section){
