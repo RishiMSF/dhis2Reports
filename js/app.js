@@ -33,6 +33,12 @@ HmisReport.config(['$routeProvider','$locationProvider',
 			}).when('/services',{
 				templateUrl: 'app/dossierServices.html',
         		controller: 'ServiceController'
+        	}).when('/indictorGroups',{
+				templateUrl: 'app/indicatorGroups.html',
+        		controller: 'IndicatorGrpController'
+        	}).when('/indictors',{
+				templateUrl: 'app/indicators.html',
+        		controller: 'IndicatorsController'
 			}).otherwise({
         		redirectTo: '/services'
       		});
