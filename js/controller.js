@@ -101,7 +101,7 @@ HmisReportcontrollers.controller('ElementsTableController',['$scope','Elements',
 	}
 }])
 
-HmisReportcontrollers.controller('IndicatorGrpController',['$scope','IndicatorGroup',function($scope,IndicatorGroup){
+HmisReportcontrollers.controller('IndicatorController',['$scope','IndicatorGroup',function($scope,IndicatorGroup){
 	$scope.getIndicators = function(indicatorGrp){
 		$scope.indicatorGrpParent4Toc = {displayName:"indicatorGroup "+indicatorGrp.displayName,id:indicatorGrp.id}
 		$scope.indicatorGroup = IndicatorGroup.get({indicatorGrpId:indicatorGrp.id}, function(){
