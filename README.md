@@ -25,13 +25,12 @@ All Rest-calls are placed in services.js and implemented using angular resources
 
 #To Do
 1. Add main structure to app as definied in [dhis2 dev guid](http://dhis2.github.io/dhis2-docs/master/en/developer/html/dhis2_developer_manual_full.html#d6531e13445 "dev guide dhis2")
-2. logout problem 
 3. editor for dossier
 4. security for dataset zzdossier
 5. security for tabs
 6. complete translations
 
 #Known bugs
-1. logout problem
+1. logout problem , to be fixed by checking dropdowns are not empty, if so go to login page.
 2. Copy link with view Anchor included.
 
