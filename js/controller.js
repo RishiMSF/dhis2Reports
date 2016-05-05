@@ -24,7 +24,7 @@ HmisReportcontrollers.controller('HmisReportCtrl', ['$scope','$translate','$rout
 
 }]);
 
-HmisReportcontrollers.controller('ServiceController',['$scope','$translate','Services','ServiceDataSets','Dossier', 'IndicatorGroups', function($scope,$translate,Services,ServiceDataSets,Dossier,IndicatorGroups){
+HmisReportcontrollers.controller('ServiceController',['$scope','$translate','Services','ServiceDataSets','Dossier', 'ServiceIndicatorGrps', function($scope,$translate,Services,ServiceDataSets,Dossier,ServiceIndicatorGrps){
 	//initService = function(){
 		$scope.services = Services.get();
 		$scope.serviceDataSets = {};
@@ -39,7 +39,7 @@ HmisReportcontrollers.controller('ServiceController',['$scope','$translate','Ser
         	entries : []
       	};
 
-		$scope.indicatorGroups =  IndicatorGroups.get({serviceCode:$scope.selectedService.code});
+		$scope.indicatorGroups =  ServiceIndicatorGrps.get({serviceCode:$scope.selectedService.code});
 		$scope.serviceDataSets = ServiceDataSets.get({serviceCode:$scope.selectedService.code}); 
 		$scope.dossier = Dossier.get({languageCode:$translate.use(),serviceCode:$scope.selectedService.code});
 	
@@ -60,9 +60,8 @@ HmisReportcontrollers.controller('ServiceController',['$scope','$translate','Ser
 }]);
 
 
-HmisReportcontrollers.controller('DataSetController', ['$scope', '$translate','ServiceDataSets', function($scope, $translate, ServiceDataSets){
-	$scope.dataSets = ServiceDataSets.get();
-	$scope.dropdownChanged = false;
+HmisReportcontrollers.controller('DataSetController', ['$scope', '$translate','DataSets', function($scope, $translate, DataSets){
+	$scope.dataSets = DataSets.get();
 	
 	$scope.resetToc = function(){
 		$scope.toc={
@@ -72,10 +71,18 @@ HmisReportcontrollers.controller('DataSetController', ['$scope', '$translate','S
 
 }]);
 
+HmisReportcontrollers.controller('IndicatorGrpController', ['$scope', '$translate','IndicatorGroups', function($scope, $translate, IndicatorGroups){
+	$scope.toc={
+        	entries : []
+      	};
+
+    $scope.serviceCode = null;  
+	$scope.indicatorGrps = IndicatorGroups.get({serviceCode:$scope.serviceCode});
+}]);
+
 
 HmisReportcontrollers.controller('SectionController', ['$scope','Sections', function($scope, Sections){
 	$scope.$watch('selectedSet',function(){
-		console.log("changed");
 		$scope.sections = Sections.get({datasetId:$scope.$parent.selectedSet.id},function(){
 				addtoTOC($scope.toc,$scope.sections.sections,$scope.$parent.selectedSet,"dataset");	
 			});
@@ -102,13 +109,15 @@ HmisReportcontrollers.controller('ElementsTableController',['$scope','Elements',
 }])
 
 HmisReportcontrollers.controller('IndicatorController',['$scope','IndicatorGroup',function($scope,IndicatorGroup){
-	$scope.getIndicators = function(indicatorGrp){
-		$scope.indicatorGrpParent4Toc = {displayName:"indicatorGroup "+indicatorGrp.displayName,id:indicatorGrp.id}
-		$scope.indicatorGroup = IndicatorGroup.get({indicatorGrpId:indicatorGrp.id}, function(){
+	
+	$scope.$watch('selectedGrp',function(){
+		$scope.indicatorGrpParent4Toc = {displayName:"indicatorGroup "+$scope.$parent.selectedGrp.displayName,id:$scope.$parent.selectedGrp.id}
+		$scope.indicatorGroup = IndicatorGroup.get({indicatorGrpId:$scope.$parent.selectedGrp.id}, function(){
 			addtoTOC($scope.toc,null,$scope.indicatorGrpParent4Toc,"indicatorGroup");
-		}); 
-	};
+		});
+	});
 
+	
 	// numinator and denominator description is in indicator description
 	//(translatation doesn't work for denom and num columns) so have be extracted
 	$scope.getNuminator = function(indicator){

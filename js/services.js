@@ -10,12 +10,11 @@ var qryServices = dhisUrl +  'dataElements.json?fields=id,displayDescription,cod
 var qryDossier  = dhisUrl + 'sqlViews/ehqwjoIcBmn/data.json?var=languageCode::languageCode&var=serviceCode::serviceCode';
 //only id because section Displynames are not transleted in these datasets(childeren aren't translated) (otherwise could have done all in one call :/ )
 var qryServiceDataSets = dhisUrl + 'dataSets.json?fields=id,displayName,sections[id]&paging=false&filter=attributeValues.value\\:eq\\::serviceCode';
+var qryServiceIndicatorGrps= dhisUrl + 'indicatorGroups.json?fields=id,displayName&paging=false&filter=attributeValues.value\\:eq\\::serviceCode';
 
 var qryDataElements = dhisUrl + 'dataElements.json?fields=displayName,displayFormName,displayDescription,id,section[id]&paging=false&filter=id\\:in::IdList';
-
-var qryIndicatorGrps= dhisUrl + 'indicatorGroups.json?fields=id,displayName&paging=false&filter=attributeValues.value\\:eq\\::serviceCode';
+var qryIndicatorGrps= dhisUrl + 'indicatorGroups.json?fields=id,displayName&paging=false';
 var qryIndicatorGrp= dhisUrl + 'indicators.json?fields=displayName,id,displayFormName,displayDescription&filter=indicatorGroups.id\\:eq\\::indicatorGrpId&paging=false';
-
 var qryDataSets = dhisUrl + 'dataSets.json?fields=id,displayName,sections[id]&paging=false&translate=true';
 //var qryDataSet = dhisUrl + 'dataSets/:dataSetId.json?paging=false&translate=true';
 
@@ -44,7 +43,14 @@ function($resource){
 
 hmisReportServices.factory('IndicatorGroups', ['$resource',
 function($resource){
-  return $resource(qryIndicatorGrps, {serviceCode:'@serviceCode'}, {
+  return $resource(qryIndicatorGrps, {}, {
+      query: {method:'GET',  isArray:false}
+    });
+}]);
+
+hmisReportServices.factory('ServiceIndicatorGrps', ['$resource',
+function($resource){
+  return $resource(qryServiceIndicatorGrps, {serviceCode:'@serviceCode'}, {
       query: {method:'GET',  isArray:false}
     });
 }]);

@@ -51,9 +51,9 @@
 			</div>
 		</div>
 	</div>
-	<div class="col-md-12" id="IndicatorGroupsContainer" ng-repeat="indicatorGroup in indicatorGroups.indicatorGroups | orderBy: 'displayName'">
-		<h3 id="{{indicatorGroup.id}}">{{'Indicator Group' | translate}}: {{indicatorGroup.displayName}}</h3>
-		<div id="IndicatorGroup" ng-controller="IndicatorController" ng-init="getIndicators(indicatorGroup)" ng-model="indicatorGroup" class="col-md-12">
+	<div class="col-md-12" id="IndicatorGroupsContainer" ng-repeat="selectedGrp in indicatorGroups.indicatorGroups | orderBy: 'displayName'">
+		<h3 id="{{selectedGrp.id}}">{{'Indicator Group' | translate}}: {{selectedGrp.displayName}}</h3>
+		<div id="IndicatorGroup" ng-controller="IndicatorController"  class="col-md-12">
 			<p>{{'Number of indicators in group' | translate}}: {{indicatorGroup.indicators.length}}</p>
 			<table   class="indicatorTable table table-striped">
 				<thead>
