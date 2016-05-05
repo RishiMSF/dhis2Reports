@@ -26,3 +26,8 @@ All Rest-calls are placed in services.js and implemented using angular resources
 3. editor for dossier
 4. security for dataset zzdossier
 5. security for tabs
+
+#Known bugs
+1. logout problem
+2. Copy link with view Anchor included.
+
