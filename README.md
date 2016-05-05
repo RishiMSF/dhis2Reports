@@ -29,6 +29,7 @@ All Rest-calls are placed in services.js and implemented using angular resources
 4. security for dataset zzdossier
 5. security for tabs
 6. complete translations
+7. more documentation and add how elements can be added to dossier dataset.
 
 #Known bugs
 1. logout problem , to be fixed by checking dropdowns are not empty, if so go to login page. Or regulary send a system/ping .
