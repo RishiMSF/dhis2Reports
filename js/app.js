@@ -36,7 +36,7 @@ HmisReport.config(['$routeProvider','$locationProvider',
         	}).when('/indictorGroups',{
 				templateUrl: 'app/indicatorGroups.html',
         		controller: 'IndicatorGrpController'
-        	}).when('/indictors',{
+        	}).when('/indicators',{
 				templateUrl: 'app/indicators.html',
         		controller: 'IndicatorsController'
 			}).otherwise({
