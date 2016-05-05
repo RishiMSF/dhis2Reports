@@ -17,6 +17,9 @@ This means each tab has each own html file.
 Each tab has each own controller which are all in the controler.js futher  section, elemenements, 
 indicators are  child controler which are used by multiple parent controllers.
 
+##Translations
+Translations files are in the tranlsation folder, only en and fr are there
+
 ##Services
 All Rest-calls are placed in services.js and implemented using angular resources. 
 
@@ -26,6 +29,7 @@ All Rest-calls are placed in services.js and implemented using angular resources
 3. editor for dossier
 4. security for dataset zzdossier
 5. security for tabs
+6. complete translations
 
 #Known bugs
 1. logout problem
