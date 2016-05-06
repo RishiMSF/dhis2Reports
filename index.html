@@ -29,7 +29,7 @@
 	</head>
 	<body ng-app="HmisReport" class="container-fluid">
 		<div ng-controller="HmisReportCtrl as main"  class="row" id="main">
-			<ul id="dossierTabs" role="tablist" class="nav nav-tabs col-md-12">
+			<ul id="dossierTabs" onclick="ping()" role="tablist" class="nav nav-tabs col-md-12">
 				<li role="presentation"  class="active col-md-2"><a role="tab" data-toggle="tab"  href="#services">{{'Services' | translate}}</a></li>
 				<li role="presentation"  class="col-md-2"><a role="tab" data-toggle="tab"   href="#dataSets">DataSets</a></li>
 				<li role="presentation"  class="col-md-2"><a role="tab" data-toggle="tab"   href="#indicators">Indicators</a></li>

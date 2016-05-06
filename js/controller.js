@@ -16,8 +16,9 @@ HmisReportcontrollers.controller('HmisReportCtrl', ['$scope','$translate','$rout
   		$anchorScroll(id);  
 	}
 
+	//checking if session is not expired, if expired response is login-page
 	ping = function(){
-  		$http.get(qryPing).success(function(data, status, headers, config) {
+		$http.get(qryPing).success(function(data, status, headers, config) {
      		if (headers()['login-page']){
      			$window.location.href = dhisroot;
      		}
