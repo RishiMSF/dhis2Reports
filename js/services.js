@@ -1,4 +1,5 @@
-var dhisUrl = window.location.href.split('/api/')[0] + '/api/';
+var dhisroot = window.location.href.split('/api/')[0]
+var dhisUrl = dhisroot + '/api/';
 
 //http://localhost:8989/dhis/api/system/info   , contextPath
 
@@ -19,6 +20,20 @@ var qryDataSets = dhisUrl + 'dataSets.json?fields=id,displayName,sections[id]&pa
 //var qryDataSet = dhisUrl + 'dataSets/:dataSetId.json?paging=false&translate=true';
 
 var hmisReportServices = angular.module('hmisReportServices', ['ngResource']);
+
+hmisReportServices.factory('Ping', ['$resource',
+function($resource){
+  return $resource(qryPing, {}, {
+      query: {method:'GET', transformResponse: function (data, headers) {
+                //if no data return so no warnings
+                if (data == ''){
+                    return;
+                }
+
+                return {data: $.extend({}, eval("{" + data + '}'))};
+            }} 
+    });
+}]);
 
 hmisReportServices.factory('Dossier', ['$resource',
 function($resource){

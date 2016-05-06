@@ -1,6 +1,6 @@
 var HmisReportcontrollers = angular.module('HmisReportcontrollers',['ngSanitize','pascalprecht.translate','ui.tinymce']);
 
-HmisReportcontrollers.controller('HmisReportCtrl', ['$scope','$translate','$route', '$location', '$anchorScroll', '$routeParams', function($scope, $translate,$route, $location, $anchorScroll, $routeParams){
+HmisReportcontrollers.controller('HmisReportCtrl', ['$scope','$translate','$route', '$location', '$anchorScroll', '$routeParams', '$http', '$window', function($scope, $translate,$route, $location, $anchorScroll, $routeParams, $http, $window){
 	// master controler, does not do much but when multiple tabs  are enabled again then it will have a function
 	this.$route = $route;
     this.$location = $location;
@@ -20,6 +20,16 @@ HmisReportcontrollers.controller('HmisReportCtrl', ['$scope','$translate','$rout
 
 	$scope.scrollTo = function (id) {
   		$anchorScroll(id);  
+	}
+
+	
+
+	ping = function(){
+  		$http.get(qryPing).success(function(headers) {
+     		if (headers()['login-page']){
+     			$window.location.href = dhisroot;
+     		}
+  		}).error(function(data, status, headers, config) {});
 	}
 
 }]);
@@ -67,6 +77,8 @@ HmisReportcontrollers.controller('DataSetController', ['$scope', '$translate','D
 		$scope.toc={
         	entries : []
     	};
+
+    	ping();
 	};
 
 }]);
@@ -81,7 +93,7 @@ HmisReportcontrollers.controller('IndicatorGrpController', ['$scope', '$translat
 }]);
 
 
-HmisReportcontrollers.controller('SectionController', ['$scope','Sections', function($scope, Sections){
+HmisReportcontrollers.controller('SectionController', ['$scope','Sections', 'Ping', function($scope, Sections, Ping){
 	$scope.$watch('selectedSet',function(){
 		$scope.sections = Sections.get({datasetId:$scope.$parent.selectedSet.id},function(){
 				addtoTOC($scope.toc,$scope.sections.sections,$scope.$parent.selectedSet,"dataset");	
