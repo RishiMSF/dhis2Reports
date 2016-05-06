@@ -16,11 +16,12 @@ HmisReportcontrollers.controller('HmisReportCtrl', ['$scope','$translate','$rout
   		$anchorScroll(id);  
 	}
 
-	//checking if session is not expired, if expired response is login-page
+	//checking if session is not expired, if expired response is login-page(so then reload)
 	ping = function(){
 		$http.get(qryPing).success(function(data, status, headers, config) {
+			console.log(data);
      		if (headers()['login-page']){
-     			$window.location.href = dhisroot;
+     			document.location.reload(true);
      		}
   		}).error(function(data, status, headers, config) {});
 	}
