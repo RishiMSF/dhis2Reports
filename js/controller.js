@@ -19,7 +19,6 @@ HmisReportcontrollers.controller('HmisReportCtrl', ['$scope','$translate','$rout
 	//checking if session is not expired, if expired response is login-page(so then reload)
 	ping = function(){
 		$http.get(qryPing).success(function(data, status, headers, config) {
-			console.log(data);
      		if (headers()['login-page']){
      			document.location.reload(true);
      		}

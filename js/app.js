@@ -1,4 +1,4 @@
-var HmisReport = angular.module('HmisReport',['ngRoute','HmisReportcontrollers','hmisReportServices']);
+var HmisReport = angular.module('HmisReport',['ngRoute','HmisReportcontrollers','hmisReportServices','d2Menu']);
 
 /*
 HmisReport.config(['$routeProvider',
