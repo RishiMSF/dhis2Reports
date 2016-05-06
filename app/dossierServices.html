@@ -5,7 +5,7 @@
 	<p>{{'Number of IndicatorGroups in Service' | translate}}: {{indicatorGroups.indicatorGroups.length}}</p>
 	<div class="col-md-12">
 	<select class="col-md-2" ng-options="service.displayDescription for service in services.dataElements | orderBy: 'displayName'" name="selectService" id="drpBoxServices" ng-model="selectedService"
-	ng-change="getServiceData()">
+	onchange="ping()">
 	</select>
 	</div>
 
@@ -16,7 +16,7 @@
 	</div>
 
 	<div id="tocContainer" class="col-md-11">
-		<h3 ng-show="selectedService" style="text-decoration: underline;">{{'Table Of Content'| translate}}</h3>
+		<h3 ng-if="selectedService" style="text-decoration: underline;">{{'Table Of Content'| translate}}</h3>
 		<ul  ng-repeat="i in toc.entries | orderBy:'parent.displayName'">
     		<li ><a href="" ng-click="scrollTo(i.parent.id)" target="_self">{{i.parent.displayName}}</a>
 				<ul  ng-repeat="j in i.children">

@@ -1,15 +1,9 @@
 var HmisReportcontrollers = angular.module('HmisReportcontrollers',['ngSanitize','pascalprecht.translate','ui.tinymce']);
 
 HmisReportcontrollers.controller('HmisReportCtrl', ['$scope','$translate','$route', '$location', '$anchorScroll', '$routeParams', '$http', '$window', function($scope, $translate,$route, $location, $anchorScroll, $routeParams, $http, $window){
-	// master controler, does not do much but when multiple tabs  are enabled again then it will have a function
 	this.$route = $route;
     this.$location = $location;
     this.$routeParams = $routeParams;
-
-      // $scope.toc={
-      //   entries : []
-      // };
-
 		
     addtoTOC = function(toc,items,parent, type){
 		var index = toc.entries.push({
@@ -22,10 +16,8 @@ HmisReportcontrollers.controller('HmisReportCtrl', ['$scope','$translate','$rout
   		$anchorScroll(id);  
 	}
 
-	
-
 	ping = function(){
-  		$http.get(qryPing).success(function(headers) {
+  		$http.get(qryPing).success(function(data, status, headers, config) {
      		if (headers()['login-page']){
      			$window.location.href = dhisroot;
      		}
@@ -35,26 +27,20 @@ HmisReportcontrollers.controller('HmisReportCtrl', ['$scope','$translate','$rout
 }]);
 
 HmisReportcontrollers.controller('ServiceController',['$scope','$translate','Services','ServiceDataSets','Dossier', 'ServiceIndicatorGrps', function($scope,$translate,Services,ServiceDataSets,Dossier,ServiceIndicatorGrps){
-	//initService = function(){
 		$scope.services = Services.get();
 		$scope.serviceDataSets = {};
-		 
-	//};
 
-	//initService();
-
-	
-	$scope.getServiceData = function(){
+	$scope.$watch('selectedService',function(){	 	
+		ping();
 		$scope.toc={
         	entries : []
       	};
-
-		$scope.indicatorGroups =  ServiceIndicatorGrps.get({serviceCode:$scope.selectedService.code});
-		$scope.serviceDataSets = ServiceDataSets.get({serviceCode:$scope.selectedService.code}); 
-		$scope.dossier = Dossier.get({languageCode:$translate.use(),serviceCode:$scope.selectedService.code});
-	
-	//	initService();
-	};
+      	if ($scope.selectedService){
+			$scope.indicatorGroups =  ServiceIndicatorGrps.get({serviceCode:$scope.selectedService.code});
+			$scope.serviceDataSets = ServiceDataSets.get({serviceCode:$scope.selectedService.code}); 
+			$scope.dossier = Dossier.get({languageCode:$translate.use(),serviceCode:$scope.selectedService.code});
+		}
+	});
 
 	// $scope.filterByDataSet = function(sc){
 	// 	var inDataSet = false;
@@ -123,6 +109,7 @@ HmisReportcontrollers.controller('ElementsTableController',['$scope','Elements',
 HmisReportcontrollers.controller('IndicatorController',['$scope','IndicatorGroup',function($scope,IndicatorGroup){
 	
 	$scope.$watch('selectedGrp',function(){
+		ping();
 		$scope.indicatorGrpParent4Toc = {displayName:"indicatorGroup "+$scope.$parent.selectedGrp.displayName,id:$scope.$parent.selectedGrp.id}
 		$scope.indicatorGroup = IndicatorGroup.get({indicatorGrpId:$scope.$parent.selectedGrp.id}, function(){
 			addtoTOC($scope.toc,null,$scope.indicatorGrpParent4Toc,"indicatorGroup");
