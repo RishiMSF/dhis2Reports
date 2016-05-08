@@ -79,6 +79,14 @@ HmisReportcontrollers.controller('IndicatorGrpController', ['$scope', '$translat
 	$scope.indicatorGrps = IndicatorGroups.get({serviceCode:$scope.serviceCode});
 }]);
 
+HmisReportcontrollers.controller('IndicatorsWithoutGrpController', ['$scope','Ping', function($scope, Ping){
+	// $scope.$watch('selectedSet',function(){
+	// 	$scope.sections = Sections.get({datasetId:$scope.$parent.selectedSet.id},function(){
+	// 			addtoTOC($scope.toc,$scope.sections.sections,$scope.$parent.selectedSet,"dataset");	
+	// 		});
+	// });
+}]);
+
 
 HmisReportcontrollers.controller('SectionController', ['$scope','Sections', 'Ping', function($scope, Sections, Ping){
 	$scope.$watch('selectedSet',function(){
@@ -87,6 +95,8 @@ HmisReportcontrollers.controller('SectionController', ['$scope','Sections', 'Pin
 			});
 	});
 }]);
+
+
 
 
 HmisReportcontrollers.controller('ElementsTableController',['$scope','Elements',function($scope,Elements){

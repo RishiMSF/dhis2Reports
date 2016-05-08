@@ -11,9 +11,22 @@ h3,
 h4,
 h5,
 h6 {
- margin-top: 5px;	
+ /*margin-top: 5px;	*/
   font-family: 'Rajdhani', sans-serif;
 }
+
+.nav-tabs, .menu{
+	background-color: grey ;/*#b40303*/
+}
+
+.nav>li>a{
+	color: white;
+}
+
+.active{
+	color: black;	
+}
+
 
 a:visited{
 	color:#bbb;
