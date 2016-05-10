@@ -14,7 +14,7 @@ var qryServiceDataSets = dhisUrl + 'dataSets.json?fields=id,displayName,sections
 var qryServiceIndicatorGrps= dhisUrl + 'indicatorGroups.json?fields=id,displayName&paging=false&filter=attributeValues.value\\:eq\\::serviceCode';
 
 var qryDataElements = dhisUrl + 'dataElements.json?fields=displayName,displayFormName,displayDescription,id,section[id]&paging=false&filter=id\\:in::IdList';
-var qryIndicatorGrps= dhisUrl + 'indicatorGroups.json?fields=id,displayName&paging=false';
+var qryIndicatorGrps= dhisUrl + 'indicatorGroups.json?fields=id,displayName&paging=false&translate=true';
 var qryIndicatorGrp= dhisUrl + 'indicators.json?fields=displayName,id,displayFormName,displayDescription&filter=indicatorGroups.id\\:eq\\::indicatorGrpId&paging=false';
 var qryDataSets = dhisUrl + 'dataSets.json?fields=id,displayName,sections[id]&paging=false&translate=true';
 //var qryDataSet = dhisUrl + 'dataSets/:dataSetId.json?paging=false&translate=true';
