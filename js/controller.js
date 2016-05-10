@@ -120,7 +120,6 @@ HmisReportcontrollers.controller('IndicatorController',['$scope','IndicatorGroup
 
 	$scope.getAllIndicators = function(){
 		$scope.indicators = AllIndicators.get();
-		console.log("Hola");
 	}
 
 	// numinator and denominator description is in indicator description

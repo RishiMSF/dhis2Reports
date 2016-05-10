@@ -1,10 +1,10 @@
 <div id="dataSetPanel" class="row">
 	<div id="headerPanel" class="col-md-12">
-		<h1>{{'HMIS DataSets' | translate}}</h1>
+		<h1>{{'HMIS Data Sets' | translate}}</h1>
 		<h2><tt>{{selected.name}}</tt> </h2>
 		<p>{{'number of datasets' | translate}}: {{dataSets.dataSets.length}}</p>
 		<p>{{'number of sections in dataset' | translate}}: {{dataset.sections.length}}</p>
-		<select ng-options="set.displayName for set in dataSets.dataSets | orderBy: 'displayName'" ng-change="resetToc()" name="select" id="drpBoxDataSet" ng-model="selectedSet">
+		<select ng-options="set.displayName for set in dataSets.dataSets | orderBy: 'displayName'" ng-change="resetToc()" name="select"  id="drpBoxDataSet" ng-model="selectedSet">
 		</select>
 	</div>
 	
