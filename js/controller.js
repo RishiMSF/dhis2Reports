@@ -111,9 +111,9 @@ HmisReportcontrollers.controller('IndicatorController',['$scope','IndicatorGroup
 	$scope.$watch('selectedGrp',function(){
 		ping();
 		if ($scope.$parent.selectedGrp){
-			$scope.indicatorGrpParent4Toc = {displayName:"…IndicatorGroup "+$scope.$parent.selectedGrp.displayName,id:$scope.$parent.selectedGrp.id}
+			$scope.indicatorGrpParent4Toc = {displayName:"…Indicator Group "+$scope.$parent.selectedGrp.displayName,id:$scope.$parent.selectedGrp.id}
 			$scope.indicatorGroup = IndicatorGroup.get({indicatorGrpId:$scope.$parent.selectedGrp.id}, function(){
-				addtoTOC($scope.toc,null,$scope.indicatorGrpParent4Toc,"…IndicatorGroup");
+				addtoTOC($scope.toc,null,$scope.indicatorGrpParent4Toc,"…Indicator Group");
 			});
 		}
 	});
