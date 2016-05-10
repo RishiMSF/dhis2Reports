@@ -18,6 +18,7 @@ var qryIndicatorGrps= dhisUrl + 'indicatorGroups.json?fields=id,displayName&pagi
 var qryIndicatorGrp= dhisUrl + 'indicators.json?fields=displayName,id,displayFormName,displayDescription&filter=indicatorGroups.id\\:eq\\::indicatorGrpId&paging=false';
 var qryDataSets = dhisUrl + 'dataSets.json?fields=id,displayName,sections[id]&paging=false&translate=true';
 //var qryDataSet = dhisUrl + 'dataSets/:dataSetId.json?paging=false&translate=true';
+var qryAllIndicators = dhisUrl + 'indicators.json?fields=displayName,id,displayFormName,displayDescription,indicatorGroups[displayName]&paging=false';
 
 var hmisReportServices = angular.module('hmisReportServices', ['ngResource']);
 
@@ -45,6 +46,13 @@ function($resource){
 hmisReportServices.factory('IndicatorGroup', ['$resource',
 function($resource){
   return $resource(qryIndicatorGrp, {indicatorGrpId:'@indicatorGrpId'}, {
+      query: {method:'GET',  isArray:false}
+    });
+}]);
+
+hmisReportServices.factory('AllIndicators', ['$resource',
+function($resource){
+  return $resource(qryAllIndicators, {}, {
       query: {method:'GET',  isArray:false}
     });
 }]);

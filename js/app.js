@@ -14,7 +14,7 @@ HmisReport.config(['$routeProvider','$locationProvider',
         		controller: 'IndicatorGrpController'
         	}).when('/indicators',{
 				templateUrl: 'app/indicators.html',
-        		controller: 'IndicatorsWithoutGrpController'
+        		controller: 'IndicatorController'
 			}).otherwise({
         		redirectTo: '/services'
       		});

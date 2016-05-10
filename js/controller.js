@@ -61,11 +61,10 @@ HmisReportcontrollers.controller('DataSetController', ['$scope', '$translate','D
 	$scope.dataSets = DataSets.get();
 	
 	$scope.resetToc = function(){
+		ping();
 		$scope.toc={
         	entries : []
     	};
-
-    	ping();
 	};
 
 }]);
@@ -79,14 +78,6 @@ HmisReportcontrollers.controller('IndicatorGrpController', ['$scope', '$translat
 	$scope.indicatorGrps = IndicatorGroups.get({serviceCode:$scope.serviceCode});
 }]);
 
-HmisReportcontrollers.controller('IndicatorsWithoutGrpController', ['$scope','Ping', function($scope, Ping){
-	// $scope.$watch('selectedSet',function(){
-	// 	$scope.sections = Sections.get({datasetId:$scope.$parent.selectedSet.id},function(){
-	// 			addtoTOC($scope.toc,$scope.sections.sections,$scope.$parent.selectedSet,"dataset");	
-	// 		});
-	// });
-}]);
-
 
 HmisReportcontrollers.controller('SectionController', ['$scope','Sections', 'Ping', function($scope, Sections, Ping){
 	$scope.$watch('selectedSet',function(){
@@ -95,8 +86,6 @@ HmisReportcontrollers.controller('SectionController', ['$scope','Sections', 'Pin
 			});
 	});
 }]);
-
-
 
 
 HmisReportcontrollers.controller('ElementsTableController',['$scope','Elements',function($scope,Elements){
@@ -117,17 +106,23 @@ HmisReportcontrollers.controller('ElementsTableController',['$scope','Elements',
 	}
 }])
 
-HmisReportcontrollers.controller('IndicatorController',['$scope','IndicatorGroup',function($scope,IndicatorGroup){
+HmisReportcontrollers.controller('IndicatorController',['$scope','IndicatorGroup','AllIndicators',function($scope,IndicatorGroup,AllIndicators){
 	
 	$scope.$watch('selectedGrp',function(){
 		ping();
-		$scope.indicatorGrpParent4Toc = {displayName:"indicatorGroup "+$scope.$parent.selectedGrp.displayName,id:$scope.$parent.selectedGrp.id}
-		$scope.indicatorGroup = IndicatorGroup.get({indicatorGrpId:$scope.$parent.selectedGrp.id}, function(){
-			addtoTOC($scope.toc,null,$scope.indicatorGrpParent4Toc,"indicatorGroup");
-		});
+		if ($scope.$parent.selectedGrp){
+			$scope.indicatorGrpParent4Toc = {displayName:"indicatorGroup "+$scope.$parent.selectedGrp.displayName,id:$scope.$parent.selectedGrp.id}
+			$scope.indicatorGroup = IndicatorGroup.get({indicatorGrpId:$scope.$parent.selectedGrp.id}, function(){
+				addtoTOC($scope.toc,null,$scope.indicatorGrpParent4Toc,"indicatorGroup");
+			});
+		}
 	});
 
-	
+	$scope.getAllIndicators = function(){
+		$scope.indicators = AllIndicators.get();
+		console.log("Hola");
+	}
+
 	// numinator and denominator description is in indicator description
 	//(translatation doesn't work for denom and num columns) so have be extracted
 	$scope.getNuminator = function(indicator){
@@ -155,6 +150,19 @@ HmisReportcontrollers.controller('IndicatorController',['$scope','IndicatorGroup
 		else{
 			return indicator.displayDescription;
 		}
+	}
+
+	$scope.getIndicatorGroupNames = function(indicator){
+		var indicatorGroupNames;
+
+		angular.forEach(indicator.indicatorGroups, function(indicatorGroup,key){
+			if (key!=0){			
+				indicatorGroupNames += "," + indicatorGroup.displayName;
+			}else{
+				indicatorGroupNames = indicatorGroup.displayName;
+			}
+		});		
+		return indicatorGroupNames;
 	}
 }])
 
