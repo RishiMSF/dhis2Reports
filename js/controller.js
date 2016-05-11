@@ -18,11 +18,59 @@ HmisReportcontrollers.controller('HmisReportCtrl', ['$scope','$translate','$rout
 
 	//checking if session is not expired, if expired response is login-page(so then reload)
 	ping = function(){
-		$http.get(qryPing).success(function(data, status, headers, config) {
-     		if (headers()['login-page']){
-     			document.location.reload(true);
-     		}
-  		}).error(function(data, status, headers, config) {});
+		var ua = window.navigator.userAgent;
+	  	ms_ie = ua.match(/MSIE|Trident/)
+	    console.log(ua);
+	  //   if(!ms_ie ){	
+			// $http.get(qryPing).success(function(data, status, headers, config,response) {
+	  //    		if (headers()['login-page']){
+	  //    			if(ms_ie ){
+	  //    				console.log("shitty browser");
+	  //    			}
+	  //    			document.location.reload(true);
+	  //    			document.location.reload(true);
+	  //    			//$window.location.href = dhisroot + "/dhis-web-commons/security/login.action";
+	  //           	//return dhisloc;
+	  //    		}
+	  // 		}).error(function(data, status, headers, config) {
+	  // 		});
+  	// 	}
+  	// 	else{
+  				//IE handling
+  			   // $.ajax({
+  			   // 	  method:"GET",
+		      //     url: qryPing,
+		      //     dataType:"json"
+		      //     success: function(result,data){
+		      //     	console.log(result);
+		      //        if (data!=="pong"){
+		      //        	document.location.reload(true);
+		      //        	document.location.reload(true);
+		      //        }else{
+		      //        	console.log("pong");
+		      //        }
+		      //        //document.location.reload(true);
+		      //     },     
+		      //     error: function(result){
+		      //     }
+		      //  });
+
+
+		    
+		    $.ajax({
+			  url: qryPing,
+			  dataType:"html",
+			  cache: false
+			})
+			.done(function( data ) {
+			    if (data!=="pong"){
+	             	document.location.reload(true);
+	             	//document.location.reload(true);
+	            }else{
+	             	console.log("pong");
+	            }
+			});
+  		//}
 	}
 
 }]);

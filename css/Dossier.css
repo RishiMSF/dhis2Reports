@@ -19,6 +19,12 @@ h6 {
 	background-color: grey ;/*#b40303*/
 }
 
+@media print {
+ .menu, .nav-tabs{
+ 	display: none;
+ }
+}
+
 .nav>li>a{
 	color: white;
 }
