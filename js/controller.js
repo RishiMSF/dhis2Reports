@@ -4,7 +4,7 @@ HmisReportcontrollers.controller('HmisReportCtrl', ['$scope','$translate','$rout
 	this.$route = $route;
     this.$location = $location;
     this.$routeParams = $routeParams;
-		
+
     addtoTOC = function(toc,items,parent, type){
 		var index = toc.entries.push({
 			'parent':parent,
@@ -25,6 +25,7 @@ HmisReportcontrollers.controller('HmisReportCtrl', ['$scope','$translate','$rout
 		})
 		.done(function( data ) {
 		    if (data!=="pong"){
+             	window.location.href = dhisloc;
              	document.location.reload(true);
             }
 		});
@@ -64,6 +65,9 @@ HmisReportcontrollers.controller('ServiceController',['$scope','$translate','Ser
 
 HmisReportcontrollers.controller('DataSetController', ['$scope', '$translate','DataSets', function($scope, $translate, DataSets){
 	$scope.dataSets = DataSets.get();
+	$('#dossierTabs').tab();
+	//$('#dataSets').tab();
+	
 	
 	$scope.resetToc = function(){
 		ping();

@@ -18,5 +18,6 @@ HmisReport.config(['$routeProvider','$locationProvider',
 			}).otherwise({
         		redirectTo: '/services'
       		});
+
 	//$locationProvider.html5Mode(true);		
 }]);

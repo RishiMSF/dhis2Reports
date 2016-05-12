@@ -36,14 +36,18 @@
 		
 	</head>
 	<body   ng-app="HmisReport" class="container-fluid">
-		<div class="row menu" d2-menu></div>  
+		<div class="row menu" d2-menu>
+			<!-- <button type="button" class="btn btn-default" aria-label="Left Align">
+  				<span class="glyphicon glyphicon-print" aria-hidden="true"></span>
+			</button> -->
+		</div>  
 
 		<div ng-controller="HmisReportCtrl as main"  class="row" id="main">
 			<ul id="dossierTabs" onclick="ping()" role="tablist" class="nav nav-tabs col-md-12">
-				<li role="presentation"  class="active col-md-2"><a role="tab" data-toggle="tab"  href="#services">{{'Services' | translate}}</a></li>
-				<li role="presentation"  class="col-md-2 tab"><a role="tab" data-toggle="tab"   href="#dataSets">{{'Data Sets' | translate}}</a></li>
-				<li role="presentation"  class="col-md-2 tab"><a role="tab" data-toggle="tab"   href="#indictorGroups">{{'Indicator Groups'| translate}}</a></li>
-				<li role="presentation"  class="col-md-2 tab"><a role="tab" data-toggle="tab"   href="#indicators">{{'Indicators'| translate}}</a></li>
+				<li id="services" role="presentation"  class="active col-md-2"><a role="tab" data-toggle="tab"  href="#services">{{'Services' | translate}}</a></li>
+				<li id="dataSets" role="presentation"  class="col-md-2 tab"><a role="tab" data-toggle="tab"   href="#dataSets">{{'Data Sets' | translate}}</a></li>
+				<li id="indictorGroups" role="presentation"  class="col-md-2 tab"><a role="tab" data-toggle="tab"   href="#indictorGroups">{{'Indicator Groups'| translate}}</a></li>
+				<li id="indicators" role="presentation"  class="col-md-2 tab"><a role="tab" data-toggle="tab"   href="#indicators">{{'Indicators'| translate}}</a></li>
 			</ul>
 
 <!-- DHIS2 Settings initialization for a baseUrl that is used for the menu -->
@@ -52,6 +56,11 @@
             dhis2.settings = dhis2.settings || {};
             dhis2.settings.baseUrl = 'dhis';
             var dhisloc = window.location.href;
+
+            jQuery(document).ready(function ($) {
+        		$('#dossierTabs').tab();
+        		console.log("tab");
+    		});
         </script>
 
 		<!-- Menu scripts -->
