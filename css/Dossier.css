@@ -40,10 +40,11 @@ h6 {
   	page-break-before: always;
   }
 
-  #print-foot:after {
+  /* works only in firefox, so disabled it, anyway in firefox by default (ugly) pages numbers are added in print view */
+  /*#print-foot:after {
   content: counter(page);
   counter-increment: page;
-  }
+  }*/
 }
 
 @page:left{
