@@ -27,11 +27,11 @@
 			</ul>
 		</div>
 		<div id="serviceDataSetContainer" class="col-md-12" ng-repeat="selectedSet in serviceDataSets.dataSets"  ng-model="selectedSet"> 
-			<h2 id="{{selectedSet.id}}">{{selectedSet.displayName}}</h2>
+			<h2 class="dataset" id="{{selectedSet.id}}">{{selectedSet.displayName}}</h2>
 			<div id="sectionContainer" ng-controller="SectionController">	
 				
 				<div  class="col-md-12" ng-repeat="section in sections.sections | orderBy: 'displayName'">
-					<h3 id="{{section.id}}">{{section.displayName}}</h3>
+					<h3 class="section" id="{{section.id}}">{{section.displayName}}</h3>
 					<p>{{'Number of elements in section'| translate}}: {{section.dataElements.length}}</p>
 					<table  ng-controller="ElementsTableController" ng-init="getElementsInSection(section)" class="sectionElementsTable table table-striped">
 						<thead>
@@ -53,8 +53,8 @@
 			</div>
 		</div>
 		<div class="col-md-12" id="IndicatorGroupsContainer" ng-repeat="selectedGrp in indicatorGroups.indicatorGroups | orderBy: 'displayName'">
-			<h3 id="{{selectedGrp.id}}">{{'Indicator Group' | translate}}: {{selectedGrp.displayName}}</h3>
-			<div id="IndicatorGroup" ng-controller="IndicatorController"  class="col-md-12">
+			<h3 class="indicatorGroup" id="{{selectedGrp.id}}">{{'Indicator Group' | translate}}: {{selectedGrp.displayName}}</h3>
+			<div ng-controller="IndicatorController"  class="col-md-12">
 				<p>{{'Number of indicators in group' | translate}}: {{indicatorGroup.indicators.length}}</p>
 				<table   class="indicatorTable table table-striped">
 					<thead>

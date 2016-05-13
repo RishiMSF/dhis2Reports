@@ -15,14 +15,41 @@ h6 {
   font-family: 'Rajdhani', sans-serif;
 }
 
+
+
 .nav-tabs, .menu{
 	background-color: grey ;/*#b40303*/
 }
 
+#print-foot {
+  display: none;
+  }
+
 @media print {
- .menu, .nav-tabs{
+ .menu, .nav-tabs, .headerPanel{
  	display: none;
  }
+ #print-foot {
+  display: block;
+  position: fixed;
+  bottom: 0pt;
+  right: 0pt;
+  }
+
+  .dataset,.indicatorGroup{
+  	page-break-before: always;
+  }
+
+  #print-foot:after {
+  content: counter(page);
+  counter-increment: page;
+  }
+}
+
+@page:left{
+  @bottom-left {
+    content: "Page " counter(page) " of " counter(pages);
+  }
 }
 
 .nav>li>a{
