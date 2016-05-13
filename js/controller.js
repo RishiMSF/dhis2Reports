@@ -26,7 +26,7 @@ HmisReportcontrollers.controller('HmisReportCtrl', ['$scope','$translate','$rout
 		.done(function( data ) {
 		    if (data!=="pong"){
              	window.location.href = dhisloc;
-             	document.location.reload(true);
+             	// testing this without document.location.reload(true);
             }
 		});
 	}
@@ -65,8 +65,7 @@ HmisReportcontrollers.controller('ServiceController',['$scope','$translate','Ser
 
 HmisReportcontrollers.controller('DataSetController', ['$scope', '$translate','DataSets', function($scope, $translate, DataSets){
 	$scope.dataSets = DataSets.get();
-	$('#dossierTabs').tab();
-	//$('#dataSets').tab();
+	$('#dataSets').tab('show');
 	
 	
 	$scope.resetToc = function(){
@@ -79,6 +78,8 @@ HmisReportcontrollers.controller('DataSetController', ['$scope', '$translate','D
 }]);
 
 HmisReportcontrollers.controller('IndicatorGrpController', ['$scope', '$translate','IndicatorGroups', function($scope, $translate, IndicatorGroups){
+	$('#indictorGroups').tab('show');
+
 	$scope.toc={
         	entries : []
       	};
@@ -124,6 +125,9 @@ HmisReportcontrollers.controller('IndicatorController',['$scope','IndicatorGroup
 			$scope.indicatorGroup = IndicatorGroup.get({indicatorGrpId:$scope.$parent.selectedGrp.id}, function(){
 				addtoTOC($scope.toc,null,$scope.indicatorGrpParent4Toc,"…Indicator Group");
 			});
+		}else{
+			$('#indicators').tab('show');
+	
 		}
 	});
 
