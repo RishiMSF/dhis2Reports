@@ -15,11 +15,11 @@
 		<script src="bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.min.js"></script>
 		
 		<script src="bower_components/angular-animate/angular-animate.js"></script>
-
+<!-- 
 		<script src="bower_components/tinymce-dist/tinymce.min.js"></script>
 		<script src="bower_components/angular-ui-tinymce/src/tinymce.js"></script>
-
-		<script src="js/app.js"></script>
+ -->		
+ 		<script src="js/app.js"></script>
 		<script src="js/controller.js"></script>
 		<script src="js/services.js"></script>
 
@@ -56,6 +56,7 @@
             dhis2.settings.baseUrl = 'dhis';
 
             jQuery(document).ready(function ($) {
+            	//dhisloc is used for ping method in controller
             	var dhisloc = window.location.href;
     		});
         </script>
@@ -77,9 +78,9 @@
 		  <pre>$routeParams = {{main.$routeParams}}</pre> -->
 		</div>	
 
-		<!-- works only in firefox css has been disabled in stylesheet -->
+		<!-- works only properly in firefox  -->
         <div id="print-foot">
-      		Page: 
+      		 
  		</div>
 	</body>
 </html>

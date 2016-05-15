@@ -15,8 +15,6 @@ h6 {
   font-family: 'Rajdhani', sans-serif;
 }
 
-
-
 .nav-tabs, .menu{
 	background-color: grey ;/*#b40303*/
 }
@@ -26,9 +24,11 @@ h6 {
   }
 
 @media print {
- .menu, .nav-tabs, .headerPanel{
+ .menu, .nav-tabs, .headerPanel/*, #tocContainer */{
  	display: none;
  }
+
+/* works only properly in firefox */
  #print-foot {
   display: block;
   position: fixed;
@@ -36,21 +36,22 @@ h6 {
   right: 0pt;
   }
 
-  .dataset,.indicatorGroup{
+  /* works only properly in firefox */
+  .service>.dataset,.indicatorGroup{
   	page-break-before: always;
   }
 
-  /* works only in firefox, so disabled it, anyway in firefox by default (ugly) pages numbers are added in print view */
-  /*#print-foot:after {
+  /* works only properly in firefox */
+  #print-foot:after {
   content: counter(page);
   counter-increment: page;
-  }*/
-}
-
-@page:left{
-  @bottom-left {
-    content: "Page " counter(page) " of " counter(pages);
   }
+
+  /* for page numbers in table of content not working anywhere yet css standard still has to be implemented 
+  a.pageref::after { 
+  content: target-counter(attr(href url), page);
+  }*/
+    
 }
 
 .nav>li>a{

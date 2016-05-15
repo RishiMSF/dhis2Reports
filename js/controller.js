@@ -1,4 +1,5 @@
-var HmisReportcontrollers = angular.module('HmisReportcontrollers',['ngSanitize','pascalprecht.translate','ui.tinymce']);
+var HmisReportcontrollers = angular.module('HmisReportcontrollers',['ngSanitize','pascalprecht.translate']); 
+/*'ui.tinymce' has to be added to angular.module for editor functionality*/
 
 HmisReportcontrollers.controller('HmisReportCtrl', ['$scope','$translate','$route', '$location', '$anchorScroll', '$routeParams', '$http', '$window', function($scope, $translate,$route, $location, $anchorScroll, $routeParams, $http, $window){
 	this.$route = $route;
@@ -48,18 +49,6 @@ HmisReportcontrollers.controller('ServiceController',['$scope','$translate','Ser
 			$scope.dossier = Dossier.get({languageCode:$translate.use(),serviceCode:$scope.selectedService.code});
 		}
 	});
-
-	// $scope.filterByDataSet = function(sc){
-	// 	var inDataSet = false;
-	// 	//console.log($scope.sections.length);	
-	// 	angular.forEach($scope.dataset.sections, function(dsSection){
-	// 		if (sc.id === dsSection.id) {
-	// 			inDataSet = true;
-	// 		}
-	// 	});
-	// 	return inDataSet;	
-	// }
-
 }]);
 
 
