@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<!-- saved from url=(0095)http://localhost:8989/dhis/dhis-web-maintenance-dataadmin/showUpdateSqlViewForm.action?id=46725 -->
+<html class="x-border-box"><!--[endif]--><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>MSF OCBA HMIS</title>
+    <meta name="description" content="DHIS 2">
+    <meta name="keywords" content="DHIS 2">
+    
+    <link type="text/css" rel="stylesheet" href="./SQLViewInDhis2_files/font-awesome.min.css">
+    <link type="text/css" rel="stylesheet" media="screen" href="./SQLViewInDhis2_files/jquery-ui.css">
+    <link type="text/css" rel="stylesheet" media="screen,print" href="./SQLViewInDhis2_files/vietnam.css">
+    <link type="text/css" rel="stylesheet" media="screen,print" href="./SQLViewInDhis2_files/widgets.css">
+    <link type="text/css" rel="stylesheet" media="print" href="./SQLViewInDhis2_files/print.css">
+    <link type="text/css" rel="stylesheet" media="screen" href="./SQLViewInDhis2_files/menu.css">
+    <link type="text/css" rel="stylesheet" media="screen" href="./SQLViewInDhis2_files/jquery.calendars.picker.css">
+        <link type="text/css" rel="stylesheet" href="./SQLViewInDhis2_files/style">
+    <link rel="shortcut icon" href="http://localhost:8989/dhis/favicon.ico">
+
+    <script type="text/javascript">
+      var dateFormat = 'yy-mm-dd';
+    </script>
+
+    <script type="text/javascript" src="./SQLViewInDhis2_files/es5-shim.min.js"></script>
+    <script type="text/javascript" src="./SQLViewInDhis2_files/es5-sham.min.js"></script>
+
+    <script type="text/javascript" src="./SQLViewInDhis2_files/ext-all.js"></script>
+
+    <script type="text/javascript" src="./SQLViewInDhis2_files/jquery.min.js"></script>
+    <!--[if lte IE 8]><script type="text/javascript" src="../dhis-web-commons/javascripts/jQuery/placeholders.jquery.min.js?_rev=21013"></script><![endif]-->
+    <script type="text/javascript" src="./SQLViewInDhis2_files/jquery.utils.js"></script>
+    <script type="text/javascript" src="./SQLViewInDhis2_files/jquery.ext.js"></script>
+    <script type="text/javascript" src="./SQLViewInDhis2_files/jquery.metadata.js"></script>
+    <script type="text/javascript" src="./SQLViewInDhis2_files/jquery.tablesorter.min.js"></script>
+    <script type="text/javascript" src="./SQLViewInDhis2_files/jquery.upload-1.0.2.min.js"></script>
+    <script type="text/javascript" src="./SQLViewInDhis2_files/jquery.dhisAjaxSelect.js"></script>
+    <script type="text/javascript" src="./SQLViewInDhis2_files/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="./SQLViewInDhis2_files/jquery.blockUI.js"></script>
+    <script type="text/javascript" src="./SQLViewInDhis2_files/jquery.validate.js"></script>
+    <script type="text/javascript" src="./SQLViewInDhis2_files/jquery.validate.ext.js"></script>
+    <script type="text/javascript" src="./SQLViewInDhis2_files/jquery.cookie.js"></script>
+    <script type="text/javascript" src="./SQLViewInDhis2_files/jquery.glob.js"></script>
+    <script type="text/javascript" src="./SQLViewInDhis2_files/jquery.date.js"></script>
+    <script type="text/javascript" src="./SQLViewInDhis2_files/jquery.tmpl.js"></script>
+    <script type="text/javascript" src="./SQLViewInDhis2_files/jquery.autogrow.js"></script>
+    <script type="text/javascript" src="./SQLViewInDhis2_files/jquery.fileupload.min.js"></script>
+    <script type="text/javascript" src="./SQLViewInDhis2_files/underscore.min.js"></script>
+    <script type="text/javascript" src="./SQLViewInDhis2_files/filesize.min.js"></script>
+    <script type="text/javascript" src="./SQLViewInDhis2_files/dhis2.util.js"></script>
+    <script type="text/javascript" src="./SQLViewInDhis2_files/commons.js"></script>
+    <script type="text/javascript" src="./SQLViewInDhis2_files/commons.ajax.js"></script>
+    <script type="text/javascript" src="./SQLViewInDhis2_files/lists.js"></script>
+    <script type="text/javascript" src="./SQLViewInDhis2_files/periodType.js"></script>
+    <script type="text/javascript" src="./SQLViewInDhis2_files/date.js"></script>
+    <script type="text/javascript" src="./SQLViewInDhis2_files/json2.js"></script>
+    <script type="text/javascript" src="./SQLViewInDhis2_files/validationRules.js"></script>
+    <script type="text/javascript" src="./SQLViewInDhis2_files/dhis2.array.js"></script>
+    <script type="text/javascript" src="./SQLViewInDhis2_files/dhis2.select.js"></script>
+    <script type="text/javascript" src="./SQLViewInDhis2_files/jquery.calendars.min.js"></script>
+    <script type="text/javascript" src="./SQLViewInDhis2_files/jquery.calendars.plus.min.js"></script>
+        <script type="text/javascript" src="./SQLViewInDhis2_files/dhis2.period.js"></script>
+    <script type="text/javascript" src="./SQLViewInDhis2_files/jquery.calendars.picker.min.js"></script>
+    <script type="text/javascript" src="./SQLViewInDhis2_files/dhis2.selected.js"></script>
+    <script type="text/javascript" src="./SQLViewInDhis2_files/dhis2.comparator.js"></script>
+    <script type="text/javascript" src="./SQLViewInDhis2_files/dhis2.availability.js"></script>
+    <script type="text/javascript" src="./SQLViewInDhis2_files/dhis2.trigger.js"></script>
+    <script type="text/javascript" src="./SQLViewInDhis2_files/dhis2.sharing.js"></script>
+    <script type="text/javascript" src="./SQLViewInDhis2_files/dhis2.validation.js"></script>
+    <script type="text/javascript" src="./SQLViewInDhis2_files/dhis2.storage.ss.js"></script>
+    <script type="text/javascript" src="./SQLViewInDhis2_files/dhis2.storage.ls.js"></script>
+    <script type="text/javascript" src="./SQLViewInDhis2_files/dhis2.storage.idb.js"></script>
+    <script type="text/javascript" src="./SQLViewInDhis2_files/dhis2.storage.memory.js"></script>
+    <script type="text/javascript" src="./SQLViewInDhis2_files/dhis2.storage.js"></script>
+    <script type="text/javascript" src="./SQLViewInDhis2_files/dhis2.contextmenu.js"></script>
+    <script type="text/javascript" src="./SQLViewInDhis2_files/dhis2.appcache.js"></script>
+    <script type="text/javascript" src="./SQLViewInDhis2_files/dhis2.translate.js"></script>
+    <script type="text/javascript" src="./SQLViewInDhis2_files/dhis2.menu.js"></script>
+    <script type="text/javascript" src="./SQLViewInDhis2_files/dhis2.menu.ui.js"></script>
+    <script type="text/javascript" src="./SQLViewInDhis2_files/i18nJavaScript.action"></script>
+    <script type="text/javascript" src="./SQLViewInDhis2_files/main.js"></script>
+    <script type="text/javascript" src="./SQLViewInDhis2_files/request.js"></script>
+
+        <script type="text/javascript" src="./SQLViewInDhis2_files/sqlView.js"></script>
+        <script type="text/javascript" src="./SQLViewInDhis2_files/updateSqlViewForm.js"></script>
+        <script type="text/javascript" src="./SQLViewInDhis2_files/script"></script>
+    <!-- Create global system calendar -->
+    <script>
+      dhis2.period.format = 'dd-mm-yyyy';
+            dhis2.period.calendar = $.calendars.instance('gregorian');
+            dhis2.period.generator = new dhis2.period.PeriodGenerator( dhis2.period.calendar, dhis2.period.format );
+      dhis2.period.picker = new dhis2.period.DatePicker( dhis2.period.calendar, dhis2.period.format );
+    </script>
+  </head>
+
+  
+  <body class="x-body x-webkit x-chrome x-reset" id="ext-gen1009">
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="header">
+      <img id="headerBanner" src="./SQLViewInDhis2_files/logo_banner" onclick="window.location.href=&#39;../dhis-web-dashboard-integration/index.action&#39;" style="cursor:pointer" title="View home page">
+
+      <span id="headerText" onclick="window.location.href=&#39;../dhis-web-dashboard-integration/index.action&#39;" style="cursor:pointer" title="View home page">
+        MSF OCBA HMIS
+      </span>
+
+      <div id="dhisDropDownMenu"><ul id="menuLinkArea"><li id="profileButton"><a id="profileLink" class="menu-link drop-down-menu-link"><i class="fa fa-user"></i>Profile</a><div class="app-menu-dropdown-wrap" data-display-clicked="false" style="display: none;"><div class="app-menu-dropdown"><div class="caret-up-border"></div><div class="caret-up-background"></div><ul class="menuDropDownBox"><li data-id="settings" data-app-name="Settings" data-app-action="../dhis-web-commons-about/userSettings.action"><a href="http://localhost:8989/dhis/dhis-web-commons-about/userSettings.action" class="app-menu-item"><img src="./SQLViewInDhis2_files/usersettings.png" onerror="javascript: this.onerror=null; this.src = &#39;../icons/program.png&#39;;"><span>Settings</span><div class="app-menu-item-description"><span class="bold">Settings</span><i class="fa fa-arrows"></i><p></p></div></a></li><li data-id="profile" data-app-name="Profile" data-app-action="../dhis-web-commons-about/showUpdateUserProfileForm.action"><a href="http://localhost:8989/dhis/dhis-web-commons-about/showUpdateUserProfileForm.action" class="app-menu-item"><img src="./SQLViewInDhis2_files/function-profile.png" onerror="javascript: this.onerror=null; this.src = &#39;../icons/program.png&#39;;"><span>Profile</span><div class="app-menu-item-description"><span class="bold">Profile</span><i class="fa fa-arrows"></i><p></p></div></a></li><li data-id="account" data-app-name="Account" data-app-action="../dhis-web-commons-about/showUpdateUserAccountForm.action"><a href="http://localhost:8989/dhis/dhis-web-commons-about/showUpdateUserAccountForm.action" class="app-menu-item"><img src="./SQLViewInDhis2_files/function-account.png" onerror="javascript: this.onerror=null; this.src = &#39;../icons/program.png&#39;;"><span>Account</span><div class="app-menu-item-description"><span class="bold">Account</span><i class="fa fa-arrows"></i><p></p></div></a></li><li data-id="help" data-app-name="Help" data-app-action="../dhis-web-commons-about/help.action"><a href="http://localhost:8989/dhis/dhis-web-commons-about/help.action" class="app-menu-item"><img src="./SQLViewInDhis2_files/function-account.png" onerror="javascript: this.onerror=null; this.src = &#39;../icons/program.png&#39;;"><span>Help</span><div class="app-menu-item-description"><span class="bold">Help</span><i class="fa fa-arrows"></i><p></p></div></a></li><li data-id="log_out" data-app-name="Log out" data-app-action="../dhis-web-commons-security/logout.action"><a href="http://localhost:8989/dhis/dhis-web-commons-security/logout.action" class="app-menu-item"><img src="./SQLViewInDhis2_files/function-log-out.png" onerror="javascript: this.onerror=null; this.src = &#39;../icons/program.png&#39;;"><span>Log out</span><div class="app-menu-item-description"><span class="bold">Log out</span><i class="fa fa-arrows"></i><p></p></div></a></li><li data-id="about_dhis2" data-app-name="About DHIS 2" data-app-action="../dhis-web-commons-about/about.action"><a href="http://localhost:8989/dhis/dhis-web-commons-about/about.action" class="app-menu-item"><img src="./SQLViewInDhis2_files/function-about-dhis2.png" onerror="javascript: this.onerror=null; this.src = &#39;../icons/program.png&#39;;"><span>About DHIS 2</span><div class="app-menu-item-description"><span class="bold">About DHIS 2</span><i class="fa fa-arrows"></i><p></p></div></a></li></ul><div class="menu-drop-down-buttons"></div></div></div></li><li id="applicationsButton"><a id="applicationsLink" class="menu-link drop-down-menu-link"><i class="fa fa-th"></i>Apps</a><div class="app-menu-dropdown-wrap" data-display-clicked="false" style="display: none;"><div class="app-menu-dropdown"><div class="caret-up-border"></div><div class="caret-up-background"></div><div class="menu-drop-down-wrap"><div class="menu-drop-down-scroll"><div class="apps-search-wrap"><input class="apps-search" type="text" placeholder="Search apps"><i class="apps-search-clear fa fa-times-circle"></i></div><ul class="menuDropDownBox"><li data-id="dhis-web-dashboard-integration" data-app-name="Dashboard" data-app-action="../dhis-web-dashboard-integration/index.action"><a href="http://localhost:8989/dhis/dhis-web-dashboard-integration/index.action" class="app-menu-item"><img src="./SQLViewInDhis2_files/dhis-web-dashboard-integration.png" onerror="javascript: this.onerror=null; this.src = &#39;../icons/program.png&#39;;"><span>Dashboard</span><div class="app-menu-item-description"><span class="bold">Dashboard</span><i class="fa fa-arrows"></i><p></p></div></a></li><li data-id="dhis-web-pivot" data-app-name="Pivot Table" data-app-action="../dhis-web-pivot/index.action"><a href="http://localhost:8989/dhis/dhis-web-pivot/index.action" class="app-menu-item"><img src="./SQLViewInDhis2_files/dhis-web-pivot.png" onerror="javascript: this.onerror=null; this.src = &#39;../icons/program.png&#39;;"><span>Pivot Table</span><div class="app-menu-item-description"><span class="bold">Pivot Table</span><i class="fa fa-arrows"></i><p></p></div></a></li><li data-id="dhis-web-visualizer" data-app-name="Data Visualizer" data-app-action="../dhis-web-visualizer/index.action"><a href="http://localhost:8989/dhis/dhis-web-visualizer/index.action" class="app-menu-item"><img src="./SQLViewInDhis2_files/dhis-web-visualizer.png" onerror="javascript: this.onerror=null; this.src = &#39;../icons/program.png&#39;;"><span>Data Visualizer</span><div class="app-menu-item-description"><span class="bold">Data Visualizer</span><i class="fa fa-arrows"></i><p></p></div></a></li><li data-id="dhis-web-mapping" data-app-name="GIS" data-app-action="../dhis-web-mapping/index.action"><a href="http://localhost:8989/dhis/dhis-web-mapping/index.action" class="app-menu-item"><img src="./SQLViewInDhis2_files/dhis-web-mapping.png" onerror="javascript: this.onerror=null; this.src = &#39;../icons/program.png&#39;;"><span>GIS</span><div class="app-menu-item-description"><span class="bold">GIS</span><i class="fa fa-arrows"></i><p></p></div></a></li><li data-id="dhis-web-event-reports" data-app-name="Event Reports" data-app-action="../dhis-web-event-reports/index.action"><a href="http://localhost:8989/dhis/dhis-web-event-reports/index.action" class="app-menu-item"><img src="./SQLViewInDhis2_files/dhis-web-event-reports.png" onerror="javascript: this.onerror=null; this.src = &#39;../icons/program.png&#39;;"><span>Event Reports</span><div class="app-menu-item-description"><span class="bold">Event Reports</span><i class="fa fa-arrows"></i><p></p></div></a></li><li data-id="dhis-web-event-visualizer" data-app-name="Event Visualizer" data-app-action="../dhis-web-event-visualizer/index.action"><a href="http://localhost:8989/dhis/dhis-web-event-visualizer/index.action" class="app-menu-item"><img src="./SQLViewInDhis2_files/dhis-web-event-visualizer.png" onerror="javascript: this.onerror=null; this.src = &#39;../icons/program.png&#39;;"><span>Event Visualizer</span><div class="app-menu-item-description"><span class="bold">Event Visualizer</span><i class="fa fa-arrows"></i><p></p></div></a></li><li data-id="dhis-web-dataentry" data-app-name="Data Entry" data-app-action="../dhis-web-dataentry/index.action"><a href="http://localhost:8989/dhis/dhis-web-dataentry/index.action" class="app-menu-item"><img src="./SQLViewInDhis2_files/dhis-web-dataentry.png" onerror="javascript: this.onerror=null; this.src = &#39;../icons/program.png&#39;;"><span>Data Entry</span><div class="app-menu-item-description"><span class="bold">Data Entry</span><i class="fa fa-arrows"></i><p></p></div></a></li><li data-id="dhis-web-event-capture" data-app-name="Event Capture" data-app-action="../dhis-web-event-capture/index.action"><a href="http://localhost:8989/dhis/dhis-web-event-capture/index.action" class="app-menu-item"><img src="./SQLViewInDhis2_files/dhis-web-event-capture.png" onerror="javascript: this.onerror=null; this.src = &#39;../icons/program.png&#39;;"><span>Event Capture</span><div class="app-menu-item-description"><span class="bold">Event Capture</span><i class="fa fa-arrows"></i><p></p></div></a></li><li data-id="dhis-web-tracker-capture" data-app-name="Tracker Capture" data-app-action="../dhis-web-tracker-capture/index.action"><a href="http://localhost:8989/dhis/dhis-web-tracker-capture/index.action" class="app-menu-item"><img src="./SQLViewInDhis2_files/dhis-web-tracker-capture.png" onerror="javascript: this.onerror=null; this.src = &#39;../icons/program.png&#39;;"><span>Tracker Capture</span><div class="app-menu-item-description"><span class="bold">Tracker Capture</span><i class="fa fa-arrows"></i><p></p></div></a></li><li data-id="dhis-web-maintenance-appmanager" data-app-name="App Management" data-app-action="../dhis-web-maintenance-appmanager/index.action"><a href="http://localhost:8989/dhis/dhis-web-maintenance-appmanager/index.action" class="app-menu-item"><img src="./SQLViewInDhis2_files/dhis-web-maintenance-appmanager.png" onerror="javascript: this.onerror=null; this.src = &#39;../icons/program.png&#39;;"><span>App Management</span><div class="app-menu-item-description"><span class="bold">App Management</span><i class="fa fa-arrows"></i><p></p></div></a></li><li data-id="dhis-web-maintenance-dataadmin" data-app-name="Data Administration" data-app-action="../dhis-web-maintenance-dataadmin/index.action"><a href="http://localhost:8989/dhis/dhis-web-maintenance-dataadmin/index.action" class="app-menu-item"><img src="./SQLViewInDhis2_files/dhis-web-maintenance-dataadmin.png" onerror="javascript: this.onerror=null; this.src = &#39;../icons/program.png&#39;;"><span>Data Administration</span><div class="app-menu-item-description"><span class="bold">Data Administration</span><i class="fa fa-arrows"></i><p></p></div></a></li><li data-id="dhis-web-maintenance-datadictionary" data-app-name="Data Elements / Indicators" data-app-action="../dhis-web-maintenance-datadictionary/index.action"><a href="http://localhost:8989/dhis/dhis-web-maintenance-datadictionary/index.action" class="app-menu-item"><img src="./SQLViewInDhis2_files/dhis-web-maintenance-datadictionary.png" onerror="javascript: this.onerror=null; this.src = &#39;../icons/program.png&#39;;"><span>Data Elements / Indicators</span><div class="app-menu-item-description"><span class="bold">Data Elements / Indicators</span><i class="fa fa-arrows"></i><p></p></div></a></li><li data-id="dhis-web-maintenance-dataset" data-app-name="Data Sets" data-app-action="../dhis-web-maintenance-dataset/index.action"><a href="http://localhost:8989/dhis/dhis-web-maintenance-dataset/index.action" class="app-menu-item"><img src="./SQLViewInDhis2_files/dhis-web-maintenance-dataset.png" onerror="javascript: this.onerror=null; this.src = &#39;../icons/program.png&#39;;"><span>Data Sets</span><div class="app-menu-item-description"><span class="bold">Data Sets</span><i class="fa fa-arrows"></i><p></p></div></a></li><li data-id="dhis-web-importexport" data-app-name="Import-Export" data-app-action="../dhis-web-importexport/index.action"><a href="http://localhost:8989/dhis/dhis-web-importexport/index.action" class="app-menu-item"><img src="./SQLViewInDhis2_files/dhis-web-importexport.png" onerror="javascript: this.onerror=null; this.src = &#39;../icons/program.png&#39;;"><span>Import-Export</span><div class="app-menu-item-description"><span class="bold">Import-Export</span><i class="fa fa-arrows"></i><p></p></div></a></li><li data-id="dhis-web-maintenance-mobile" data-app-name="Mobile Configuration" data-app-action="../dhis-web-maintenance-mobile/index.action"><a href="http://localhost:8989/dhis/dhis-web-maintenance-mobile/index.action" class="app-menu-item"><img src="./SQLViewInDhis2_files/dhis-web-maintenance-mobile.png" onerror="javascript: this.onerror=null; this.src = &#39;../icons/program.png&#39;;"><span>Mobile Configuration</span><div class="app-menu-item-description"><span class="bold">Mobile Configuration</span><i class="fa fa-arrows"></i><p></p></div></a></li><li data-id="dhis-web-maintenance-organisationunit" data-app-name="Organisation Units" data-app-action="../dhis-web-maintenance-organisationunit/index.action"><a href="http://localhost:8989/dhis/dhis-web-maintenance-organisationunit/index.action" class="app-menu-item"><img src="./SQLViewInDhis2_files/dhis-web-maintenance-organisationunit.png" onerror="javascript: this.onerror=null; this.src = &#39;../icons/program.png&#39;;"><span>Organisation Units</span><div class="app-menu-item-description"><span class="bold">Organisation Units</span><i class="fa fa-arrows"></i><p></p></div></a></li><li data-id="dhis-web-maintenance-program" data-app-name="Programs / Attributes" data-app-action="../dhis-web-maintenance-program/index.action"><a href="http://localhost:8989/dhis/dhis-web-maintenance-program/index.action" class="app-menu-item"><img src="./SQLViewInDhis2_files/dhis-web-maintenance-program.png" onerror="javascript: this.onerror=null; this.src = &#39;../icons/program.png&#39;;"><span>Programs / Attributes</span><div class="app-menu-item-description"><span class="bold">Programs / Attributes</span><i class="fa fa-arrows"></i><p></p></div></a></li><li data-id="dhis-web-maintenance-user" data-app-name="Users" data-app-action="../dhis-web-maintenance-user/index.action"><a href="http://localhost:8989/dhis/dhis-web-maintenance-user/index.action" class="app-menu-item"><img src="./SQLViewInDhis2_files/dhis-web-maintenance-user.png" onerror="javascript: this.onerror=null; this.src = &#39;../icons/program.png&#39;;"><span>Users</span><div class="app-menu-item-description"><span class="bold">Users</span><i class="fa fa-arrows"></i><p></p></div></a></li><li data-id="dhis-web-validationrule" data-app-name="Data Quality" data-app-action="../dhis-web-validationrule/index.action"><a href="http://localhost:8989/dhis/dhis-web-validationrule/index.action" class="app-menu-item"><img src="./SQLViewInDhis2_files/dhis-web-validationrule.png" onerror="javascript: this.onerror=null; this.src = &#39;../icons/program.png&#39;;"><span>Data Quality</span><div class="app-menu-item-description"><span class="bold">Data Quality</span><i class="fa fa-arrows"></i><p></p></div></a></li><li data-id="dhis-web-light" data-app-name="Mobile (Light)" data-app-action="../light/index.action"><a href="http://localhost:8989/dhis/light/index.action" class="app-menu-item"><img src="./SQLViewInDhis2_files/dhis-web-light.png" onerror="javascript: this.onerror=null; this.src = &#39;../icons/program.png&#39;;"><span>Mobile (Light)</span><div class="app-menu-item-description"><span class="bold">Mobile (Light)</span><i class="fa fa-arrows"></i><p></p></div></a></li><li data-id="dhis-web-mobile" data-app-name="Mobile (Smartphone)" data-app-action="../mobile/index.action"><a href="http://localhost:8989/dhis/mobile/index.action" class="app-menu-item"><img src="./SQLViewInDhis2_files/dhis-web-mobile.png" onerror="javascript: this.onerror=null; this.src = &#39;../icons/program.png&#39;;"><span>Mobile (Smartphone)</span><div class="app-menu-item-description"><span class="bold">Mobile (Smartphone)</span><i class="fa fa-arrows"></i><p></p></div></a></li><li data-id="dhis-web-reporting" data-app-name="Reports" data-app-action="../dhis-web-reporting/index.action"><a href="http://localhost:8989/dhis/dhis-web-reporting/index.action" class="app-menu-item"><img src="./SQLViewInDhis2_files/dhis-web-reporting.png" onerror="javascript: this.onerror=null; this.src = &#39;../icons/program.png&#39;;"><span>Reports</span><div class="app-menu-item-description"><span class="bold">Reports</span><i class="fa fa-arrows"></i><p></p></div></a></li><li data-id="dhis-web-sms" data-app-name="SMS" data-app-action="../sms/index.action"><a href="http://localhost:8989/dhis/sms/index.action" class="app-menu-item"><img src="./SQLViewInDhis2_files/dhis-web-sms.png" onerror="javascript: this.onerror=null; this.src = &#39;../icons/program.png&#39;;"><span>SMS</span><div class="app-menu-item-description"><span class="bold">SMS</span><i class="fa fa-arrows"></i><p></p></div></a></li><li data-id="dhis-web-cache-cleaner" data-app-name="Browser Cache Cleaner" data-app-action="../dhis-web-cache-cleaner/index.action"><a href="http://localhost:8989/dhis/dhis-web-cache-cleaner/index.action" class="app-menu-item"><img src="./SQLViewInDhis2_files/dhis-web-cache-cleaner.png" onerror="javascript: this.onerror=null; this.src = &#39;../icons/program.png&#39;;"><span>Browser Cache Cleaner</span><div class="app-menu-item-description"><span class="bold">Browser Cache Cleaner</span><i class="fa fa-arrows"></i><p></p></div></a></li><li data-id="dhis-web-settings" data-app-name="Settings" data-app-action="../dhis-web-settings/index.action"><a href="http://localhost:8989/dhis/dhis-web-settings/index.action" class="app-menu-item"><img src="./SQLViewInDhis2_files/dhis-web-settings.png" onerror="javascript: this.onerror=null; this.src = &#39;../icons/program.png&#39;;"><span>Settings</span><div class="app-menu-item-description"><span class="bold">Settings</span><i class="fa fa-arrows"></i><p></p></div></a></li><li data-id="Dossiers" data-app-name="Dossiers" data-app-action="../api/apps/dhis2Reports/index.html"><a href="http://localhost:8989/dhis/api/apps/dhis2Reports/index.html" class="app-menu-item"><img src="./SQLViewInDhis2_files/Logo_48.png" onerror="javascript: this.onerror=null; this.src = &#39;../icons/program.png&#39;;"><span>Dossiers</span><div class="app-menu-item-description"><span class="bold">Dossiers</span><i class="fa fa-arrows"></i><p></p></div></a></li><li data-id="Project Manager" data-app-name="Project Manager" data-app-action="../api/apps/msf_apps_master/index.html"><a href="http://localhost:8989/dhis/api/apps/msf_apps_master/index.html" class="app-menu-item"><img src="./SQLViewInDhis2_files/Logo_48.jpg" onerror="javascript: this.onerror=null; this.src = &#39;../icons/program.png&#39;;"><span>Project Manager</span><div class="app-menu-item-description"><span class="bold">Project Manager</span><i class="fa fa-arrows"></i><p></p></div></a></li><li data-id="Print Tally Sheets" data-app-name="Print Tally Sheets" data-app-action="../api/apps/tallysheets/index.html"><a href="http://localhost:8989/dhis/api/apps/tallysheets/index.html" class="app-menu-item"><img src="./SQLViewInDhis2_files/Logo_48(1).png" onerror="javascript: this.onerror=null; this.src = &#39;../icons/program.png&#39;;"><span>Print Tally Sheets</span><div class="app-menu-item-description"><span class="bold">Print Tally Sheets</span><i class="fa fa-arrows"></i><p></p></div></a></li></ul></div></div><div class="menu-drop-down-buttons"><div class="apps-menu-bottom-button apps-menu-more"><a href="http://localhost:8989/dhis/dhis-web-commons-about/modules.action">More apps</a></div><div class="apps-menu-bottom-button apps-scroll apps-scroll-up"><a class="fa fa-caret-up" href="http://localhost:8989/dhis/dhis-web-maintenance-dataadmin/showUpdateSqlViewForm.action?id=46725#"></a></div><div class="apps-menu-bottom-button apps-scroll apps-scroll-down"><a class="fa fa-caret-down" href="http://localhost:8989/dhis/dhis-web-maintenance-dataadmin/showUpdateSqlViewForm.action?id=46725#"></a></div></div></div></div></li></ul></div>
+
+      <span id="showLeftBar">
+        <a href="javascript:dhis2.leftBar.showAnimated()" title="Show menu">
+          <i class="fa fa-arrow-right leftBarIcon"></i></a>
+      </span>
+    </div>
+
+        <div id="leftBar">
+      <div id="hideLeftBar">
+        <a href="http://localhost:8989/dhis/dhis-web-maintenance-dataadmin/index.action" title="Show main menu" id="showMainMenuLink">
+          <i class="fa fa-home leftBarIcon"></i></a>
+        <a href="javascript:dhis2.leftBar.hideAnimated()" title="Hide menu" id="hideMainMenuLink">
+          <i class="fa fa-arrow-left leftBarIcon"></i></a>
+        <a href="javascript:dhis2.leftBar.extendAnimated()" title="Extend menu" id="extendMainMenuLink">
+          <i class="fa fa-arrow-right leftBarIcon"></i></a>
+      </div>
+
+      <div id="leftBarContents">
+        
+<h2>Data Administration&nbsp;</h2>
+
+<ul>
+    <li><a href="http://localhost:8989/dhis/dhis-web-maintenance-dataadmin/displayDataBrowserForm.action">Data Browser&nbsp;</a></li>
+    <li><a href="http://localhost:8989/dhis/dhis-web-maintenance-dataadmin/dataIntegrity.action">Data Integrity&nbsp;</a></li>
+    <li><a href="http://localhost:8989/dhis/dhis-web-maintenance-dataadmin/displayMaintenanceForm.action">Maintenance&nbsp;</a></li>
+    <li><a href="http://localhost:8989/dhis/dhis-web-maintenance-dataadmin/displayResourceTableForm.action">Resource Table&nbsp;</a></li>
+    <li><a href="http://localhost:8989/dhis/dhis-web-maintenance-dataadmin/locale.action">Locale&nbsp;</a></li>
+    <li><a href="http://localhost:8989/dhis/dhis-web-maintenance-dataadmin/sqlView.action">SQL View&nbsp;</a></li>
+    <li><a href="http://localhost:8989/dhis/dhis-web-maintenance-dataadmin/viewStatistics.action">Data Statistics&nbsp;</a></li>
+    <li><a href="http://localhost:8989/dhis/dhis-web-maintenance-dataadmin/lockException.action">Lock Exception&nbsp;</a></li>
+    <li><a href="http://localhost:8989/dhis/dhis-web-maintenance-dataadmin/getMinMaxValidationParams.action">Min-Max Value Generation&nbsp;</a></li>
+    <li><a href="http://localhost:8989/dhis/dhis-web-maintenance-dataadmin/constant.action">Constant&nbsp;</a></li>
+    <li><a href="http://localhost:8989/dhis/dhis-web-maintenance-dataadmin/optionSet.action">Option set&nbsp;</a></li>
+    <li><a href="http://localhost:8989/dhis/dhis-web-maintenance-dataadmin/showCache.action">Cache Statistics&nbsp;</a></li>
+    <li><a href="http://localhost:8989/dhis/dhis-web-maintenance-dataadmin/attribute.action">Attribute&nbsp;</a></li>
+    <li><a href="http://localhost:8989/dhis/dhis-web-maintenance-dataadmin/viewScheduledTasks.action">Scheduling</a></li>
+</ul>
+      </div>
+    </div>
+    
+    <div id="headerMessage" class="bold"></div>
+
+    <div class="page" id="mainPage"> <!-- Do not set style attr -->
+              <input type="hidden" id="curLocaleCode" value="en_">
+
+<h3>Update SQL view</h3>
+
+
+<form id="updateSqlViewForm" action="http://localhost:8989/dhis/dhis-web-maintenance-dataadmin/updateSqlViewInstance.action" method="post" class="inputForm">
+
+    <div>
+        <input type="hidden" id="id" name="id" value="46725">
+        <input type="hidden" id="name" name="name" value="Dossier" maxlength="230">
+        <input type="hidden" id="query" name="query" value="true">
+        <input type="hidden" id="type" name="query" value="QUERY">
+    </div>
+
+    <table>
+        <tbody><tr>
+            <th colspan="2">Details</th>
+        </tr>
+        <tr>
+            <td><label for="name">Name <em title="Required" class="required">*</em></label></td>
+            <td>
+                <input type="text" id="name" name="name" value="Dossier" disabled="disabled" maxlength="230">
+            </td>
+        </tr>
+        <tr>
+            <td><label for="description">Description</label></td>
+            <td>
+                <textarea id="description" name="description">Get dossier based on parameter language code and Service code</textarea>
+            </td>
+        </tr>
+        <tr>
+            <td><label for="cacheStrategy">Cache strategy</label></td>
+            <td>
+                <select id="cacheStrategy" name="cacheStrategy">
+                    <option value="RESPECT_SYSTEM_SETTING" selected="selected">Respect system setting</option>
+                    <option value="NO_CACHE">No cache</option>
+                    <option value="CACHE_1_HOUR">Cache for one hour</option>
+                    <option value="CACHE_6AM_TOMORROW">Cache until 6 AM tomorrow</option>
+                    <option value="CACHE_TWO_WEEKS">Cache for two weeks</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td><label>SQL type</label></td>
+            <td><input type="text" disabled="disabled" value="SQL query"></td>
+        </tr>
+        <tr>
+            <td><label for="sqlquery">SQL Statement <em title="Required" class="required">*</em></label></td>
+            <td>
+                <textarea type="text" id="sqlquery" name="sqlquery" style="width:80em;height:20em">select v.value from datavalue v, dataelement e, organisationunit o where o.organisationunitid = v.sourceid and v.dataelementid = e.dataelementid and e.name like 'ZZDossier%' and o.code='${languageCode}' and e.code='${serviceCode}'</textarea>
+            </td>
+        </tr>
+
+        <tr>
+            <td></td>
+            <td>
+                <input type="submit" value="Update" style="width:10em">
+                <input type="button" value="Cancel" id="cancel" name="cancel" onclick="window.location.href=&#39;sqlView.action&#39;" style="width:10em">
+            </td>
+        </tr>
+    </tbody></table>
+
+</form>
+
+          </div>
+    <script type="text/javascript">
+        </script>
+
+    <div id="rightBar">
+      <span id="hideRightBar"><a href="javascript:hideHelpContent()" title="Close">
+        <i class="fa fa-times leftBarIcon"></i></a>
+      </span>
+      <div id="rightBarContents"></div>
+    </div>
+
+    
+
+
+  
+
+<select id="cacheStrategy_storage" style="visibility: hidden;"></select></body></html>
