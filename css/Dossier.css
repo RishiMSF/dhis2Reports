@@ -28,7 +28,7 @@ h6 {
  	display: none;
  }
 
-/* works only properly in firefox */
+  /* works only properly in firefox */
  #print-foot {
   display: block;
   position: fixed;
@@ -36,15 +36,16 @@ h6 {
   right: 0pt;
   }
 
-  /* works only properly in firefox */
   .service>.dataset,.indicatorGroup{
   	page-break-before: always;
   }
 
   /* works only properly in firefox */
-  #print-foot:after {
-  content: counter(page);
-  counter-increment: page;
+  @-moz-document url-prefix() {
+    #print-foot:after {
+    content: counter(page);
+    counter-increment: page;
+    }
   }
 
   /* for page numbers in table of content not working anywhere yet css standard still has to be implemented 

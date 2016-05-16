@@ -26,7 +26,7 @@ HmisReportcontrollers.controller('HmisReportCtrl', ['$scope','$translate','$rout
 		})
 		.done(function( data ) {
 		    if (data!=="pong"){
-             	window.location.href = dhisloc;
+             	document.location;
              	document.location.reload(true);
             }
 		});
