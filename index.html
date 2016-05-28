@@ -35,12 +35,15 @@
 		
 	</head>
 	<body   ng-app="HmisReport" class="container-fluid">
-		<div class="row menu" d2-menu>
-			<!-- <button type="button" class="btn btn-default" aria-label="Left Align">
-  				<span class="glyphicon glyphicon-print" aria-hidden="true"></span>
-			</button> -->
-		</div>  
-
+	<div class="row dossierMenu" style="background-color:grey;">
+		<div class="col-md-11 menu" d2-menu>
+		</div> 
+		<div class="col-md-1"> 
+		<button type="button" onclick="javascript:window.print()" class="btn btn-link btn-lg printButton">
+		<span  aria-hidden="true" class="glyphicon glyphicon-print"></span>
+		</button>
+		</div>
+	</div>		
 		<div ng-controller="HmisReportCtrl as main"  class="row" id="main">
 			<ul id="dossierTabs" onclick="ping()" role="tablist" class="nav nav-tabs col-md-12">
 				<li id="services" role="presentation"  class="active col-md-2"><a role="tab" data-toggle="tab"  href="#services">{{'Services' | translate}}</a></li>

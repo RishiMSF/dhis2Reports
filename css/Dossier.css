@@ -23,8 +23,18 @@ h6 {
   display: none;
   }
 
+.printButton{
+   float:right;
+   margin: 3px 70px 0 0px;
+   color:white;
+}
+
+.printButton:hover{
+    color:white;
+}
+
 @media print {
- .menu, .nav-tabs, .headerPanel/*, #tocContainer */{
+ .dossierMenu, .nav-tabs, .headerPanel/*, #tocContainer */{
  	display: none;
  }
 
