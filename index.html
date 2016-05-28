@@ -35,22 +35,24 @@
 		
 	</head>
 	<body   ng-app="HmisReport" class="container-fluid">
-	<div class="row dossierMenu" style="background-color:grey;">
-		<div class="col-md-11 menu" d2-menu>
-		</div> 
-		<div class="col-md-1"> 
-		<button type="button" onclick="javascript:window.print()" class="btn btn-link btn-lg printButton">
-		<span  aria-hidden="true" class="glyphicon glyphicon-print"></span>
-		</button>
-		</div>
-	</div>		
-		<div ng-controller="HmisReportCtrl as main"  class="row" id="main">
-			<ul id="dossierTabs" onclick="ping()" role="tablist" class="nav nav-tabs col-md-12">
-				<li id="services" role="presentation"  class="active col-md-2"><a role="tab" data-toggle="tab"  href="#services">{{'Services' | translate}}</a></li>
-				<li id="dataSets" role="presentation"  class="col-md-2 tab"><a role="tab" data-toggle="tab"   href="#dataSets">{{'Data Sets' | translate}}</a></li>
-				<li id="indictorGroups" role="presentation"  class="col-md-2 tab"><a role="tab" data-toggle="tab"   href="#indictorGroups">{{'Indicator Groups'| translate}}</a></li>
-				<li id="indicators" role="presentation"  class="col-md-2 tab"><a role="tab" data-toggle="tab"   href="#indicators">{{'Indicators'| translate}}</a></li>
-			</ul>
+	<div ng-controller="HmisReportCtrl as main"  class="row" id="main">
+	
+		<div class="row dossierMenu">
+			<div class="col-md-11 menu" d2-menu>
+			</div> 
+			<div class="col-md-1"> 
+			<button type="button" onclick="javascript:window.print()" class="btn btn-link btn-lg printButton">
+			<span  aria-hidden="true" class="glyphicon glyphicon-print"></span>
+			</button>
+			</div>
+		</div>		
+		
+		<ul id="dossierTabs" onclick="ping()" role="tablist" class="nav nav-tabs col-md-12">
+			<li id="services" role="presentation"  class="active col-md-2"><a role="tab" data-toggle="tab"  href="#services">{{'Services' | translate}}</a></li>
+			<li id="dataSets" role="presentation"  class="col-md-2 tab"><a role="tab" data-toggle="tab"   href="#dataSets">{{'Data Sets' | translate}}</a></li>
+			<li id="indictorGroups" role="presentation"  class="col-md-2 tab"><a role="tab" data-toggle="tab"   href="#indictorGroups">{{'Indicator Groups'| translate}}</a></li>
+			<li id="indicators" role="presentation"  class="col-md-2 tab"><a role="tab" data-toggle="tab"   href="#indicators">{{'Indicators'| translate}}</a></li>
+		</ul>
 
 <!-- DHIS2 Settings initialization for a baseUrl that is used for the menu -->
         <script>
