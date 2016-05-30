@@ -23,6 +23,10 @@ Translations files are in the tranlsation folder, only en and fr are there
 ##Services
 All Rest-calls are placed in services.js and implemented using angular resources. 
 
+#Maintenance
+It is assumed the dhis2 app is called dhis if this is not the case change the following line in index.html, failing to do so will result in troubles with the defaul menu. 
+dhis2.settings.baseUrl = 'dhis';
+
 #To Do
 1. Add main structure to app as definied in [dhis2 dev guid](http://dhis2.github.io/dhis2-docs/master/en/developer/html/dhis2_developer_manual_full.html#d6531e13445 "dev guide dhis2")
 3. editor for dossier
