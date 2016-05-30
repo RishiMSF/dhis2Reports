@@ -36,7 +36,6 @@
 	</head>
 	<body   ng-app="HmisReport" class="container-fluid">
 	<div ng-controller="HmisReportCtrl as main"  class="row" id="main">
-	
 		<div class="row dossierMenu">
 			<div class="col-xs-10 menu" d2-menu>
 			</div> 
@@ -47,11 +46,11 @@
 			</div>
 		</div>		
 		
-		<ul id="dossierTabs" onclick="doLayout()"  role="tablist" class="nav nav-tabs col-md-12">
+		<ul id="dossierTabs" onclick="tabSwitch()"  role="tablist" class="nav nav-tabs col-md-12">
 			<li id="services" role="presentation"  class="active col-md-2"><a role="tab" data-toggle="tab"  href="#services">{{'Services' | translate}}</a></li>
 			<li id="dataSets" role="presentation"  class="col-md-2 tab"><a role="tab" data-toggle="tab"   href="#dataSets">{{'Data Sets' | translate}}</a></li>
 			<li id="indictorGroups" role="presentation"  class="col-md-2 tab"><a role="tab" data-toggle="tab"   href="#indictorGroups">{{'Indicator Groups'| translate}}</a></li>
-			<li id="indicators" role="presentation"  class="col-md-2 tab"><a role="tab" data-toggle="tab"   href="#indicators">{{'Indicators'| translate}}</a></li>
+			<li id="indicators" role="presentation"   class="col-md-2 tab"><a role="tab" data-toggle="tab" onclick="startLoadingState()"   href="#indicators">{{'Indicators'| translate}}</a></li>
 		</ul>
 
 <!-- DHIS2 Settings initialization for a baseUrl that is used for the menu -->
@@ -74,7 +73,8 @@
 
 
 			<div class="view-container">
-    			<div ng-view class="view-frame"></div>
+    			<div ng-view class="view-frame">
+    			</div>
   			</div>
   			 <hr />
 
@@ -88,5 +88,6 @@
         <div id="print-foot">
       		 
  		</div>
+ 		<div class="loading"></div>
 	</body>
 </html>

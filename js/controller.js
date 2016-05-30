@@ -32,18 +32,22 @@ HmisReportcontrollers.controller('HmisReportCtrl', ['$scope','$translate','$rout
 		});
 	}
 
-	doLayout =function(){
+	tabSwitch =function(){
 		ping();
-		disablePrintButton();
+		startLoadingState(true);
 	}
 
-	enablePrintButton = function(){
+	endLoadingState = function(){
 		// to make sure all emelemnts and indicators are loaded before printing
 		setTimeout( function(){$(".printButton").prop("disabled",false)}, 2000);
+		$(".loading").hide();
 	}
 
-	disablePrintButton = function(){ 
-			$(".printButton").prop("disabled",true);
+	startLoadingState = function(onlyprint){ 
+		$(".printButton").prop("disabled",true);
+		if(!onlyprint===true){
+			$(".loading").show();
+		}
 	}
 
 }]);
@@ -58,9 +62,8 @@ HmisReportcontrollers.controller('ServiceController',['$scope','$translate','Ser
         	entries : []
       	};
 
-      	disablePrintButton();
-
       	if ($scope.selectedService){
+      		startLoadingState(false);
 			$scope.indicatorGroups =  ServiceIndicatorGrps.get({serviceCode:$scope.selectedService.code});
 			$scope.serviceDataSets = ServiceDataSets.get({serviceCode:$scope.selectedService.code}); 
 			$scope.dossier = Dossier.get({languageCode:$translate.use(),serviceCode:$scope.selectedService.code});
@@ -92,7 +95,7 @@ HmisReportcontrollers.controller('IndicatorGrpController', ['$scope', '$translat
       	};
 
     $scope.doLayout = function(){
-    	disablePrintButton();
+    	startLoadingState(false);
     }
 
     $scope.serviceCode = null;  
@@ -104,7 +107,7 @@ HmisReportcontrollers.controller('SectionController', ['$scope','Sections', 'Pin
 	$scope.$watch('selectedSet',function(){
 		$scope.sections = Sections.get({datasetId:$scope.$parent.selectedSet.id},function(){
 				addtoTOC($scope.toc,$scope.sections.sections,$scope.$parent.selectedSet,"dataset");	
-				disablePrintButton();
+				startLoadingState(false);
 			});
 
 	});
@@ -125,8 +128,9 @@ HmisReportcontrollers.controller('ElementsTableController',['$scope','Elements',
 			}
 		});
 
-		$scope.dataElements = Elements.get({IdList:"[" + elementIds + "]"});	
-		enablePrintButton();
+		$scope.dataElements = Elements.get({IdList:"[" + elementIds + "]"}, function(){
+			endLoadingState();
+		});	
 	}
 }])
 
@@ -138,16 +142,17 @@ HmisReportcontrollers.controller('IndicatorController',['$scope','IndicatorGroup
 			$scope.indicatorGrpParent4Toc = {displayName:"…Indicator Group "+$scope.$parent.selectedGrp.displayName,id:$scope.$parent.selectedGrp.id}
 			$scope.indicatorGroup = IndicatorGroup.get({indicatorGrpId:$scope.$parent.selectedGrp.id}, function(){
 				addtoTOC($scope.toc,null,$scope.indicatorGrpParent4Toc,"…Indicator Group");
+				endLoadingState();
 			});
-			enablePrintButton();
 		}else{
 			$('#indicators').tab('show'); //only needed after a page refresh or url with tab# included
 		}
 	});
 
 	$scope.getAllIndicators = function(){
-		$scope.indicators = AllIndicators.get();
-		enablePrintButton();
+		$scope.indicators = AllIndicators.get(function(){
+			endLoadingState();
+		});
 	}
 
 	// numinator and denominator description is in indicator description
