@@ -15,25 +15,19 @@ h6 {
   font-family: 'Rajdhani', sans-serif;
 }
 
-.nav-tabs, .dossierMenu{
-	background-color: grey ;/*#b40303*/
+.nav-tabs , .dossierMenu{
+	background-color: grey ;
 }
 
 #print-foot {
   display: none;
   }
 
-.btn-link:focus{
- color: white;
- background-color: grey !important;
-}
-
 .printButton{
-   float:right;
-   margin: 3px 70px 0 0px;
+   margin: 3px 0 0 -40px;
    color:white;
+   border-style: none;
 }
-
 
 .printButton:hover, .printButton:focus, .printButton:active{
     color:white;

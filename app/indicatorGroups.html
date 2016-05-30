@@ -4,7 +4,7 @@
 				<h2><tt>{{selected.displayName}}</tt> </h2>
 				<p>{{'Number of Indicator Groups' | translate}}: {{indicatorGrps.indicatorGroups.length}}</p>
 				
-				<select ng-options="grp.displayName for grp in indicatorGrps.indicatorGroups | orderBy: 'displayName'" name="select" id="drpBoxIndicatorGrps" ng-model="selectedGrp">
+				<select ng-options="grp.displayName for grp in indicatorGrps.indicatorGroups | orderBy: 'displayName'" name="select" id="drpBoxIndicatorGrps" ng-model="selectedGrp" ng-change="doLayout()">
 				</select>
 			</div>
 			<div id="{{selectedGrp.id}}" ng-if="selectedGrp" class="col-md-12">
