@@ -32,6 +32,11 @@ HmisReportcontrollers.controller('HmisReportCtrl', ['$scope','$translate','$rout
 		});
 	}
 
+	doLayout =function(){
+		ping();
+		disablePrintButton();
+	}
+
 	enablePrintButton = function(){
 		// to make sure all emelemnts and indicators are loaded before printing
 		setTimeout( function(){$(".printButton").prop("disabled",false)}, 2000);
