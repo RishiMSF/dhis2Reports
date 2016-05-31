@@ -213,6 +213,8 @@ HmisReportcontrollers.config(function ($translateProvider) {
         prefix: 'languages/',
         suffix: '.json'
     });
+
+	  $translateProvider.useSanitizeValueStrategy(null);
 	  
 	  $translateProvider.registerAvailableLanguageKeys(
 			    ['es', 'fr', 'en', 'pt'],
