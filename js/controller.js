@@ -37,6 +37,12 @@ HmisReportcontrollers.controller('HmisReportCtrl', ['$scope','$translate','$rout
 		startLoadingState(true);
 	}
 
+	loadIndicatorTab = function(){
+		if($('.nav-tabs .active').text() !== "Indicators"){
+			startLoadingState(false);
+		}
+	}
+
 	endLoadingState = function(){
 		// to make sure all emelemnts and indicators are loaded before printing
 		setTimeout( function(){$(".printButton").prop("disabled",false)}, 2000);
