@@ -11,10 +11,6 @@
 	</div>
 	<div class="col-md-12">
 		<h1 class="col-md-12">{{selectedService.displayDescription}}</h1>
-		
-		<div id="DossierTextContainer"  class="col-md-12">
-			<span ng-bind-html="dossier.rows[0][0]"></span>
-		</div>
 
 		<div id="tocContainer" class="col-md-11">
 			<h3 ng-if="selectedService" style="text-decoration: underline;">{{'Table Of Content'| translate}}</h3>
@@ -26,6 +22,11 @@
 				</li>
 			</ul>
 		</div>
+		
+		<div id="DossierTextContainer"  class="col-md-12">
+			<span ng-bind-html="dossier.rows[0][0]"></span>
+		</div>
+
 		<div id="serviceDataSetContainer" class="col-md-12 service" ng-repeat="selectedSet in serviceDataSets.dataSets | orderBy:'displayName'"  ng-model="selectedSet"> 
 			<h2 class="dataset" id="{{selectedSet.id}}">{{selectedSet.displayName}}</h2>
 			<div id="sectionContainer" ng-controller="SectionController">	
