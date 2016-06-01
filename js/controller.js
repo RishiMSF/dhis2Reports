@@ -39,7 +39,7 @@ HmisReportcontrollers.controller('HmisReportCtrl', ['$scope','$translate','$rout
 
 	loadIndicatorTab = function(){
 		//will trigger loading gif otherwise :(
-		if($('.nav-tabs .active').text() !== "Indicators"){
+		if($('.nav-tabs .active').attr('id') !== "indicators"){
 			startLoadingState(false);
 		}else{
 			endLoadingState();
