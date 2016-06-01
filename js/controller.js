@@ -62,8 +62,12 @@ HmisReportcontrollers.controller('HmisReportCtrl', ['$scope','$translate','$rout
 }]);
 
 HmisReportcontrollers.controller('ServiceController',['$scope','$translate','Services','ServiceDataSets','Dossier', 'ServiceIndicatorGrps', function($scope,$translate,Services,ServiceDataSets,Dossier,ServiceIndicatorGrps){
-		$scope.services = Services.get();
-		$scope.serviceDataSets = {};
+	startLoadingState(false);
+	$scope.services = Services.get(function(){
+		endLoadingState();
+	});
+
+	$scope.serviceDataSets = {};
 
 	$scope.$watch('selectedService',function(){	 	
 		ping();
@@ -82,7 +86,11 @@ HmisReportcontrollers.controller('ServiceController',['$scope','$translate','Ser
 
 
 HmisReportcontrollers.controller('DataSetController', ['$scope', '$translate','DataSets', function($scope, $translate, DataSets){
-	$scope.dataSets = DataSets.get();
+	startLoadingState(false);
+	$scope.dataSets = DataSets.get(function(){
+		endLoadingState();
+	});
+
 	$('#dataSets').tab('show');  //only needed after a page refresh or url with tab# included
 	
 	
@@ -96,8 +104,8 @@ HmisReportcontrollers.controller('DataSetController', ['$scope', '$translate','D
 }]);
 
 HmisReportcontrollers.controller('IndicatorGrpController', ['$scope', '$translate','IndicatorGroups', function($scope, $translate, IndicatorGroups){
+	startLoadingState(false);
 	$('#indictorGroups').tab('show'); //only needed after a page refresh or url with tab# included
-
 
 	$scope.toc={
         	entries : []
@@ -108,7 +116,9 @@ HmisReportcontrollers.controller('IndicatorGrpController', ['$scope', '$translat
     }
 
     $scope.serviceCode = null;  
-	$scope.indicatorGrps = IndicatorGroups.get({serviceCode:$scope.serviceCode});
+	$scope.indicatorGrps = IndicatorGroups.get({serviceCode:$scope.serviceCode}, function(){
+		endLoadingState();
+	});
 }]);
 
 
