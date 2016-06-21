@@ -1,5 +1,5 @@
 {
-	"version":"0.1",
+	"version":"0.6",
 	"name":"Dossiers",
 	"description":"Dossiers",
 	"launch_path":"index.html",
@@ -8,7 +8,7 @@
 	"128":null
 	},
 	"developer":{
-	"url":"",
+	"url":"http://rishimsf.github.io/ResumeOnline/",
 	"name":"Rishi Sukul - MSFOCBA",
 	"email":"justRishi2@yahoo.com"
 	},

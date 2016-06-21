@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html ng-app="HmisReport">
 	<head>
-		<meta charset="UTF-8">
+		<!-- <meta charset="UTF-8">
 		<title>{{'Dossiers' | translate}}</title>
+ -->
 		<script src="bower_components/jquery/dist/jquery.min.js"></script>
 		<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 		<script src="bower_components/angular/angular.min.js"></script>
@@ -14,29 +15,66 @@
 		<script src="bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.min.js"></script>
 		
 		<script src="bower_components/angular-animate/angular-animate.js"></script>
-
+<!-- 
 		<script src="bower_components/tinymce-dist/tinymce.min.js"></script>
 		<script src="bower_components/angular-ui-tinymce/src/tinymce.js"></script>
-
-		<script src="js/app.js"></script>
+ -->		
+ 		<script src="js/app.js"></script>
 		<script src="js/controller.js"></script>
 		<script src="js/services.js"></script>
 
 		<link href='https://fonts.googleapis.com/css?family=Rajdhani:500' rel='stylesheet' type='text/css'>
-		<link type="text/css" rel="stylesheet" media="screen" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
-		<link type="text/css" rel="stylesheet" media="screen" href="css/Dossier.css">
+		<link type="text/css" rel="stylesheet" media="all" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+		<link type="text/css" rel="stylesheet" media="all" href="css/Dossier.css">
+		
+		  <!-- Stylesheets related to the menu -->
+        <link type="text/css" rel="stylesheet" href="../../../dhis-web-commons/font-awesome/css/font-awesome.min.css"/>
+        <link type="text/css" rel="stylesheet" media="screen" href="../../../dhis-web-commons/css/menu.css">
+
+
 		
 	</head>
-	<body ng-app="HmisReport" class="container-fluid">
-		<div ng-controller="HmisReportCtrl as main"  class="row" id="main">
-			<ul id="dossierTabs" role="tablist" class="nav nav-tabs col-md-12">
-				<li role="presentation"  class="active col-md-2"><a role="tab" data-toggle="tab"  href="#services">{{'Services' | translate}}</a></li>
-				<li role="presentation"  class="col-md-2"><a role="tab" data-toggle="tab"   href="#dataSets">DataSets</a></li>
-				<li role="presentation"  class="col-md-2"><a role="tab" data-toggle="tab"   href="#indicators">Indicators</a></li>
-				<li role="presentation"  class="col-md-2"><a role="tab" data-toggle="tab"   href="#indictorGroups">IndicatorGroups</a></li>
-			</ul>
+	<body   ng-app="HmisReport" class="container-fluid">
+	<div ng-controller="HmisReportCtrl as main"  class="row" id="main">
+		<div class="row dossierMenu">
+			<div class="col-xs-10 menu" d2-menu>
+			</div> 
+			<div class="col-xs-2"> 
+			<button disabled="disabled" type="button" onclick="javascript:window.print()" class="btn btn-link btn-lg printButton">
+			<span  aria-hidden="true" class="glyphicon glyphicon-print"></span>
+			</button>
+			</div>
+		</div>		
+		
+		<ul id="dossierTabs" onclick="tabSwitch()"  role="tablist" class="nav nav-tabs col-md-12">
+			<li id="services" role="presentation"  class="active col-md-2"><a role="tab" data-toggle="tab"  href="#services">{{'Services' | translate}}</a></li>
+			<li id="dataSets" role="presentation"  class="col-md-2 tab"><a role="tab" data-toggle="tab"   href="#dataSets">{{'Data Sets' | translate}}</a></li>
+			<li id="indictorGroups" role="presentation"  class="col-md-2 tab"><a role="tab" data-toggle="tab"   href="#indictorGroups">{{'Indicator Groups'| translate}}</a></li>
+			<li id="indicators" role="presentation"   class="col-md-2 tab"><a role="tab" data-toggle="tab" onclick="loadIndicatorTab()"   href="#indicators">{{'Indicators'| translate}}</a></li>
+		</ul>
+
+<!-- DHIS2 Settings initialization for a baseUrl that is used for the menu -->
+        <script>
+            window.dhis2 = window.dhis2 || {};
+            dhis2.settings = dhis2.settings || {};
+            dhis2.settings.baseUrl = 'dhis';
+
+      //       $(document).ready(function() {
+      //       	//dhisloc is used for ping method in controller
+      //       	var dhisloc = window.location.href;
+      //       	console.log("in index " + dhisloc);
+    		// });
+        </script>
+
+		<!-- Menu scripts -->
+		<script type="text/javascript" src="../../../dhis-web-commons/javascripts/dhis2/dhis2.translate.js"></script>
+        <script type="text/javascript" src="../../../dhis-web-commons/javascripts/dhis2/dhis2.menu.js"></script>
+        <script type="text/javascript" src="../../../dhis-web-commons/javascripts/dhis2/dhis2.menu.ui.js"></script>
+
+
 			<div class="view-container">
-    			<div ng-view class="view-frame"></div>
+    			<div ng-view class="view-frame">
+    			</div>
   			</div>
   			 <hr />
 
@@ -45,5 +83,11 @@
 		  <pre>$route.current.params = {{main.$route.current.params}}</pre>
 		  <pre>$routeParams = {{main.$routeParams}}</pre> -->
 		</div>	
+
+		<!-- works only properly in firefox  -->
+        <div id="print-foot">
+      		 
+ 		</div>
+ 		<div class="loading"></div>
 	</body>
 </html>

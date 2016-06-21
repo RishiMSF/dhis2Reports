@@ -1,14 +1,14 @@
 {
 	"Dossiers": "Dossiers",
-	"DataSets": "DataSets",
+	"Data Sets": "Data Sets",
   "Indicators": "Indicators",
   "Services": "Services",
-	"HMIS DataSets": "HMIS DataSets",
+	"HMIS Data Sets": "HMIS Data Sets",
 	"number of datasets": "number of datasets",
   "number of sections in dataset": "number of sections in dataset",
   "Number of elements in section":"Number of elements in section",
   "HMIS Indicator Groups":"HMIS Indicator Groups",
-
+  
   "Table Of Content":"Table Of Content",
 
   "NameElement":"Name",
@@ -18,7 +18,7 @@
   "Number of Indicator Groups":"Number of Indicator Groups",
   "Number of indicators in group":"Number of Indicators in Group",
   "Indicator Group":"Indicator Group",
-
+  "Indicator Groups":"Indicator Groups",
   "Nameindicator":"Name",
   "DescriptionIndicator":"Description",
   "NumeratorIndicator":"Numerator",

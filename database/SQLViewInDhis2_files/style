@@ -1,0 +1,32 @@
+@media print {
+
+    .msfocba-show-on-print, .ui-tabs-panel {
+        display: block !important;
+    }
+    
+    .msfocba-hide-on-print {
+        display: none !important;
+    }
+    
+	input.msfocba-large-size {
+		height: 90px;
+	}
+	
+	input.msfocba-medium-size {
+		height: 45px;
+	}
+	
+	input.entryfield, table.formSection, table.sectionTable {
+		width: 100%;
+	}
+	
+	input.entryfield {
+		color: #FFF !important;
+		text-indent:-9999px;
+		background-color: white !important;
+	}
+
+    div#tabs > ul > li {
+        display: none;
+    }
+}
