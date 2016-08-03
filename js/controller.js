@@ -1,4 +1,4 @@
-var HmisReportcontrollers = angular.module('HmisReportcontrollers',['ngSanitize','pascalprecht.translate']); 
+var HmisReportcontrollers = angular.module('HmisReportcontrollers',['ngSanitize','pascalprecht.translate']);
 /*'ui.tinymce' has to be added to angular.module for editor functionality*/
 
 HmisReportcontrollers.controller('HmisReportCtrl', ['$scope','$translate','$route', '$location', '$anchorScroll', '$routeParams', '$http', '$window', function($scope, $translate,$route, $location, $anchorScroll, $routeParams, $http, $window){
@@ -7,18 +7,19 @@ HmisReportcontrollers.controller('HmisReportCtrl', ['$scope','$translate','$rout
     this.$routeParams = $routeParams;
 
     addtoTOC = function(toc,items,parent, type){
+
 		var index = toc.entries.push({
 			'parent':parent,
-			 'children': items
-		})
+			'children': items
+		});
 	};
 
 	$scope.scrollTo = function (id) {
-  		$anchorScroll(id);  
+  		$anchorScroll(id);
 	}
 
 	//checking if session is not expired, if expired response is login-page(so then reload)
-	ping = function(){	    
+	ping = function(){
 	    $.ajax({
 		  url: qryPing,
 		  dataType:"html",
@@ -52,7 +53,7 @@ HmisReportcontrollers.controller('HmisReportCtrl', ['$scope','$translate','$rout
 		$(".loading").hide();
 	}
 
-	startLoadingState = function(onlyprint){ 
+	startLoadingState = function(onlyprint){
 		$(".printButton").prop("disabled",true);
 		if(!onlyprint===true){
 			$(".loading").show();
@@ -69,7 +70,7 @@ HmisReportcontrollers.controller('ServiceController',['$scope','$translate','Ser
 
 	$scope.serviceDataSets = {};
 
-	$scope.$watch('selectedService',function(){	 	
+	$scope.$watch('selectedService',function(){
 		ping();
 		$scope.toc={
         	entries : []
@@ -77,8 +78,8 @@ HmisReportcontrollers.controller('ServiceController',['$scope','$translate','Ser
 
       	if ($scope.selectedService){
       		startLoadingState(false);
-			$scope.indicatorGroups =  ServiceIndicatorGrps.get({serviceCode:$scope.selectedService.code});
-			$scope.serviceDataSets = ServiceDataSets.get({serviceCode:$scope.selectedService.code}); 
+			$scope.indicatorGroups = ServiceIndicatorGrps.get({serviceCode:$scope.selectedService.code});
+			$scope.serviceDataSets = ServiceDataSets.get({serviceCode:$scope.selectedService.code});
 			$scope.dossier = Dossier.get({languageCode:$translate.use(),serviceCode:$scope.selectedService.code});
 		}
 	});
@@ -92,8 +93,8 @@ HmisReportcontrollers.controller('DataSetController', ['$scope', '$translate','D
 	});
 
 	$('#dataSets').tab('show');  //only needed after a page refresh or url with tab# included
-	
-	
+
+
 	$scope.resetToc = function(){
 		ping();
 		$scope.toc={
@@ -115,20 +116,37 @@ HmisReportcontrollers.controller('IndicatorGrpController', ['$scope', '$translat
     	startLoadingState(false);
     }
 
-    $scope.serviceCode = null;  
+    $scope.serviceCode = null;
 	$scope.indicatorGrps = IndicatorGroups.get({serviceCode:$scope.serviceCode}, function(){
 		endLoadingState();
 	});
 }]);
 
-
 HmisReportcontrollers.controller('SectionController', ['$scope','Sections', 'Ping', function($scope, Sections, Ping){
+
+	// Added by BRaimbault, 2016-08-03
+	// Quick filtering of "Comments" sections
+	// ----------------------------------------------------------
+	filterSections = function(sections,filterDisplayName){
+		var sectionsFiltered = {sections:[]};
+		if(sections){
+			sections.sections.forEach(function(section){
+				if (section.displayName != filterDisplayName) {
+					sectionsFiltered.sections.push(section);
+				}
+			});
+		}
+		return sectionsFiltered;
+	};
+	// ----------------------------------------------------------
+
 	$scope.$watch('selectedSet',function(){
 		$scope.sections = Sections.get({datasetId:$scope.$parent.selectedSet.id},function(){
-				addtoTOC($scope.toc,$scope.sections.sections,$scope.$parent.selectedSet,"dataset");	
-				startLoadingState(false);
-			});
 
+			$scope.sections = filterSections($scope.sections,"Comments");
+			addtoTOC($scope.toc,$scope.sections.sections,$scope.$parent.selectedSet,"dataset");
+			startLoadingState(false);
+		});
 	});
 }]);
 
@@ -140,7 +158,7 @@ HmisReportcontrollers.controller('ElementsTableController',['$scope','Elements',
 		$scope.dataElements = {};
 
 		angular.forEach(section.dataElements, function(element,key){
-			if (key!=0){			
+			if (key!=0){
 				elementIds += "," + element.id;
 			}else{
 				elementIds = element.id;
@@ -149,12 +167,12 @@ HmisReportcontrollers.controller('ElementsTableController',['$scope','Elements',
 
 		$scope.dataElements = Elements.get({IdList:"[" + elementIds + "]"}, function(){
 			endLoadingState();
-		});	
+		});
 	}
 }])
 
 HmisReportcontrollers.controller('IndicatorController',['$scope','IndicatorGroup','AllIndicators',function($scope,IndicatorGroup,AllIndicators){
-	
+
 	$scope.$watch('selectedGrp',function(){
 		ping();
 		if ($scope.$parent.selectedGrp){
@@ -207,25 +225,25 @@ HmisReportcontrollers.controller('IndicatorController',['$scope','IndicatorGroup
 		var indicatorGroupNames;
 
 		angular.forEach(indicator.indicatorGroups, function(indicatorGroup,key){
-			if (key!=0){			
+			if (key!=0){
 				indicatorGroupNames += "," + indicatorGroup.displayName;
 			}else{
 				indicatorGroupNames = indicatorGroup.displayName;
 			}
-		});		
+		});
 		return indicatorGroupNames;
 	}
 }])
 
 HmisReportcontrollers.config(function ($translateProvider) {
-	  
+
 	  $translateProvider.useStaticFilesLoader({
         prefix: 'languages/',
         suffix: '.json'
     });
 
 	  $translateProvider.useSanitizeValueStrategy(null);
-	  
+
 	  $translateProvider.registerAvailableLanguageKeys(
 			    ['es', 'fr', 'en', 'pt'],
 			    {
@@ -236,7 +254,7 @@ HmisReportcontrollers.config(function ($translateProvider) {
 			        '*': 'en' // must be last!
 			    }
 			);
-	  
+
 	  $translateProvider.fallbackLanguage(['en']);
 
 	  jQuery.ajax({ url: dhisUrl + 'userSettings/keyUiLocale/', contentType: 'text/plain', method: 'GET', dataType: 'text', async: false}).success(function (uiLocale) {
@@ -249,5 +267,5 @@ HmisReportcontrollers.config(function ($translateProvider) {
     }).fail(function () {
   	  $translateProvider.determinePreferredLanguage();
 	  });
-	  
+
 });

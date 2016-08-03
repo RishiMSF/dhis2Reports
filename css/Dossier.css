@@ -16,7 +16,7 @@ h6 {
 }
 
 .nav-tabs , .dossierMenu{
-	background-color: grey ;
+	background-color: #b40303 ;
 }
 
 #print-foot {
@@ -69,11 +69,11 @@ h6 {
     }
   }
 
-  /* for page numbers in table of content not working anywhere yet css standard still has to be implemented 
-  a.pageref::after { 
+  /* for page numbers in table of content not working anywhere yet css standard still has to be implemented
+  a.pageref::after {
   content: target-counter(attr(href url), page);
   }*/
-    
+
 }
 
 .nav>li>a{
@@ -81,7 +81,7 @@ h6 {
 }
 
 .active{
-	color: black;	
+	color: black;
 }
 
 
@@ -104,4 +104,42 @@ a{
 
 .clear-fix {
   overflow: auto;
+}
+
+/*----------------------------------------------------------------------------*/
+/* Header                                                                     */
+/*----------------------------------------------------------------------------*/
+
+#header
+{
+  background-color: #b40303;
+  height: 44px;
+  position: fixed;
+  z-index: 15;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  box-shadow: 0 0 3px #222;
+}
+
+#headerBanner
+{
+  position: absolute;
+  top: 13px;
+  left: 55px;
+}
+
+#headerText
+{
+  position: absolute;
+  top: 12px;
+  left: 175px;
+  font-weight: bold;
+  color: #fff;
+  font-size: 16px;
+}
+
+.view-container
+{
+    margin-top: 44px;
 }
