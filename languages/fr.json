@@ -30,5 +30,7 @@
     "Number of Services": "Nombre de Services",
     "Number of DataSets in Service": "Nombre d'Ensemble de Données dans le Service",
     "Number of Sections in Service": "Nombre de Sections dans le Service",
-    "Number of IndicatorGroups in Service": "Nombre de Groupes d'Indicateurs dans le Service"
+    "Number of IndicatorGroups in Service": "Nombre de Groupes d'Indicateurs dans le Service",
+
+    "Comments": "Commentaires"
 }

@@ -122,7 +122,7 @@ HmisReportcontrollers.controller('IndicatorGrpController', ['$scope', '$translat
 	});
 }]);
 
-HmisReportcontrollers.controller('SectionController', ['$scope','Sections', 'Ping', function($scope, Sections, Ping){
+HmisReportcontrollers.controller('SectionController', ['$scope', '$translate', 'Sections', 'Ping', function($scope, $translate, Sections, Ping){
 
 	// Added by BRaimbault, 2016-08-03
 	// Quick filtering of "Comments" sections
@@ -131,7 +131,7 @@ HmisReportcontrollers.controller('SectionController', ['$scope','Sections', 'Pin
 		var sectionsFiltered = {sections:[]};
 		if(sections){
 			sections.sections.forEach(function(section){
-				if (section.displayName != filterDisplayName) {
+				if (section.displayName != $translate.instant(filterDisplayName)) {
 					sectionsFiltered.sections.push(section);
 				}
 			});
@@ -142,7 +142,7 @@ HmisReportcontrollers.controller('SectionController', ['$scope','Sections', 'Pin
 
 	$scope.$watch('selectedSet',function(){
 		$scope.sections = Sections.get({datasetId:$scope.$parent.selectedSet.id},function(){
-
+			console.log($scope.sections);
 			$scope.sections = filterSections($scope.sections,"Comments");
 			addtoTOC($scope.toc,$scope.sections.sections,$scope.$parent.selectedSet,"dataset");
 			startLoadingState(false);
