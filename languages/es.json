@@ -1,8 +1,36 @@
 {
-	"IN_PROGRESS": "CARGANDO",
-	"PRINT": "Imprimir",
-  	"EXPORT_EXCEL": "Exportar a MS Excel",
-	"HOME": "Inicio",
-	"SELECT_DATASET": "Selecciona un set de datos",
-  	"ADD_FORM": "Añadir formulario"
+    "Dossiers": "Dossiers",
+    "Data Sets": "Sets de Datos",
+    "Indicators": "Indicadores",
+    "Services": "Servicios",
+    "HMIS Data Sets": "HMIS Sets de Datos",
+    "number of datasets": "Número de Sets de Datos",
+    "number of sections in dataset": "Número de Secciones en el Sets de Datos",
+    "Number of elements in section": "Número de Elementos en la Sección",
+    "HMIS Indicator Groups": "HMIS Grupos de Indicadores",
+    "HMIS Indicators": "HMIS Indicadores",
+
+    "Table Of Content": "Tabla de Contenidos",
+
+    "NameElement": "Nombre",
+    "FormNameElement": "Nombre del Formulario",
+    "DescriptionElement": "Descripción",
+
+    "Number of Indicator Groups": "Número de Grupos de Indicadores",
+    "Number of indicators in group": "Número de Indicadores en el Grupo",
+    "Number of indicators": "Número de Indicadores",
+    "Indicator Group": "Grupo de Indicadores",
+    "Indicator Groups": "Grupos de Indicadores",
+    "Nameindicator": "Nombre",
+    "DescriptionIndicator": "Descripción",
+    "NumeratorIndicator": "Numerador",
+    "DenominatorIndicator": "Denominador",
+
+    "Health Services": "Servicios de Salud",
+    "Number of Services": "Número de Servicios",
+    "Number of DataSets in Service": "Número de Sets de Datos en el Servicio",
+    "Number of Sections in Service": "Número de Secciones en el Servicio",
+    "Number of IndicatorGroups in Service": "Número de Grupos de Indicadores en el Servicio",
+
+    "Comments": "Comentarios"
 }
