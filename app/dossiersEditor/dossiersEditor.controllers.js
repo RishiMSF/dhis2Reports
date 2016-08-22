@@ -97,6 +97,8 @@ dossiersEditorModule.controller('dossiersEditorMainController', ['$scope', 'doss
                     $('#saveButton').removeClass('btn-warning');
                     $('#saveButton').addClass('btn-danger');
                     console.log('dossiersEditor: Exactly one result expected from "qryTranslation"!');
+                    endLoadingState();
+                    
                 }
             });
         }

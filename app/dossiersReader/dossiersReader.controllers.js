@@ -5,8 +5,10 @@
 
 dossiersReaderModule.controller('dossiersReaderMainController', ['$scope', '$translate', 'dossiersDossierFactory', function($scope, $translate, dossiersDossierFactory) {
     ping();
-    $scope.dossier = dossiersDossierFactory.get({
-        languageCode: $translate.use(),
-        serviceId: $scope.selectedService.id
+    $scope.$watch('selectedService', function() {
+        $scope.dossier = dossiersDossierFactory.get({
+            languageCode: $translate.use(),
+            serviceId: $scope.selectedService.id
+        });
     });
 }]);
