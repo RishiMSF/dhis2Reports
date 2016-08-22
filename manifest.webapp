@@ -1,5 +1,5 @@
 {
-	"version":"0.6.21",
+	"version":"0.7.1-dev",
 	"name":"Dossiers",
 	"description":"Dossiers",
 	"launch_path":"index.html",
@@ -7,10 +7,15 @@
 	"48":"img/Logo_48.png",
 	"128":null
 	},
-	"developer":{
-	"url":"http://rishimsf.github.io/ResumeOnline/",
-	"name":"Rishi Sukul - MSFOCBA",
-	"email":"justRishi2@yahoo.com"
+	"developer1":{
+		"url":"http://rishimsf.github.io/ResumeOnline/",
+		"name":"Rishi Sukul - MSFOCBA",
+		"email":"justRishi2@yahoo.com"
+	},
+	"developer2":{
+		"url":"http://braimbault.github.io/",
+		"name":"Bruno Raimbault - MSFOCBA",
+		"email":"raimbault.bruno@gmail.com"
 	},
 	"installs_allowed_from":null,
 	"default_locale":"en",

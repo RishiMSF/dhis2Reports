@@ -1,111 +1,110 @@
 <!DOCTYPE html>
-<html ng-app="HmisReport">
+<html ng-app="appModule">
 
-<head>
-	<!--
-	<meta charset="UTF-8">
-	<title>{{'Dossiers' | translate}}</title>
-	-->
-	<script src="bower_components/jquery/dist/jquery.min.js"></script>
-	<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-	<script src="bower_components/angular/angular.min.js"></script>
-	<script src="bower_components/angular-route/angular-route.min.js"></script>
-	<script src="bower_components/angular-resource/angular-resource.min.js"></script>
-	<script src="bower_components/angular-sanitize/angular-sanitize.min.js"></script>
+	<head>
 
-	<script src="bower_components/angular-translate/angular-translate.min.js"></script>
-	<script src="bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.min.js"></script>
+		<!-- dependencies: jQuery -->
+		<script src="bower_components/jquery/dist/jquery.min.js">							</script>
 
-	<script src="bower_components/angular-animate/angular-animate.min.js"></script>
-	<!--
-	<script src="bower_components/tinymce-dist/tinymce.min.js"></script>
-	<script src="bower_components/angular-ui-tinymce/src/tinymce.js"></script>
-	-->
-	<script src="js/app.js"></script>
-	<script src="js/controller.js"></script>
-	<script src="js/services.js"></script>
+		<!-- dependencies: Bootstrap -->
+		<script src="bower_components/bootstrap/dist/js/bootstrap.min.js">					</script>
+		<link 	href="bower_components/bootstrap/dist/css/bootstrap.min.css" 				type="text/css" rel="stylesheet" media="all">
+		<link 	href="bower_components/bootstrap-vertical-tabs/bootstrap.vertical-tabs.css"	type="text/css" rel="stylesheet" media="all">
 
-	<link href='https://fonts.googleapis.com/css?family=Rajdhani:500' rel='stylesheet' type='text/css'>
-	<link type="text/css" rel="stylesheet" media="all" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
-	<link type="text/css" rel="stylesheet" media="all" href="css/Dossier.css">
+		<!-- dependencies: Angular -->
+		<script src="bower_components/angular/angular.min.js">								</script>
+		<script src="bower_components/angular-animate/angular-animate.min.js">				</script>
+		<script src="bower_components/angular-resource/angular-resource.min.js">			</script>
+	<!--	<script src="bower_components/angular-route/angular-route.min.js">					</script> -->
+		<script src="bower_components/angular-ui-router/angular-ui-router.min.js">			</script>
+		<script src="bower_components/angular-sanitize/angular-sanitize.min.js">			</script>
+		<script src="bower_components/angular-translate/angular-translate.min.js">			</script>
+		<script src="bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.min.js"></script>
 
-	<!-- Stylesheets related to the menu -->
-	<link type="text/css" rel="stylesheet" href="../../../dhis-web-commons/font-awesome/css/font-awesome.min.css" />
-	<link type="text/css" rel="stylesheet" media="screen" href="../../../dhis-web-commons/css/menu.css">
+		<!-- dependencies: TinyMCE -->
+		<script src="bower_components/tinymce/tinymce.min.js">								</script>
+		<script src="bower_components/angular-ui-tinymce/src/tinymce.js">					</script>
 
-	<!-- DHIS2 Settings initialization for a baseUrl that is used for the menu -->
-	<script>
-		 window.dhis2 = window.dhis2 || {};
-		 dhis2.settings = dhis2.settings || {};
-		 dhis2.settings.baseUrl = 'dhis';
-	</script>
-	<!-- Menu scripts -->
-	 <script type="text/javascript" src="../../../dhis-web-commons/javascripts/dhis2/dhis2.translate.js"></script>
-	 <script type="text/javascript" src="../../../dhis-web-commons/javascripts/dhis2/dhis2.menu.js"></script>
-	 <script type="text/javascript" src="../../../dhis-web-commons/javascripts/dhis2/dhis2.menu.ui.js"></script>
+		<!-- app: core -->
+		<script src="app/app.config.js">													</script>
+		<script src="app/app.services.js">													</script>
+		<script src="app/app.controllers.js">												</script>
+		<link 	href="assets/fonts/rajdhani.css"											type="text/css" rel="stylesheet">
+		<link 	href="app/app.css.css"														type="text/css" rel="stylesheet" media="all">
 
+		<!-- app: module-dossiers -->
+		<script src="app/dossiers/dossiers.services.js">									</script>
+		<script src="app/dossiers/dossiers.controllers.js">									</script>
+		<script src="app/dossiersEditor/dossiersEditor.service.js">							</script>
+		<script src="app/dossiersEditor/dossiersEditor.controllers.js">						</script>
 
-</head>
+		<!-- app: module-dossiers -->
+		<link 	href="app/search/search.css.css" 											type="text/css" rel="stylesheet" media="all">
+		<script src="app/search/search.filters.js">											</script>
+		<script src="app/search/search.services.js">										</script>
+		<script src="app/search/search.controllers.js">										</script>
 
-<body ng-app="HmisReport" class="container-fluid">
-	<div ng-controller="HmisReportCtrl as main" class="row" id="main">
-		<div class="row dossierMenu" id="header">
-			<div class="col-xs-4 menu">
-				<img id="headerBanner" src="img/logo_banner.png" style="cursor:pointer" title="View home page" onclick="window.location.href='../../../'">
-				<span id="headerText" style="cursor:pointer" title="View home page" onclick="window.location.href='../../../'">MSF - Dossiers</span>
+	</head>
+
+	<body class="container-fluid">
+
+		<div ng-controller="appSharedController">
+
+			<!-- app: header menu -->
+
+			<div id="header">
+
+				<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+				<!-- DHIS2 Settings initialization for a baseUrl that is used for the menu -->
+				<script>
+					window.dhis2 = window.dhis2 || {};
+					dhis2.settings = dhis2.settings || {};
+					dhis2.settings.baseUrl = 'dhis';
+				</script>
+
+				<!-- Menu scripts -->
+				<script src="../../../dhis-web-commons/javascripts/dhis2/dhis2.translate.js"></script>
+				<script src="../../../dhis-web-commons/javascripts/dhis2/dhis2.menu.js">	</script>
+				<script src="../../../dhis-web-commons/javascripts/dhis2/dhis2.menu.ui.js">	</script>
+
+				<!-- Stylesheets related to the menu -->
+				<link 	href="../../../dhis-web-commons/font-awesome/css/font-awesome.min.css" type="text/css" rel="stylesheet">
+				<link 	href="../../../dhis-web-commons/css/menu.css"						type="text/css" rel="stylesheet" media="screen">
+				<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+				<div class="col-xs-4">
+					<img id="header-banner" src="img/logo_banner.png" style="cursor:pointer" title="View home page" onclick="window.location.href='../../../'">
+					<span id="header-text" style="cursor:pointer" title="View home page" onclick="window.location.href='../../../'">MSF - Dossiers</span>
+				</div>
+				<div class="col-xs-7" d2-menu>
+				</div>
+				<div class="col-xs-1">
+					<button disabled="disabled" type="button" onclick="javascript:window.print()" class="btn btn-link btn-lg printButton">
+						<span aria-hidden="true" class="glyphicon glyphicon-print"></span>
+					</button>
+				</div>
 			</div>
-			<div class="col-xs-7 menu" d2-menu>
+
+
+			<!-- app: lateral menu -->
+			<ul id="menu-container" class="nav nav-tabs tabs-left sideways" onclick="tabSwitch()" role="tablist" >
+		      <li id="services" class="active" role="presentation"><a href="#services" data-toggle="tab">{{'Services List' | translate}}</a></li>
+		      <li id="search" role="presentation"><a href="#search" data-toggle="tab">{{'Search' | translate}}</a></li>
+		    </ul>
+			<div id="menu-background"></div>
+
+			<!-- app: view-container -->
+			<div id="view-container">
+				<div ui-view class="view-frame"></div>
 			</div>
-			<div class="col-xs-1">
-				<button disabled="disabled" type="button" onclick="javascript:window.print()" class="btn btn-link btn-lg printButton">
-					<span aria-hidden="true" class="glyphicon glyphicon-print"></span>
-				</button>
-			</div> -->
+
 		</div>
 
-		<!--<ul id="dossierTabs" onclick="tabSwitch()" role="tablist" class="nav nav-tabs col-md-12">
-			<li id="services" role="presentation" class="active col-md-2"><a role="tab" data-toggle="tab" href="#services">{{'Services' | translate}}</a></li>
-			 <li id="dataSets" role="presentation"  class="col-md-2 tab"><a role="tab" data-toggle="tab"   href="#dataSets">{{'Data Sets' | translate}}</a></li>
-				<li id="indictorGroups" role="presentation"  class="col-md-2 tab"><a role="tab" data-toggle="tab"   href="#indictorGroups">{{'Indicator Groups'| translate}}</a></li>
-				<li id="indicators" role="presentation"   class="col-md-2 tab"><a role="tab" data-toggle="tab" onclick="loadIndicatorTab()"   href="#indicators">{{'Indicators'| translate}}</a></li>
-		</ul>-->
+		<!-- print: footer - nb: works only properly in firefox -->
+		<div id="print-foot"></div>
 
-		<!-- DHIS2 Settings initialization for a baseUrl that is used for the menu -->
-		<script>
-			window.dhis2 = window.dhis2 || {};
-			dhis2.settings = dhis2.settings || {};
-			dhis2.settings.baseUrl = 'dhis';
+		<div class="loading"></div>
 
-			//       $(document).ready(function() {
-			//       	//dhisloc is used for ping method in controller
-			//       	var dhisloc = window.location.href;
-			//       	console.log("in index " + dhisloc);
-			// });
-		</script>
-
-		<!-- Menu scripts -->
-		<script type="text/javascript" src="../../../dhis-web-commons/javascripts/dhis2/dhis2.translate.js"></script>
-		<script type="text/javascript" src="../../../dhis-web-commons/javascripts/dhis2/dhis2.menu.js"></script>
-		<script type="text/javascript" src="../../../dhis-web-commons/javascripts/dhis2/dhis2.menu.ui.js"></script>
-
-
-		<div class="view-container">
-			<div ng-view class="view-frame">
-			</div>
-		</div>
-		<hr />
-
-		<!-- <pre>$location.path() = {{main.$location.path()}}</pre>
-		  <pre>$route.current.templateUrl = {{main.$route.current.templateUrl}}</pre>
-		  <pre>$route.current.params = {{main.$route.current.params}}</pre>
-		  <pre>$routeParams = {{main.$routeParams}}</pre> -->
-	</div>
-
-	<!-- works only properly in firefox  -->
-	<div id="print-foot">
-
-	</div>
-	<div class="loading"></div>
-</body>
+	</body>
 
 </html>

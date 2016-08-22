@@ -1,0 +1,50 @@
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    List of contributors: https://github.com/MSFOCBA
+    Please refer to the LICENSE.md and LICENSES-DEP.md for complete licenses.
+ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+
+<div ng-controller="dossiersEditorMainController">
+	<div class="col-md-11">
+		<br>
+		<form id="editForm" class="col-md-12" method="post">
+			<textarea ui-tinymce="tinymceOptions" ng-model="tinymceModel"></textarea>
+		</form>
+	</div>
+	<div class="col-md-1">
+		<button type="button" class="btn btn-default btn-xs active" ui-sref="dossiers.reader" style="width:55px;">
+			<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+		</button>
+		<br>
+		<select class="btn btn-default dropdown-toggle  btn-xs" style="width:55px;" ng-init="selectedLanguage = languages.languages[0]" ng-options="language.language for language in languages.languages | orderBy: 'language'" id="drpBoxLanguage" name="selectedLanguage" ng-model="selectedLanguage">{{selectedLanguage.language}}
+		</select>
+		<button type="button" class="btn btn-default" style="width:55px;" ng-click="saveDescription()">
+			<span class="glyphicon glyphicon-floppy-save" aria-hidden="true"></span>
+		</button>
+	<div>
+</div>
+<!--
+
+<div ng-controller="editorMainController">
+	<div id="headerPanelService" class="col-md-12 headerPanel">
+		<h1>Dossier text editor</h1>
+		<p>Number of Services: {{services.dataElements.length}}</p>
+		<p>Number of Languages: {{languages.languages.length}}</p>
+		<div class="col-md-12">
+			<select class="col-md-3" ng-options="service.displayDescription for service in services.dataElements | orderBy: 'displayName'" name="selectService" id="drpBoxServices" ng-model="selectedService">
+			</select>
+			<select class="col-md-1" ng-options="language.language for language in languages.languages | orderBy: 'language'" id="drpBoxLanguage" name="selectedLanguage" ng-model="selectedLanguage">
+			</select>
+		</div>
+	</div>
+	<div>
+		<h1 class="col-md-12">{{selectedService.displayDescription}}</h1>
+
+		<form id="editForm" class="col-md-12" method="post">
+			<textarea class="col-md-10" ui-tinymce="tinymceOptions" ng-model="tinymceModel"></textarea>
+			<button id="saveDossierTxt" disabled class="col-md-3" ng-click="setContent()">Save content</button>
+		</form>
+	</div>
+</div>
+
+-->
