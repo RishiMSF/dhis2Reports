@@ -6,27 +6,17 @@
 dossiersEditorModule.controller('dossiersEditorMainController', ['$scope', 'dossiersServicesFactory', 'dossiersDossierFactory', 'dossiersEditorTranslationFactory', 'dossiersEditorUpdateDescriptionFactory', function($scope, dossiersServicesFactory, dossiersDossierFactory, dossiersEditorTranslationFactory, dossiersEditorUpdateDescriptionFactory) {
     startLoadingState();
 
-    $scope.tinymceModel = '-';
-
-    $scope.getContent = function() {
-        console.log('Editor content:', $scope.tinymceModel);
-    };
-
-    $scope.setContent = function() {
-        $scope.tinymceModel = 'Time: ' + (new Date());
-    };
-
-    $scope.disableTinyEditor = function() {
-        $scope.tinymceOptions = {
-            plugins: 'link image code',
-            toolbar: 'undo redo | bold italic | alignleft aligncenter alignright | code',
-            readonly: 1
-        };
-
-    };
-
-    $scope.enableTinyEditor = function() {
-        tinymce.activeEditor.setMode('design');
+    $scope.tinymceOptions = {
+        menu: {},
+        plugins: 'link image table textcolor preview',
+        toolbar: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | table | forecolor backcolor | preview',
+        statusbar: false,
+        setup: function(ed) {
+            ed.on('change', function(e) {
+                $('#saveButton').removeClass('btn-default');
+                $('#saveButton').addClass('btn-warning');
+            });
+        }
     };
 
     $scope.languages = {
@@ -52,6 +42,14 @@ dossiersEditorModule.controller('dossiersEditorMainController', ['$scope', 'doss
     $scope.$watchGroup(['selectedService', 'selectedLanguage'], function(newValues, oldValues) {
         ping();
 
+        $('#saveButton').removeClass('btn-success');
+        $('#saveButton').removeClass('btn-warning');
+        $('#saveButton').removeClass('btn-danger');
+        $('#saveButton').addClass('btn-default');
+        $('#saveButton').addClass('disabled');
+        $('#saveIcon').removeClass('glyphicon-floppy-disk');
+        $('#saveIcon').addClass('glyphicon-time');
+
         if (!angular.isUndefined($scope.selectedLanguage) && !angular.isUndefined($scope.selectedService)) {
             startLoadingState();
 
@@ -60,25 +58,29 @@ dossiersEditorModule.controller('dossiersEditorMainController', ['$scope', 'doss
                 serviceId: $scope.selectedService.id
             }, function() {
                 $scope.tinymceModel = $scope.dossier.displayDescription;
-                endLoadingState();
-            });
 
+                setTimeout(function(){
+                    $('#saveButton').removeClass('btn-success');
+                    $('#saveButton').removeClass('btn-warning');
+                    $('#saveButton').removeClass('btn-danger');
+                    $('#saveButton').addClass('btn-default');
+                    $('#saveButton').removeClass('disabled');
+                    $('#saveIcon').removeClass('glyphicon-time');
+                    $('#saveIcon').addClass('glyphicon-floppy-disk');
+
+                    endLoadingState();
+                }, 500);
+            });
         }
     });
 
     $scope.saveDescription = function() {
         if (!angular.isUndefined($scope.selectedLanguage) && !angular.isUndefined($scope.selectedService)) {
             startLoadingState(false);
-
-            console.log($scope.selectedLanguage.code);
-            console.log($scope.selectedService.id);
-
             $scope.translation = dossiersEditorTranslationFactory.get({
                 languageCode: $scope.selectedLanguage.code,
                 serviceId: $scope.selectedService.id
             }, function() {
-
-                console.log($scope.translation.translations[0]);
                 if ($scope.translation.translations.length == 1) {
 
                     dossiersEditorUpdateDescriptionFactory.update({
@@ -86,11 +88,15 @@ dossiersEditorModule.controller('dossiersEditorMainController', ['$scope', 'doss
                     },{
                         value: $scope.tinymceModel
                     }, function() {
-                        console.log('ok',$scope.tinymceModel);
+                        $('#saveButton').removeClass('btn-warning');
+                        $('#saveButton').removeClass('btn-danger');
+                        $('#saveButton').addClass('btn-success');
                         endLoadingState();
                     });
                 } else {
-                    console.log('dossiersEditor: Only one result expected!');
+                    $('#saveButton').removeClass('btn-warning');
+                    $('#saveButton').addClass('btn-danger');
+                    console.log('dossiersEditor: Exactly one result expected from "qryTranslation"!');
                 }
             });
         }
