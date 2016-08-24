@@ -68,7 +68,7 @@ a {
 }
 
 @media print {
-    .dossierMenu, .nav-tabs, .headerPanel, .menu-container, .menu-background {
+    #header, #menu-container, #menu-background, #headerDossierPanel /*dossiers.view*/, #editDescButton /*dossiersReader.view*/ {
         display: none;
     }
     /* works only properly in firefox */

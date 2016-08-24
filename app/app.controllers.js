@@ -65,10 +65,12 @@ appModule.controller('appSharedController', ['$scope', '$translate', '$state', '
      * 	@description To make sure all emelemnts and indicators are loaded before printing
      * 	@todo
      */
-    endLoadingState = function() {
-        setTimeout(function() {
-            $(".printButton").prop("disabled", false)
-        }, 1000);
+    endLoadingState = function(disableprint) {
+        if (disableprint === true) {
+            setTimeout(function() {
+                $(".printButton").prop("disabled", false)
+            }, 1000);
+        }
         $(".loading").hide();
     };
 

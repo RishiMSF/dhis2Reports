@@ -8,9 +8,12 @@ dossiersEditorModule.controller('dossiersEditorMainController', ['$scope', 'doss
 
     $scope.tinymceOptions = {
         menu: {},
-        plugins: 'link image table textcolor preview',
-        toolbar: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | table | forecolor backcolor | preview',
-        statusbar: false,
+        plugins: 'link image table textcolor preview wordcount',
+        toolbar: 'insertfile undo redo | styleselect | fontsizeselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | table | preview',
+        fontsize_formats: '8pt 10pt 12pt 14pt 18pt 24pt 36pt',
+        //statusbar: false,
+        content_css: 'app/app.css.css, assets/fonts/rajdhani.css',
+        resize: true,
         setup: function(ed) {
             ed.on('change', function(e) {
                 $('#saveButton').removeClass('btn-default');
@@ -36,7 +39,7 @@ dossiersEditorModule.controller('dossiersEditorMainController', ['$scope', 'doss
     };
 
     $scope.services = dossiersServicesFactory.get(function() {
-        endLoadingState();
+        endLoadingState(false);
     });
 
     $scope.$watchGroup(['selectedService', 'selectedLanguage'], function(newValues, oldValues) {
@@ -68,7 +71,7 @@ dossiersEditorModule.controller('dossiersEditorMainController', ['$scope', 'doss
                     $('#saveIcon').removeClass('glyphicon-time');
                     $('#saveIcon').addClass('glyphicon-floppy-disk');
 
-                    endLoadingState();
+                    endLoadingState(false);
                 }, 500);
             });
         }
@@ -82,6 +85,8 @@ dossiersEditorModule.controller('dossiersEditorMainController', ['$scope', 'doss
                 serviceId: $scope.selectedService.id
             }, function() {
                 if ($scope.translation.translations.length == 1) {
+
+                    console.log($scope.tinymceModel);
 
                     dossiersEditorUpdateDescriptionFactory.update({
                         translationId: $scope.translation.translations[0].id
@@ -98,7 +103,7 @@ dossiersEditorModule.controller('dossiersEditorMainController', ['$scope', 'doss
                     $('#saveButton').addClass('btn-danger');
                     console.log('dossiersEditor: Exactly one result expected from "qryTranslation"!');
                     endLoadingState();
-                    
+
                 }
             });
         }
