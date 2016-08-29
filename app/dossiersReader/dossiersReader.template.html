@@ -1,0 +1,16 @@
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    List of contributors: https://github.com/MSFOCBA
+    Please refer to the LICENSE.md and LICENSES-DEP.md for complete licenses.
+ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+<div ng-controller="dossiersReaderMainController">
+	<div class="col-md-11" id="dossierDescription">
+		<br>
+		<div ng-bind-html="trustAsHtml(dossier.displayDescription)"></div>
+	</div>
+	<div class="col-md-1">
+		<button ng-if="autho" type="button" class="btn btn-default btn-xs" ui-sref="dossiers.editor" style="width:55px;" id="editDescButton">
+			<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+		</button>
+	</div>
+</div>

@@ -3,6 +3,7 @@
     "Data Sets": "DataSets",
     "Indicators": "Indicators",
     "Services": "Services",
+    "Search": "Search",
     "HMIS Data Sets": "HMIS DataSets",
     "number of datasets": "Number of Datasets",
     "number of sections in dataset": "Number of Sections in Dataset",
@@ -11,6 +12,11 @@
 	"HMIS Indicators": "HMIS Indicators",
 
     "Table Of Content": "Table of Content",
+
+    "Type": "Type",
+    "NameObject": "Name",
+    "DescriptionObject": "Description",
+    "ParentsObject": "Parents",
 
     "NameElement": "Name",
     "FormNameElement": "Form Name",
