@@ -3,7 +3,7 @@
     Please refer to the LICENSE.md and LICENSES-DEP.md for complete licenses.
 ------------------------------------------------------------------------------------*/
 
-dossiersEditorModule.controller('dossiersEditorMainController', ['$scope', 'dossiersServicesFactory', 'dossiersDossierFactory', 'dossiersEditorTranslationFactory', 'dossiersEditorUpdateDescriptionFactory', function($scope, dossiersServicesFactory, dossiersDossierFactory, dossiersEditorTranslationFactory, dossiersEditorUpdateDescriptionFactory) {
+dossiersEditorModule.controller('dossiersEditorMainController', ['$scope', 'dossiersReaderMeFactory', 'dossiersServicesFactory', 'dossiersDossierFactory', 'dossiersEditorTranslationFactory', 'dossiersEditorUpdateDescriptionFactory', 'dossiersEditorCreateDescriptionFactory', function($scope, dossiersReaderMeFactory, dossiersServicesFactory, dossiersDossierFactory, dossiersEditorTranslationFactory, dossiersEditorUpdateDescriptionFactory, dossiersEditorCreateDescriptionFactory) {
     startLoadingState();
 
     $scope.tinymceOptions = {
@@ -21,6 +21,11 @@ dossiersEditorModule.controller('dossiersEditorMainController', ['$scope', 'doss
             });
         }
     };
+
+    var me = dossiersReaderMeFactory.get({},function() {
+        $scope.autho = me.userGroups[0].name == 'Administrators';
+        console.log('dossiersEditor: User authorised to edit: ' + $scope.autho);
+    });
 
     $scope.languages = {
         "languages": [{
@@ -84,6 +89,7 @@ dossiersEditorModule.controller('dossiersEditorMainController', ['$scope', 'doss
                 languageCode: $scope.selectedLanguage.code,
                 serviceId: $scope.selectedService.id
             }, function() {
+
                 if ($scope.translation.translations.length == 1) {
 
                     console.log($scope.tinymceModel);
@@ -98,6 +104,32 @@ dossiersEditorModule.controller('dossiersEditorMainController', ['$scope', 'doss
                         $('#saveButton').addClass('btn-success');
                         endLoadingState();
                     });
+
+                } else if ($scope.translation.translations.length == 0) {
+                    dossiersEditorCreateDescriptionFactory.create({
+                    },{
+                        className: "OrganisationUnitGroup",
+                        locale: $scope.selectedLanguage.code,
+                        externalAccess: false,
+                        property: "description",
+                        value: $scope.tinymceModel,
+                        objectId: $scope.selectedService.id,
+                        access: {
+                            read: true,
+                            update: true,
+                            externalize: false,
+                            delete: true,
+                            write: true,
+                            manage: false
+                        },
+                        userGroupAccesses: []
+                        }, function() {
+                        $('#saveButton').removeClass('btn-warning');
+                        $('#saveButton').removeClass('btn-danger');
+                        $('#saveButton').addClass('btn-success');
+                        endLoadingState();
+                    });
+
                 } else {
                     $('#saveButton').removeClass('btn-warning');
                     $('#saveButton').addClass('btn-danger');
