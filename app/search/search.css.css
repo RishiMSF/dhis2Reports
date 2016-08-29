@@ -6,3 +6,7 @@
 .highlighted {
     color: red;
 }
+
+td {
+    height: 50px;
+}

@@ -5,7 +5,7 @@
 
 var dossiersEditorModule = angular.module('dossiersEditorModule', ['ui.tinymce']);
 var dossiersReaderModule = angular.module('dossiersReaderModule', []);
-var searchModule = angular.module('searchModule', []);
+var searchModule = angular.module('searchModule', ['angularUtils.directives.dirPagination','angular.filter']);
 var dossiersModule = angular.module('dossiersModule', ['dossiersEditorModule','dossiersReaderModule']);
 
 var appModule = angular.module('appModule', ['ui.router', 'd2Menu', 'ngSanitize', 'pascalprecht.translate', 'ngResource', 'dossiersModule', 'searchModule']);
