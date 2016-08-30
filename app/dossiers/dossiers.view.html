@@ -5,7 +5,7 @@
 
 <div ng-controller="dossiersMainController" id="DossierPanel" class="row">
 	<div id="headerDossierPanel" class="col-md-12 headerPanel">
-		<h1>{{'Health Services' | translate}}</h1>
+		<h1>{{'Services' | translate}}</h1>
 		<p>{{'Number of Services' | translate}}: {{services.organisationUnitGroups.length}}</p>
 		<p>{{'Number of DataSets in Service' | translate}}: {{serviceDataSets.dataSets.length}}</p>
 		<p>{{'Number of IndicatorGroups in Service' | translate}}: {{indicatorGroups.indicatorGroups.length}}</p>
@@ -18,7 +18,7 @@
 		<h1 class="col-md-12">{{selectedService.displayName}}</h1>
 
 		<div id="tocContainer" class="col-md-11">
-			<h3 ng-if="selectedService" style="text-decoration: underline;">{{'Table Of Content'| translate}}</h3>
+			<h3 ng-if="selectedService" style="text-decoration: underline;">{{'Table of Content'| translate}}</h3>
 			<ul ng-repeat="i in toc.entries | orderBy:'parent.displayName'">
 				<li><a href="" class="pageref" ng-click="scrollTo(i.parent.id)" target="_self">{{i.parent.displayName}}</a>
 					<ul ng-repeat="j in i.children">
@@ -38,7 +38,7 @@
 
 				<div class="col-md-12" ng-repeat="section in sections.sections">
 					<h3 class="section" id="{{section.id}}">{{section.displayName}}</h3>
-					<p>{{'Number of elements in section'| translate}}: {{section.dataElements.length}}</p>
+					<p>{{'Number of Elements in Section'| translate}}: {{section.dataElements.length}}</p>
 					<table ng-controller="dossiersElementsTableController" ng-init="getElementsInSection(section)" class="sectionElementsTable table table-striped">
 						<thead>
 							<tr>
@@ -61,11 +61,11 @@
 		<div class="col-md-12" id="IndicatorGroupsContainer" ng-repeat="selectedGrp in indicatorGroups.indicatorGroups | orderBy: 'displayName'">
 			<h3 class="indicatorGroup" id="{{selectedGrp.id}}">{{'Indicator Group' | translate}}: {{selectedGrp.displayName}}</h3>
 			<div ng-controller="dossiersIndicatorController" class="col-md-12">
-				<p>{{'Number of indicators in group' | translate}}: {{indicatorGroup.indicators.length}}</p>
+				<p>{{'Number of Indicators in Group' | translate}}: {{indicatorGroup.indicators.length}}</p>
 				<table class="indicatorTable table table-striped">
 					<thead>
 						<tr>
-							<th>{{'Nameindicator' | translate}}</th>
+							<th>{{'NameIndicator' | translate}}</th>
 							<th>{{'DescriptionIndicator' | translate}}</th>
 							<th>{{'NumeratorIndicator' | translate}}</th>
 							<th>{{'DenominatorIndicator' | translate}}</th>

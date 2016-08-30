@@ -1,36 +1,41 @@
 {
-    "Dossiers": "Dossiers",
-    "Data Sets": "Ensemble de Données",
-    "Indicators": "Indicateurs",
+    "INDEX.HTML":       "****************************",
+
     "Services": "Services",
-    "HMIS Data Sets": "HMIS Ensembles de Données",
-    "number of datasets": "Nombre d'Ensembles de Données",
-    "number of sections in dataset": "Nombre de Sections dans l'Ensemble de Données",
-    "Number of elements in section": "Nombre d'Eléments dans la Section",
-    "HMIS Indicator Groups": "HMIS Groupes d'Indicateurs",
-    "HMIS Indicators": "HMIS Indicateurs",
+    "Search": "Recherche",
 
-    "Table Of Content": "Table des Matières",
 
+    "MODULE:DOSSIERS":  "****************************",
+
+    "Number of Services": "Nombre de Services",
+    "Number of DataSets in Service": "Nombre d'Ensemble de Données dans le Service",
+    "Number of IndicatorGroups in Service": "Nombre de Groupes d'Indicateurs dans le Service",
+
+    "Table of Content": "Table des Matières",
+
+    "Number of Elements in Section": "Nombre d'Eléments dans la Section",
     "NameElement": "Nom",
     "FormNameElement": "Nom du Formulaire",
     "DescriptionElement": "Description",
 
-    "Number of Indicator Groups": "Nombre de Groupes d'Indicateurs",
-    "Number of indicators in group": "Nombre d'Indicateurs dans le Groupe",
-    "Number of indicators": "Nombre d'Indicateurs",
     "Indicator Group": "Groupe d'Indicateurs",
-    "Indicator Groups": "Groupes d'Indicateurs",
-    "Nameindicator": "Nom",
+    "Number of Indicators in Group": "Nombre d'Indicateurs dans le Groupe",
+    "NameIndicator": "Nom",
     "DescriptionIndicator": "Description",
     "NumeratorIndicator": "Numérateur",
     "DenominatorIndicator": "Dénominateur",
 
-    "Health Services": "Services de Santé",
-    "Number of Services": "Nombre de Services",
-    "Number of DataSets in Service": "Nombre d'Ensemble de Données dans le Service",
-    "Number of Sections in Service": "Nombre de Sections dans le Service",
-    "Number of IndicatorGroups in Service": "Nombre de Groupes d'Indicateurs dans le Service",
+    "Comments": "Commentaires",
 
-    "Comments": "Commentaires"
+
+    "MODULE:SEARCH":    "****************************",
+
+    "All": "Tout",
+    "DataElements": "Eléments de Données",
+    "Indicators": "Indicateurs",
+
+    "Type": "Type",
+    "NameObject": "Nom",
+    "DescriptionObject": "Description",
+    "ParentsObject": "Parents"
 }
