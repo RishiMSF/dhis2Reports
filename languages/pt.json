@@ -1,8 +1,41 @@
 {
-  "IN_PROGRESS": "EM PROCESSO",
-  "PRINT": "Imprimir",
-  "EXPORT_EXCEL": "Exportar para Excel",
-  "HOME": "Principal",
-  "SELECT_DATASET": "Selecione um conjunto de dados",
-  "ADD_FORM": "Adicionar forma"
+    "INDEX.HTML":       "****************************",
+
+    "Services": "Services",
+    "Search": "Search",
+
+
+    "MODULE:DOSSIERS":  "****************************",
+
+    "Number of Services": "Number of Services",
+    "Number of DataSets in Service": "Number of DataSets in Service",
+    "Number of IndicatorGroups in Service": "Number of IndicatorGroups in Service",
+
+    "Table Of Content": "Table of Content",
+
+    "Number of Elements in Section": "Number of Elements in Section",
+    "NameElement": "Name",
+    "FormNameElement": "Form Name",
+    "DescriptionElement": "Description",
+
+    "Indicator Group": "Indicator Group",
+    "Number of Indicators in Group": "Number of Indicators in Group",
+    "NameIndicator": "Name",
+    "DescriptionIndicator": "Description",
+    "NumeratorIndicator": "Numerator",
+    "DenominatorIndicator": "Denominator",
+
+    "Comments": "Comments",
+
+
+    "MODULE:SEARCH":    "****************************",
+
+    "All": "All",
+    "DataElements": "Data Elements",
+    "Indicators": "Indicators",
+
+    "Type": "Type",
+    "NameObject": "Name",
+    "DescriptionObject": "Description",
+    "ParentsObject": "Parents"
 }

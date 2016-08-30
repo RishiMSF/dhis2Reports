@@ -15,10 +15,12 @@
 		<script src="bower_components/angular/angular.min.js">								</script>
 		<script src="bower_components/angular-animate/angular-animate.min.js">				</script>
 		<script src="bower_components/angular-resource/angular-resource.min.js">			</script>
-		<script src="bower_components/angular-ui-router/angular-ui-router.min.js">			</script>
 		<script src="bower_components/angular-sanitize/angular-sanitize.min.js">			</script>
 		<script src="bower_components/angular-translate/angular-translate.min.js">			</script>
 		<script src="bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.min.js"></script>
+		<script src="bower_components/angular-ui-router/angular-ui-router.min.js">			</script>
+		<script src="bower_components/angular-utils/dirPagination.js">						</script>
+		<script src="bower_components/angular-filter/angular-filter.min.js">				</script>
 
 		<!-- dependencies: TinyMCE -->
 		<script src="bower_components/tinymce/tinymce.min.js">								</script>
@@ -63,6 +65,8 @@
 				<script>
 					window.dhis2 = window.dhis2 || {};
 					dhis2.settings = dhis2.settings || {};
+
+					/*HARDCODED*/
 					dhis2.settings.baseUrl = 'dhis';
 				</script>
 
@@ -78,6 +82,8 @@
 
 				<div class="col-xs-4">
 					<img id="header-banner" src="assets/img/logo_banner.png" style="cursor:pointer" title="View home page" onclick="window.location.href='../../../'">
+					
+					<!-- HARDCODED -->
 					<span id="header-text" style="cursor:pointer" title="View home page" onclick="window.location.href='../../../'">MSF - Dossiers </span>
 				</div>
 				<div class="col-xs-7" d2-menu>
@@ -92,7 +98,7 @@
 
 			<!-- app: lateral menu -->
 			<ul id="menu-container" class="nav nav-tabs tabs-left sideways" onclick="tabSwitch()" role="tablist" >
-		      <li id="services" class="active" role="presentation"><a href="#services" data-toggle="tab">{{'Services List' | translate}}</a></li>
+		      <li id="services" class="active" role="presentation"><a href="#services" data-toggle="tab">{{'Services' | translate}}</a></li>
 		      <li id="search" role="presentation"><a href="#search" data-toggle="tab">{{'Search' | translate}}</a></li>
 		    </ul>
 			<div id="menu-background"></div>

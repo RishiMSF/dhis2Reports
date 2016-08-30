@@ -9,15 +9,15 @@
 		<div class="col-md-3">
 			<input type="text" class="form-control ng-valid ng-dirty" ng-model="search.text" title="Type text to search here">
 		</div>
-		<div class="col-md-6 btn-group" role="group" data-toggle="buttons" aria-label="...">
+		<div class="col-md-5 btn-group" role="group" data-toggle="buttons" aria-label="...">
 			<label class="btn btn-default active" ng-click="getAllObjects()">
-				<input type="radio" name="options" id="option1" autocomplete="off" checked> All
+				<input type="radio" name="options" id="option1" autocomplete="off" checked> {{'All' | translate}}
 			</label>
 			<label class="btn btn-default" ng-click="getAllDataElements()">
-				<input type="radio" name="options" id="option2" autocomplete="off"> Data Elements
+				<input type="radio" name="options" id="option2" autocomplete="off"> {{'DataElements' | translate}}
 			</label>
 			<label class="btn btn-default" ng-click="getAllIndicators()">
-				<input type="radio" name="options" id="option4" autocomplete="off"> Indicators
+				<input type="radio" name="options" id="option4" autocomplete="off"> {{'Indicators' | translate}}
 			</label>
 		</div>
 		<div class="col-md-12"><br></div>
@@ -34,13 +34,14 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr ng-repeat="oneObject in allObjects | filter:search.text | orderBy: 'type + displayName'">
-					<td><span ng-bind-html='oneObject.type | highlight:search.text'></span></td>
+				<tr dir-paginate="oneObject in allObjects | fuzzyBy: 'displayName': search.text | orderBy: 'type + displayName' | itemsPerPage: 10">
+					<td><span ng-bind-html='oneObject.type'></span></td>
 					<td><span ng-bind-html='oneObject.displayName | highlight:search.text'></span></td>
-					<td><span ng-bind-html='getDescription(oneObject) | highlight:search.text'></span></td>
-					<td><span ng-bind-html='getParents(oneObject) | highlight:search.text'></span></td>
+					<td><span ng-bind-html='getDescription(oneObject)'></span></td>
+					<td><span ng-bind-html='getParents(oneObject)'></span></td>
 				</tr>
 			</tbody>
 		</table>
-</div>
+		<dir-pagination-controls boundary-links="true"></dir-pagination-controls>
+	</div>
 </div>
