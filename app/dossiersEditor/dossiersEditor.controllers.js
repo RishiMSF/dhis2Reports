@@ -85,57 +85,54 @@ dossiersEditorModule.controller('dossiersEditorMainController', ['$scope', 'doss
     $scope.saveDescription = function() {
         if (!angular.isUndefined($scope.selectedLanguage) && !angular.isUndefined($scope.selectedService)) {
             startLoadingState(false);
+
+            var translationsArray = [];
+
             $scope.translation = dossiersEditorTranslationFactory.get({
                 languageCode: $scope.selectedLanguage.code,
                 serviceId: $scope.selectedService.id
             }, function() {
+                console.log($scope.translation);
+                translationsArray.push({
+                    "property": "DESCRIPTION",
+                    "locale": $scope.selectedLanguage.code,
+                    "value": $scope.tinymceModel
+                });
+            });
 
-                if ($scope.translation.translations.length == 1) {
+            $scope.languages.languages.forEach(function(lang) {
+                if(lang.code != $scope.selectedLanguage.code){
+                    dossiersEditorTranslationFactory.get({
+                        languageCode: lang.code,
+                        serviceId: $scope.selectedService.id
+                    }, function(temp) {
+                        console.log(temp);
+                        if(temp.translations){
+                            tempValue = temp.translations[0].value;
+                        }else{
+                            tempValue = " ";
+                        }
+                        translationsArray.push({
+                            "property": "DESCRIPTION",
+                            "locale": lang.code,
+                            "value": tempValue
+                        });
 
-                    console.log($scope.tinymceModel);
+                        if (translationsArray.length == $scope.languages.languages.length) {
+                            console.log(translationsArray);
+                            dossiersEditorUpdateDescriptionFactory.update({
+                                serviceId: $scope.selectedService.id
+                            },{
+                              "translations": translationsArray
+                            }, function() {
+                                $('#saveButton').removeClass('btn-warning');
+                                $('#saveButton').removeClass('btn-danger');
+                                $('#saveButton').addClass('btn-success');
+                                endLoadingState();
+                            });
 
-                    dossiersEditorUpdateDescriptionFactory.update({
-                        translationId: $scope.translation.translations[0].id
-                    },{
-                        value: $scope.tinymceModel
-                    }, function() {
-                        $('#saveButton').removeClass('btn-warning');
-                        $('#saveButton').removeClass('btn-danger');
-                        $('#saveButton').addClass('btn-success');
-                        endLoadingState();
+                        }
                     });
-
-                } else if ($scope.translation.translations.length == 0) {
-                    dossiersEditorCreateDescriptionFactory.create({
-                    },{
-                        className: "OrganisationUnitGroup",
-                        locale: $scope.selectedLanguage.code,
-                        externalAccess: false,
-                        property: "description",
-                        value: $scope.tinymceModel,
-                        objectId: $scope.selectedService.id,
-                        access: {
-                            read: true,
-                            update: true,
-                            externalize: false,
-                            delete: true,
-                            write: true,
-                            manage: false
-                        },
-                        userGroupAccesses: []
-                        }, function() {
-                        $('#saveButton').removeClass('btn-warning');
-                        $('#saveButton').removeClass('btn-danger');
-                        $('#saveButton').addClass('btn-success');
-                        endLoadingState();
-                    });
-
-                } else {
-                    $('#saveButton').removeClass('btn-warning');
-                    $('#saveButton').addClass('btn-danger');
-                    console.log('dossiersEditor: Exactly one result expected from "qryTranslation"!');
-                    endLoadingState();
-
                 }
             });
         }
