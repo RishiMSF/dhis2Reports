@@ -3,12 +3,13 @@
     Please refer to the LICENSE.md and LICENSES-DEP.md for complete licenses.
 ------------------------------------------------------------------------------------*/
 
+var graphModule = angular.module('graphModule', ['angucomplete-alt']);
 var dossiersEditorModule = angular.module('dossiersEditorModule', ['ui.tinymce']);
 var dossiersReaderModule = angular.module('dossiersReaderModule', []);
 var searchModule = angular.module('searchModule', ['angularUtils.directives.dirPagination','angular.filter']);
 var dossiersModule = angular.module('dossiersModule', ['dossiersEditorModule','dossiersReaderModule']);
 
-var appModule = angular.module('appModule', ['ui.router', 'd2Menu', 'ngSanitize', 'pascalprecht.translate', 'ngResource', 'dossiersModule', 'searchModule']);
+var appModule = angular.module('appModule', ['ui.router', 'd2Menu', 'ngSanitize', 'pascalprecht.translate', 'ngResource', 'dossiersModule', 'searchModule', 'graphModule']);
 
 /*
  * 	@alias appModule.config
@@ -37,6 +38,10 @@ appModule.config(['$stateProvider', '$urlRouterProvider', '$translateProvider', 
         .state('search', {
             url:'/search',
             templateUrl: 'app/search/search.view.html',
+        })
+        .state('graph', {
+            url:'/graph',
+            templateUrl: 'app/graph/graph.view.html',
         });
 
 

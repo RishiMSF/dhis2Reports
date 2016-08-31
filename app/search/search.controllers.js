@@ -3,7 +3,7 @@
     Please refer to the LICENSE.md and LICENSES-DEP.md for complete licenses.
 ------------------------------------------------------------------------------------*/
 
-searchModule.controller('searchAllObjectsController', ['$scope', 'searchAllDataElementsFactory', 'searchAllIndicatorsFactory', function($scope, searchAllDataElementsFactory, searchAllIndicatorsFactory) {
+searchModule.controller('searchAllObjectsController', ['$scope', '$translate', 'searchAllDataElementsFactory', 'searchAllIndicatorsFactory', function($scope, $translate, searchAllDataElementsFactory, searchAllIndicatorsFactory) {
     $('#search').tab('show');
 
     concatObjects = function(tablesList) {
