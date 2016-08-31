@@ -307,13 +307,13 @@ graphModule.controller('graphMainController', ['$scope', '$translate', 'dossiers
             $scope.nodeSelected = function(selected) {
                 if (selected) {
                     //find the node
+                    console.log("graph: Selected node: " + selected.title);
                     var selectedVal = document.getElementById(selected.title).value;
                     var node = svg.selectAll(".nodes");
                     if (selectedVal == "none") {
                         node.style("stroke", "white").style("stroke-width", "1");
                     } else {
                         var selected_node = node.filter(function (d, i) {
-                            console.log(selected.title);
                             return d.name != selected.title;
                         });
                         selected_node.style("opacity", "0");
@@ -329,7 +329,7 @@ graphModule.controller('graphMainController', ['$scope', '$translate', 'dossiers
                             .style("opacity", 1);
                     }
                 } else {
-                    console.log('cleared');
+                    console.log("graph: Selection cleared");
                 }
             };
 

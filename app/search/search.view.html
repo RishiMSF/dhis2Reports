@@ -30,7 +30,7 @@
 					<th>{{'Type' | translate}}</th>
 					<th>{{'NameObject' | translate}}</th>
 					<th>{{'DescriptionObject' | translate}}</th>
-					<th>{{'ParentsObject' | translate}}</th>
+					<!--<th>{{'ParentsObject' | translate}}</th>-->
 				</tr>
 			</thead>
 			<tbody>
@@ -38,7 +38,7 @@
 					<td><span ng-bind-html='oneObject.type'></span></td>
 					<td><span ng-bind-html='oneObject.displayName | highlight:search.text'></span></td>
 					<td><span ng-bind-html='getDescription(oneObject)'></span></td>
-					<td><span ng-bind-html='getParents(oneObject)'></span></td>
+					<!--<td><span ng-bind-html='getParents(oneObject)'></span></td>-->
 				</tr>
 			</tbody>
 		</table>

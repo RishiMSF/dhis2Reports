@@ -11,7 +11,6 @@ var qryServiceIndicatorGrps = dhisUrl + 'indicatorGroups.json?fields=id,displayN
 var qryDataElements = dhisUrl + 'dataElements.json?fields=displayName,displayFormName,displayDescription,id,section[id]&paging=false&filter=id\\:in::IdList';
 var qryIndicatorGrp = dhisUrl + 'indicators.json?fields=displayName,id,displayFormName,displayDescription&filter=indicatorGroups.id\\:eq\\::indicatorGrpId&paging=false';
 
-
 dossiersModule.factory('dossiersServicesFactory', ['$resource',
     function($resource) {
         return $resource(qryServices, {}, {

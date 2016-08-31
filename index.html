@@ -75,8 +75,14 @@
 					window.dhis2 = window.dhis2 || {};
 					dhis2.settings = dhis2.settings || {};
 
-					/*HARDCODED*/
-					dhis2.settings.baseUrl = 'dhis';
+					var dhisroot = window.location.href.split('/api/')[0];
+					var dhisrootArr = dhisroot.split('/');
+					console.log("index.html: Prefix: "+ dhisrootArr[3]);
+					if(dhisrootArr.length >= 4){
+						dhis2.settings.baseUrl = dhisrootArr[3];
+					}else {
+						dhis2.settings.baseUrl = '';
+					}
 				</script>
 
 				<!-- Menu scripts -->
