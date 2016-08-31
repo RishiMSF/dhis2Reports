@@ -1,32 +1,41 @@
 {
-	"Dossiers": "Dossiers",
-	"Data Sets": "Data Sets",
-  "Indicators": "Indicators",
-  "Services": "Services",
-	"HMIS Data Sets": "HMIS Data Sets",
-	"number of datasets": "number of datasets",
-  "number of sections in dataset": "number of sections in dataset",
-  "Number of elements in section":"Number of elements in section",
-  "HMIS Indicator Groups":"HMIS Indicator Groups",
-  
-  "Table Of Content":"Table Of Content",
+    "INDEX.HTML":       "****************************",
 
-  "NameElement":"Name",
-  "FormNameElement":"Form Name",
-  "DescriptionElement":"Description",
+    "Services": "Services",
+    "Search": "Search",
+    "Graph": "Graph",
 
-  "Number of Indicator Groups":"Number of Indicator Groups",
-  "Number of indicators in group":"Number of Indicators in Group",
-  "Indicator Group":"Indicator Group",
-  "Indicator Groups":"Indicator Groups",
-  "Nameindicator":"Name",
-  "DescriptionIndicator":"Description",
-  "NumeratorIndicator":"Numerator",
-  "DenominatorIndicator":"Denominator",
+    "MODULE:DOSSIERS":  "****************************",
 
-  "Health Services":"Health Services",
-  "Number of Services":"Number of Services",
-  "Number of DataSets in Service":"Number of DataSets in Service",
-  "Number of Sections in Service":"Number of Sections in Service",
-  "Number of IndicatorGroups in Service":"Number of IndicatorGroups in Service"
+    "Number of Services": "Number of Services",
+    "Number of DataSets in Service": "Number of DataSets in Service",
+    "Number of IndicatorGroups in Service": "Number of IndicatorGroups in Service",
+
+    "Table of Content": "Table of Content",
+
+    "Number of Elements in Section": "Number of Elements in Section",
+    "NameElement": "Name",
+    "FormNameElement": "Form Name",
+    "DescriptionElement": "Description",
+
+    "Indicator Group": "Indicator Group",
+    "Number of Indicators in Group": "Number of Indicators in Group",
+    "NameIndicator": "Name",
+    "DescriptionIndicator": "Description",
+    "NumeratorIndicator": "Numerator",
+    "DenominatorIndicator": "Denominator",
+
+    "Comments": "Comments",
+
+
+    "MODULE:SEARCH":    "****************************",
+
+    "All": "All",
+    "DataElements": "Data Elements",
+    "Indicators": "Indicators",
+
+    "Type": "Type",
+    "NameObject": "Name",
+    "DescriptionObject": "Description",
+    "ParentsObject": "Parents"
 }

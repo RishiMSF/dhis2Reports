@@ -1,8 +1,41 @@
 {
-	"IN_PROGRESS": "CARGANDO",
-	"PRINT": "Imprimir",
-  	"EXPORT_EXCEL": "Exportar a MS Excel",
-	"HOME": "Inicio",
-	"SELECT_DATASET": "Selecciona un set de datos",
-  	"ADD_FORM": "Añadir formulario"
+    "INDEX.HTML":       "****************************",
+
+    "Services": "Servicios",
+    "Search": "Busqueda",
+    "Graph": "Graf",
+
+    "MODULE:DOSSIERS":  "****************************",
+
+    "Number of Services": "Número de Servicios",
+    "Number of DataSets in Service": "Número de Sets de Datos en el Servicio",
+    "Number of IndicatorGroups in Service": "Número de Grupos de Indicadores en el Servicio",
+
+    "Table of Content": "Tabla de Contenidos",
+
+    "Number of Elements in Section": "Número de Elementos en la Sección",
+    "NameElement": "Nombre",
+    "FormNameElement": "Nombre del Formulario",
+    "DescriptionElement": "Descripción",
+
+    "Indicator Group": "Grupo de Indicadores",
+    "Number of Indicators in Group": "Número de Indicadores en el Grupo",
+    "NameIndicator": "Nombre",
+    "DescriptionIndicator": "Descripción",
+    "NumeratorIndicator": "Numerador",
+    "DenominatorIndicator": "Denominador",
+
+    "Comments": "Comentarios",
+
+
+    "MODULE:SEARCH":    "****************************",
+
+    "All": "Todo",
+    "DataElements": "Elementos de Datos",
+    "Indicators": "Indicadores",
+
+    "Type": "Tipo",
+    "NameObject": "Nombre",
+    "DescriptionObject": "Descripción",
+    "ParentsObject": "Padres"
 }

@@ -1,0 +1,47 @@
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    List of contributors: https://github.com/MSFOCBA
+    Please refer to the LICENSE.md and LICENSES-DEP.md for complete licenses.
+ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+<div id="searchPanel" id="AllObjectsGroup" ng-controller="searchAllObjectsController" class="row">
+	<div id="headerPanel" class="col-md-12 headerPanel row">
+		<h1>{{'Search' | translate}}</h1>
+		<div class="col-md-3">
+			<input type="text" class="form-control ng-valid ng-dirty" ng-model="search.text" title="Type text to search here" placeholder="Search object">
+		</div>
+		<div class="col-md-5 btn-group" role="group" data-toggle="buttons" aria-label="...">
+			<label class="btn btn-default active" ng-click="getAllObjects()">
+				<input type="radio" name="options" id="option1" autocomplete="off" checked> {{'All' | translate}}
+			</label>
+			<label class="btn btn-default" ng-click="getAllDataElements()">
+				<input type="radio" name="options" id="option2" autocomplete="off"> {{'DataElements' | translate}}
+			</label>
+			<label class="btn btn-default" ng-click="getAllIndicators()">
+				<input type="radio" name="options" id="option4" autocomplete="off"> {{'Indicators' | translate}}
+			</label>
+		</div>
+		<div class="col-md-12"><br></div>
+	</div>
+
+	<div class="col-md-12" ng-init="getAllObjects()">
+		<table class="allObjectsTable table table-striped">
+			<thead>
+				<tr>
+					<th>{{'Type' | translate}}</th>
+					<th>{{'NameObject' | translate}}</th>
+					<th>{{'DescriptionObject' | translate}}</th>
+					<!--<th>{{'ParentsObject' | translate}}</th>-->
+				</tr>
+			</thead>
+			<tbody>
+				<tr dir-paginate="oneObject in allObjects | fuzzyBy: 'displayName': search.text | orderBy: 'type + displayName' | itemsPerPage: 10">
+					<td><span ng-bind-html='oneObject.type'></span></td>
+					<td><span ng-bind-html='oneObject.displayName | highlight:search.text'></span></td>
+					<td><span ng-bind-html='getDescription(oneObject)'></span></td>
+					<!--<td><span ng-bind-html='getParents(oneObject)'></span></td>-->
+				</tr>
+			</tbody>
+		</table>
+		<dir-pagination-controls boundary-links="true"></dir-pagination-controls>
+	</div>
+</div>
