@@ -12,6 +12,7 @@
     "Number of IndicatorGroups in Service": "Nombre de Groupes d'Indicateurs dans le Service",
 
     "Table of Content": "Table des Matières",
+    "BackToTop": "Haut de Page",
 
     "Number of Elements in Section": "Nombre d'Eléments dans la Section",
     "NameElement": "Nom",
@@ -30,12 +31,14 @@
 
     "MODULE:SEARCH":    "****************************",
 
-    "All": "Tout",
-    "DataElements": "Eléments de Données",
-    "Indicators": "Indicateurs",
+    "srch_SearchAll": "Rechercher dans toutes les Colonnes",
+    "srch_SearchAll_Not": "Inverser recherche",
+    "srch_SearchAll_Clear": "Réinitialiser filtres",
+    "srch_SearchAll_Here": "Entrer texte...",
 
-    "Type": "Type",
-    "NameObject": "Nom",
-    "DescriptionObject": "Description",
-    "ParentsObject": "Parents"
+    "srch_SelectColumns": "Selectionner les Colonnes à Afficher",
+    "srch_SelectColumns_objBasics": "Data Elements ou Indicators - Essentiel",
+    "srch_SelectColumns_objDescs": "Data Elements ou Indicators - Descriptions",
+    "srch_SelectColumns_grpBasics": "Data Sets ou Indicator Groups - Essentiel",
+    "srch_SelectColumns_servBasics": "Services - Essentiel"
 }

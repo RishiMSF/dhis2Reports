@@ -16,10 +16,12 @@
 		<script src="bower_components/angular-animate/angular-animate.min.js">				</script>
 		<script src="bower_components/angular-resource/angular-resource.min.js">			</script>
 		<script src="bower_components/angular-sanitize/angular-sanitize.min.js">			</script>
+		<script src="bower_components/angular-table/ng-table.min.js">						</script>
+		<link 	href="bower_components/angular-table/ng-table.min.css"						type="text/css" rel="stylesheet" media="all">
 		<script src="bower_components/angular-translate/angular-translate.min.js">			</script>
 		<script src="bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.min.js"></script>
+		<script src="bower_components/angular-ui/ui-bootstrap-tpls-2.2.0.min.js">			</script>
 		<script src="bower_components/angular-ui-router/angular-ui-router.min.js">			</script>
-		<script src="bower_components/angular-utils/dirPagination.js">						</script>
 		<script src="bower_components/angular-filter/angular-filter.min.js">				</script>
 		<script src="bower_components/angucomplete-alt/angucomplete-alt.min.js">			</script>
 		<link 	href="bower_components/angucomplete-alt/angucomplete-alt.css"				type="text/css" rel="stylesheet" media="all">
@@ -42,11 +44,11 @@
 		<script src="app/dossiers/dossiers.services.js">									</script>
 		<script src="app/dossiers/dossiers.controllers.js">									</script>
 		<!-- app: module-dossiersEditor -->
-		<script src="app/dossiersEditor/dossiersEditor.service.js">							</script>
+		<script src="app/dossiersEditor/dossiersEditor.services.js">						</script>
 		<script src="app/dossiersEditor/dossiersEditor.controllers.js">						</script>
 		<!-- app: module-dossiersReader -->
 		<link 	href="app/dossiersReader/dossiersReader.css.css"							type="text/css" rel="stylesheet" media="all">
-		<script src="app/dossiersReader/dossiersReader.service.js">							</script>
+		<script src="app/dossiersReader/dossiersReader.services.js">							</script>
 		<script src="app/dossiersReader/dossiersReader.controllers.js">						</script>
 
 		<!-- app: module-search -->
@@ -115,7 +117,7 @@
 			<ul id="menu-container" class="nav nav-tabs tabs-left sideways" onclick="tabSwitch()" role="tablist" >
 		      <li id="services" class="active" role="presentation"><a href="#services" data-toggle="tab">{{'Services' | translate}}</a></li>
 			  <li id="search" role="presentation"><a href="#search" data-toggle="tab">{{'Search' | translate}}</a></li>
-		      <li id="graph" role="presentation"><a href="#graph" data-toggle="tab">{{'Graph' | translate}}</a></li>
+		    <!-- <li id="graph" role="presentation"><a href="#graph" data-toggle="tab">{{'Graph' | translate}}</a></li> -->
 		    </ul>
 			<div id="menu-background"></div>
 

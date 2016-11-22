@@ -1,3 +1,4 @@
+"srch_SearchAll_Here": "Type here...",
 {
     "INDEX.HTML":       "****************************",
 
@@ -11,7 +12,8 @@
     "Number of DataSets in Service": "Number of DataSets in Service",
     "Number of IndicatorGroups in Service": "Number of IndicatorGroups in Service",
 
-    "Table Of Content": "Table of Content",
+    "Table of Content": "Table of Content",
+    "BackToTop": "Back to Top",
 
     "Number of Elements in Section": "Number of Elements in Section",
     "NameElement": "Name",
@@ -30,12 +32,13 @@
 
     "MODULE:SEARCH":    "****************************",
 
-    "All": "All",
-    "DataElements": "Data Elements",
-    "Indicators": "Indicators",
+    "srch_SearchAll": "Search all Columns",
+    "srch_SearchAll_Not": "Invert search",
+    "srch_SearchAll_Clear": "Clear filters",
+    "srch_SearchAll_Here": "Type here...",
 
-    "Type": "Type",
-    "NameObject": "Name",
-    "DescriptionObject": "Description",
-    "ParentsObject": "Parents"
-}
+    "srch_SelectColumns": "Select Displayed Columns",
+    "srch_SelectColumns_objBasics": "Data Elements or Indicators - Basics",
+    "srch_SelectColumns_objDescs": "Data Elements or Indicators - Descriptions",
+    "srch_SelectColumns_grpBasics": "Data Sets or Indicator Groups - Basics",
+    "srch_SelectColumns_servBasics": "Services - Basics"
