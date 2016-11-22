@@ -3,45 +3,153 @@
     Please refer to the LICENSE.md and LICENSES-DEP.md for complete licenses.
  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
-<div id="searchPanel" id="AllObjectsGroup" ng-controller="searchAllObjectsController" class="row">
-	<div id="headerPanel" class="col-md-12 headerPanel row">
-		<h1>{{'Search' | translate}}</h1>
-		<div class="col-md-3">
-			<input type="text" class="form-control ng-valid ng-dirty" ng-model="search.text" title="Type text to search here" placeholder="Search object">
+<div id="searchPanel" ng-controller="searchController as table" class="row">
+	<div class="row headerPanel">
+		<div class="col-xs-12">
+			<p></p>
+
+			<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+
+				<div class="panel panel-default">
+					<div class="panel-heading" role="tab" id="headingOne">
+						<h4 class="panel-title">
+			        <a class="accordion-toggle" role="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+			          	{{'srch_SearchAll' | translate}}
+			        </a>
+			      </h4>
+					</div>
+					<div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+						<div class="panel-body">
+							<form name="table.searchForm" novalidate ng-submit="table.applyGlobalSearch()">
+								<div class="input-group">
+									<span class="input-group-addon">{{'srch_SearchAll_Not' | translate}}
+			                  			<input type="checkbox" name="inverted" ng-model="table.isInvertedSearch" />
+			                		</span>
+									<input type="text" class="form-control" placeholder="{{'srch_SearchAll_Here' | translate}}" name="searchTerm" ng-model="table.globalSearchTerm" required />
+									<span class="input-group-btn">
+			                  			<button class="btn btn-default" type="submit" ng-disabled="table.searchForm.$invalid">
+			                    			<span class="glyphicon glyphicon-search"></span>
+									</button>
+									</span>
+									<span class="input-group-btn">
+										<button class="btn btn-primary pull-right" ng-disabled="!table.tableParams.hasFilter()" ng-click="table.tableParams.filter({})">{{'srch_SearchAll_Clear' | translate}}</button>
+									</span>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+
+				<div class="panel panel-default">
+					<div class="panel-heading" role="tab" id="headingThree">
+						<h4 class="panel-title">
+					        <a class="accordion-toggle" class="collapsed" role="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+					          {{'srch_SelectColumns' | translate}}
+					        </a>
+			      		</h4>
+					</div>
+					<div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+						<div class="panel-body">
+							<div class="row">
+								<div class="col-xs-3">
+									<p><b>{{'srch_SelectColumns_objBasics' | translate}}</b></p>
+									<div class="col-xs-1"></div>
+									<div class="col-xs-11">
+										<label class="checkbox" ng-repeat="col in table.cols" ng-if="cols_object[col.title()]">
+											<input type="checkbox" ng-model-options="{ getterSetter: true }" ng-model="col.show" /> {{col.title()}}
+										</label>
+									</div>
+								</div>
+								<div class="col-xs-3">
+									<p><b>{{'srch_SelectColumns_objDescs' | translate}}</b></p>
+									<div class="col-xs-1"></div>
+									<div class="col-xs-11">
+										<label class="checkbox" ng-repeat="col in table.cols" ng-if="cols_object_desc[col.title()]">
+											<input type="checkbox" ng-model-options="{ getterSetter: true }" ng-model="col.show" /> {{col.title()}}
+										</label>
+									</div>
+								</div>
+								<div class="col-xs-3">
+									<p><b>{{'srch_SelectColumns_grpBasics' | translate}}</b></p>
+									<div class="col-xs-1"></div>
+									<div class="col-xs-11">
+										<label class="checkbox" ng-repeat="col in table.cols" ng-if="cols_objectGroup[col.title()]">
+											<input type="checkbox" ng-model-options="{ getterSetter: true }" ng-model="col.show" /> {{col.title()}}
+										</label>
+									</div>
+								</div>
+								<div class="col-xs-3">
+									<p><b>{{'srch_SelectColumns_servBasics' | translate}}</b></p>
+									<div class="col-xs-1"></div>
+									<div class="col-xs-11">
+										<label class="checkbox" ng-repeat="col in table.cols" ng-if="cols_service[col.title()]">
+											<input type="checkbox" ng-model-options="{ getterSetter: true }" ng-model="col.show" /> {{col.title()}}
+										</label>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
-		<div class="col-md-5 btn-group" role="group" data-toggle="buttons" aria-label="...">
-			<label class="btn btn-default active" ng-click="getAllObjects()">
-				<input type="radio" name="options" id="option1" autocomplete="off" checked> {{'All' | translate}}
-			</label>
-			<label class="btn btn-default" ng-click="getAllDataElements()">
-				<input type="radio" name="options" id="option2" autocomplete="off"> {{'DataElements' | translate}}
-			</label>
-			<label class="btn btn-default" ng-click="getAllIndicators()">
-				<input type="radio" name="options" id="option4" autocomplete="off"> {{'Indicators' | translate}}
-			</label>
-		</div>
-		<div class="col-md-12"><br></div>
 	</div>
 
-	<div class="col-md-12" ng-init="getAllObjects()">
-		<table class="allObjectsTable table table-striped">
-			<thead>
-				<tr>
-					<th>{{'Type' | translate}}</th>
-					<th>{{'NameObject' | translate}}</th>
-					<th>{{'DescriptionObject' | translate}}</th>
-					<!--<th>{{'ParentsObject' | translate}}</th>-->
-				</tr>
-			</thead>
-			<tbody>
-				<tr dir-paginate="oneObject in allObjects | fuzzyBy: 'displayName': search.text | orderBy: 'type + displayName' | itemsPerPage: 10">
-					<td><span ng-bind-html='oneObject.type'></span></td>
-					<td><span ng-bind-html='oneObject.displayName | highlight:search.text'></span></td>
-					<td><span ng-bind-html='getDescription(oneObject)'></span></td>
-					<!--<td><span ng-bind-html='getParents(oneObject)'></span></td>-->
-				</tr>
-			</tbody>
-		</table>
-		<dir-pagination-controls boundary-links="true"></dir-pagination-controls>
-	</div>
+	<table ng-table="table.tableParams" class="table table-condensed table-bordered table-striped" ng-table-columns-binding="table.cols">
+		<tr ng-repeat="object in $data">
+
+			<td data-title="'object_type'" sortable="'object_type'" filter="{object_type:'./app/search/search.table.html'}" ng-if="false">
+				<span ng-bind-html='object.object_type | highlight: table.globalSearchTerm:params.filter():"object_type"'></span>
+			</td>
+			<td data-title="'object_id'" sortable="'object_id'" filter="{object_id:'./app/search/search.table.html'}" ng-if="false">
+				<span ng-bind-html='object.object_id | highlight: table.globalSearchTerm:params.filter():"object_id"'></span>
+			</td>
+			<td data-title="'object_code'" sortable="'object_code'" filter="{object_code:'./app/search/search.table.html'}" ng-if="true">
+				<span ng-bind-html='object.object_code | highlight: table.globalSearchTerm:params.filter():"object_code"'></span>
+			</td>
+			<td data-title="'object_name'" sortable="'object_name'" filter="{object_name:'./app/search/search.table.html'}" ng-if="true">
+				<span ng-bind-html='object.object_name | highlight: table.globalSearchTerm:params.filter():"object_name"'></span>
+			</td>
+			<td data-title="'object_form'" sortable="'object_form'" filter="{object_form:'./app/search/search.table.html'}" ng-if="false">
+				<span ng-bind-html='object.object_form | highlight: table.globalSearchTerm:params.filter():"object_form"'></span>
+			</td>
+
+			<td data-title="'object_description'" sortable="'object_description'" filter="{object_description:'./app/search/search.table.html'}" ng-if="true">
+				<span ng-bind-html='object.object_description | highlight: table.globalSearchTerm:params.filter():"object_description"'></span>
+			</td>
+			<td data-title="'object_num_ids'" sortable="'object_num_ids'" filter="{object_num_ids:'./app/search/search.table.html'}" ng-if="false">
+				<span ng-bind-html='object.object_num_ids | highlight: table.globalSearchTerm:params.filter():"object_num_ids"'></span>
+			</td>
+			<td data-title="'object_num_description'" sortable="'object_num_description'" filter="{object_num_description:'./app/search/search.table.html'}" ng-if="false">
+				<span ng-bind-html='object.object_num_description | highlight: table.globalSearchTerm:params.filter():"object_num_description"'></span>
+			</td>
+			<td data-title="'object_den_ids'" sortable="'object_den_ids'" filter="{object_den_ids:'./app/search/search.table.html'}" ng-if="false">
+				<span ng-bind-html='object.object_den_ids | highlight: table.globalSearchTerm:params.filter():"object_den_ids"'></span>
+			</td>
+			<td data-title="'object_den_description'" sortable="'object_den_description'" filter="{object_den_description:'./app/search/search.table.html'}" ng-if="false">
+				<span ng-bind-html='object.object_den_description | highlight: table.globalSearchTerm:params.filter():"object_den_description"'></span>
+			</td>
+
+			<td data-title="'objectGroup_id'" sortable="'objectGroup_id'" filter="{objectGroup_id:'./app/search/search.table.html'}" ng-if="false">
+				<span ng-bind-html='object.objectGroup_id | highlight: table.globalSearchTerm:params.filter():"objectGroup_id"'></span>
+			</td>
+			<td data-title="'objectGroup_code'" sortable="'objectGroup_code'" filter="{objectGroup_code:'./app/search/search.table.html'}" ng-if="false">
+				<span ng-bind-html='object.objectGroup_code | highlight: table.globalSearchTerm:params.filter():"objectGroup_code"'></span>
+			</td>
+			<td data-title="'objectGroup_name'" sortable="'objectGroup_name'" filter="{objectGroup_name:'./app/search/search.table.html'}" ng-if="true">
+				<span ng-bind-html='object.objectGroup_name | highlight: table.globalSearchTerm:params.filter():"objectGroup_name"'></span>
+			</td>
+
+			<td data-title="'service_id'" sortable="'service_id'" filter="{service_id:'./app/search/search.table.html'}" ng-if="false">
+				<span ng-bind-html='object.service_id | highlight: table.globalSearchTerm:params.filter():"service_id"'></span>
+			</td>
+			<td data-title="'service_code'" sortable="'service_code'" filter="{service_code:'./app/search/search.table.html'}" ng-if="false">
+				<span ng-bind-html='object.service_code | highlight: table.globalSearchTerm:params.filter():"service_code"'></span>
+			</td>
+			<td data-title="'service_name'" sortable="'service_name'" filter="{service_name:'./app/search/search.table.html'}" ng-if="true">
+				<span ng-bind-html='object.service_name | highlight: table.globalSearchTerm:params.filter():"service_name"'></span>
+			</td>
+
+		</tr>
+	</table>
 </div>

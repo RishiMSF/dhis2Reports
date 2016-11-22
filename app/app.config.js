@@ -6,7 +6,7 @@
 var graphModule = angular.module('graphModule', ['angucomplete-alt']);
 var dossiersEditorModule = angular.module('dossiersEditorModule', ['ui.tinymce']);
 var dossiersReaderModule = angular.module('dossiersReaderModule', []);
-var searchModule = angular.module('searchModule', ['angularUtils.directives.dirPagination','angular.filter']);
+var searchModule = angular.module('searchModule', ['ngTable', 'angular.filter', 'ui.bootstrap']);
 var dossiersModule = angular.module('dossiersModule', ['dossiersEditorModule','dossiersReaderModule']);
 
 var appModule = angular.module('appModule', ['ui.router', 'd2Menu', 'ngSanitize', 'pascalprecht.translate', 'ngResource', 'dossiersModule', 'searchModule', 'graphModule']);
@@ -39,10 +39,10 @@ appModule.config(['$stateProvider', '$urlRouterProvider', '$translateProvider', 
             url:'/search',
             templateUrl: 'app/search/search.view.html',
         })
-        .state('graph', {
+        /*.state('graph', {
             url:'/graph',
             templateUrl: 'app/graph/graph.view.html',
-        });
+        })*/;
 
 
     $translateProvider.useStaticFilesLoader({

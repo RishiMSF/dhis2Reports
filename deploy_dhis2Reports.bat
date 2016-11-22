@@ -1,1 +1,1 @@
-xcopy /s "D:\GitHub\dhis2Reports" "C:\opt\dhis2\apps\dhis2Reports"
+xcopy /s "D:\GitHub\dhis2Reports" "C:\Program Files (x86)\DHIS2\DHIS\apps\dhis2Reports"

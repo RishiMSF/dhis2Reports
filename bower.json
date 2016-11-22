@@ -12,6 +12,7 @@
     "angular-filter": "0.5.11",
     "angular-resource": "1.5.8",
     "angular-sanitize": "1.5.8",
+    "angular-table": "2.1.0",
     "angular-translate": "2.9.0",
     "angular-translate-loader-static-files": "2.9.0",
     "angular-ui-router": "0.2.18",
