@@ -18,8 +18,14 @@ dossiersModule.controller('dossiersMainController', ['$scope', '$translate', '$a
     addtoTOC = function(toc, items, parent, type) {
         var index = toc.entries.push({
             'parent': parent,
-            'children': items
+            'children': items,
+            'type': type
         });
+        if(type == 'Data Set'){
+            toc.dataSets = true;
+        }else if(type == 'Indicator Group'){
+            toc.indicatorGroups = true;
+        }
     };
 
     /*
@@ -27,8 +33,8 @@ dossiersModule.controller('dossiersMainController', ['$scope', '$translate', '$a
      * 	@description Scroll to an element when clicking on the Dossier Table Of Content (TOC)
      *  @scope dossiersMainController
      */
-    $scope.scrollTo = function(id) {
-        $anchorScroll.yOffset = 66;
+    $scope.scrollTo = function(id,yOffset) {
+        $anchorScroll.yOffset = yOffset; //66;
         $anchorScroll(id);
     };
 
@@ -56,7 +62,9 @@ dossiersModule.controller('dossiersMainController', ['$scope', '$translate', '$a
     $scope.$watch('selectedService', function() {
         ping();
         $scope.toc = {
-            entries: []
+            entries: [],
+            dataSets: false,
+            indicatorGroups: false
         };
 
         if ($scope.selectedService) {
@@ -65,14 +73,14 @@ dossiersModule.controller('dossiersMainController', ['$scope', '$translate', '$a
 
             // indicatorGroups
             $scope.indicatorGroups = dossiersServiceIndicatorGrpsFactory.get({
-                serviceCode: '_' + $scope.selectedService.code.split('_')[2],
-                serviceCod2: '_' + $scope.selectedService.code.split('_')[2] + '_'
+                serviceCode1: '_' + $scope.selectedService.code.split('_')[2],
+                serviceCode2: '_' + $scope.selectedService.code.split('_')[2] + '_'
             });
 
             // datasets
             $scope.serviceDataSets = dossiersServiceDataSetsFactory.get({
-                serviceCode: '_' + $scope.selectedService.code.split('_')[2],
-                serviceCod2: '_' + $scope.selectedService.code.split('_')[2] + '_'
+                serviceCode1: '_' + $scope.selectedService.code.split('_')[2],
+                serviceCode2: '_' + $scope.selectedService.code.split('_')[2] + '_'
             });
 
             // Service description
@@ -124,7 +132,7 @@ dossiersModule.controller('dossiersSectionController', ['$scope', '$translate', 
             datasetId: $scope.$parent.selectedSet.id
         }, function() {
             $scope.sections = filterSections($scope.sections, "Comments");
-            addtoTOC($scope.toc, $scope.sections.sections, $scope.$parent.selectedSet, "dataset");
+            addtoTOC($scope.toc, $scope.sections.sections, $scope.$parent.selectedSet, "Data Set");
             startLoadingState(false);
         });
     });
@@ -158,21 +166,22 @@ dossiersModule.controller('dossiersIndicatorController', ['$scope', 'dossiersInd
         ping();
         if ($scope.$parent.selectedGrp) {
             $scope.indicatorGrpParent4Toc = {
-                displayName: "…Indicator Group " + $scope.$parent.selectedGrp.displayName,
+                displayName: $scope.$parent.selectedGrp.displayName,
                 id: $scope.$parent.selectedGrp.id
             }
             $scope.indicatorGroup = dossiersIndicatorGroupFactory.get({
                 indicatorGrpId: $scope.$parent.selectedGrp.id
             }, function() {
-                addtoTOC($scope.toc, null, $scope.indicatorGrpParent4Toc, "…Indicator Group");
+                addtoTOC($scope.toc, null, $scope.indicatorGrpParent4Toc, "Indicator Group");
                 endLoadingState();
             });
         }
     });
 
+    // The next three functions are repeated from search controllers!
     // numerator and denominator description is in indicator description
     // (translatation doesn't work for denom and num columns) so have be extracted
-    $scope.getNuminator = function(indicator) {
+    $scope.getNumerator = function(indicator) {
         var re = /(NUM:)(.*)(DENOM:)/;
         var result = re.exec(indicator.displayDescription);
         if (result !== null) {

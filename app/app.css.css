@@ -71,12 +71,28 @@ a {
     #header, #menu-container, #menu-background, #headerDossierPanel /*dossiers.view*/, #editDescButton /*dossiersReader.view*/, #backtotop {
         display: none;
     }
+    a[href]:after {
+        content: none !important;
+    }
+    
+    body {
+        zoom: 85%;
+    }
+
     /* works only properly in firefox */
     #print-foot {
         display: block;
         position: fixed;
         bottom: 0pt;
         right: 0pt;
+    }
+
+    .headerGroup {
+        page-break-before: always;
+    }
+
+    .service>.dataset:first-child, .indicatorGroup:first-child {
+        page-break-before: avoid;
     }
     .service>.dataset, .indicatorGroup {
         page-break-before: always;
@@ -87,6 +103,13 @@ a {
             content: counter(page);
             counter-increment: page;
         }
+    }
+    @page
+    {
+        /*size: auto;   /* auto is the initial value */
+
+        /* this affects the margin in the printer settings */
+        margin: 15mm 10mm 15mm -8mm;
     }
 }
 

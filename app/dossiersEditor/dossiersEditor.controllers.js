@@ -32,7 +32,7 @@ dossiersEditorModule.controller('dossiersEditorMainController', ['$scope', 'doss
      * @dependencies dossiersReaderMeFactory
      */
     var me = dossiersReaderMeFactory.get({},function() {
-        $scope.autho = me.userGroups[0].name == 'Administrators' || me.userGroups[0].name == 'HMIS Officer';
+        $scope.autho = me.userGroups[0].name == 'Administrators';
         console.log('dossiersEditor: User authorised to edit: ' + $scope.autho);
     });
 
