@@ -1,7 +1,7 @@
 {
-	"version":"0.8.0-dev",
-	"name":"Dossiers",
-	"description":"Dossiers",
+	"version":"0.8.3-dev",
+	"name":"HMIS Dictionary",
+	"description":"HMIS Dictionary",
 	"launch_path":"index.html",
 	"icons":{"16":null,
 	"48":"assets/img/Logo_48.png",

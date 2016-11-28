@@ -19,14 +19,14 @@ dossiersModule.factory('dossiersServicesFactory', ['$resource',
 
 
 //var qryServiceDataSets = dhisUrl + 'dataSets.json?fields=id,displayName,sections[id]&paging=false&filter=attributeValues.value\\:like\\::serviceCode';
-var qryServiceDataSets = dhisUrl + 'dataSets.json?fields=id,displayName,sections[id]&paging=false&filter=attributeValues.value\\:$like\\::serviceCode&filter=attributeValues.value\\:like\\::serviceCod2&rootJunction=OR';
+var qryServiceDataSets = dhisUrl + 'dataSets.json?fields=id,displayName,sections[id]&paging=false&filter=attributeValues.value\\:$like\\::serviceCode1&filter=attributeValues.value\\:like\\::serviceCode2&rootJunction=OR';
 
 
 dossiersModule.factory('dossiersServiceDataSetsFactory', ['$resource',
     function($resource) {
         return $resource(qryServiceDataSets, {
-            serviceCode: '@serviceCode',
-            serviceCod2: '@serviceCod2'
+            serviceCode1: '@serviceCode1',
+            serviceCode2: '@serviceCode2'
         }, {
             query: {
                 method: 'GET',
@@ -55,13 +55,13 @@ dossiersModule.factory('dossiersDossierFactory', ['$resource',
 
 
 //var qryServiceIndicatorGrps = dhisUrl + 'indicatorGroups.json?fields=id,displayName&paging=false&filter=attributeValues.value\\:like\\::serviceCode';
-var qryServiceIndicatorGrps = dhisUrl + 'indicatorGroups.json?fields=id,displayName&paging=false&filter=attributeValues.value\\:$like\\::serviceCode&filter=attributeValues.value\\:like\\::serviceCod2&rootJunction=OR';
+var qryServiceIndicatorGrps = dhisUrl + 'indicatorGroups.json?fields=id,displayName&paging=false&filter=attributeValues.value\\:$like\\::serviceCode1&filter=attributeValues.value\\:like\\::serviceCode2&rootJunction=OR';
 
 dossiersModule.factory('dossiersServiceIndicatorGrpsFactory', ['$resource',
     function($resource) {
         return $resource(qryServiceIndicatorGrps, {
-            serviceCode: '@serviceCode',
-            serviceCod2: '@serviceCod2'
+            serviceCode1: '@serviceCode1',
+            serviceCode2: '@serviceCode2'
         }, {
             query: {
                 method: 'GET',
