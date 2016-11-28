@@ -3,7 +3,7 @@
     Please refer to the LICENSE.md and LICENSES-DEP.md for complete licenses.
 ------------------------------------------------------------------------------------*/
 
-searchModule.controller('searchController', ['$scope', '$translate', 'NgTableParams', 'searchAllFactory', function($scope, $translate, NgTableParams, searchAllFactory) {
+searchModule.controller('searchController', ['ExcelFactory', '$timeout', '$scope', '$translate', 'NgTableParams', 'searchAllFactory', function(ExcelFactory, $timeout, $scope, $translate, NgTableParams, searchAllFactory) {
 
     $('#search').tab('show');
 
@@ -32,6 +32,9 @@ searchModule.controller('searchController', ['$scope', '$translate', 'NgTablePar
         return temp;
     };
 
+    /*
+     * Filter dataElements and indicators that are not associated to a dataSet or an indicatorGroup
+     */
     var blacklist_datasets = [];
     var blacklist_indicatorgroups = [
         'rD7MJ3LaakW' // Individual Indicators
@@ -63,9 +66,9 @@ searchModule.controller('searchController', ['$scope', '$translate', 'NgTablePar
     self.applyGlobalSearch = function() {
         var term = self.globalSearchTerm;
         //var term_or = self.globalSearchTerm.split('||');
-        self.tableParams.filter({
-            $: term
-        });
+        var filter_content = self.tableParams.filter();
+        filter_content.$ = term;
+        self.tableParams.filter(filter_content);
     };
 
     startLoadingState(false);
@@ -106,18 +109,33 @@ searchModule.controller('searchController', ['$scope', '$translate', 'NgTablePar
 
     self.tableParams = new NgTableParams();
 
+    $scope.loaded = {
+        //dataElements
+        get_dataElements:               false,
+        get_dataElementsDescriptions:   false,
+        get_dataElementsGroups:         false,
+        //indicators
+        get_indicators:                 false,
+        get_indicatorsDescriptions:     false,
+        get_indicatorGroups:            false
+    };
+
     $scope.allObjects = [];
     $scope.$watch('allObjects', function(){
         //console.log('$scope.allObjects update', $scope.allObjects);
-        self.tableParams.settings({
-            filterOptions: { filterFilterName: "filterOR" },
-            dataset: $scope.allObjects
-        });
-        console.log($scope.table);
-        if($scope.table.cols){
-            $scope.table.cols.forEach(function(col) {
-                col.code = Object.keys(col.filter())[0];
+        var loaded_array = Object.keys($scope.loaded).map(function(key) { return $scope.loaded[key]; });
+        if(loaded_array.indexOf(false) == -1){
+            self.tableParams.settings({
+                filterOptions: { filterFilterName: "filterOR" },
+                dataset: $scope.allObjects
             });
+            console.log($scope.table);
+            if($scope.table.cols){
+                $scope.table.cols.forEach(function(col) {
+                    col.code = Object.keys(col.filter())[0];
+                });
+            }
+            endLoadingState();
         }
     });
 
@@ -169,12 +187,10 @@ searchModule.controller('searchController', ['$scope', '$translate', 'NgTablePar
                             object_name: obj.displayName,
                             object_form: obj.displayFormName,
                         };
-
                     }
-
                 });
-
                 //console.log('get_dataElements refactored', temp);
+                $scope.loaded.get_dataElements = true;
                 $scope.allObjects = Object.keys(temp).map(function(key) { return temp[key]; });
 
                 searchAllFactory.get_dataElementsDescriptions.query(function(response){
@@ -188,6 +204,7 @@ searchModule.controller('searchController', ['$scope', '$translate', 'NgTablePar
                         };
                     });
                     //console.log('get_dataElementsDescriptions refactored', temp);
+                    $scope.loaded.get_dataElementsDescriptions = true;
                     $scope.allObjects = Object.keys(temp).map(function(key) { return temp[key]; });
 
                 });
@@ -235,8 +252,8 @@ searchModule.controller('searchController', ['$scope', '$translate', 'NgTablePar
 
                     });
                     //console.log('get_dataElementsGroups refactored', temp);
+                    $scope.loaded.get_dataElementsGroups = true;
                     $scope.allObjects = Object.keys(temp).map(function(key) { return temp[key]; });
-                    endLoadingState();
 
                 });
             });
@@ -261,6 +278,7 @@ searchModule.controller('searchController', ['$scope', '$translate', 'NgTablePar
 
                 });
                 //console.log('get_indicators refactored', temp);
+                $scope.loaded.get_indicators = true;
                 $scope.allObjects = Object.keys(temp).map(function(key) { return temp[key]; });
 
                 searchAllFactory.get_indicatorsDescriptions.query(function(response){
@@ -279,6 +297,7 @@ searchModule.controller('searchController', ['$scope', '$translate', 'NgTablePar
 
                     });
                     //console.log('get_indicatorsDescriptions refactored', temp);
+                    $scope.loaded.get_indicatorsDescriptions = true;
                     $scope.allObjects = Object.keys(temp).map(function(key) { return temp[key]; });
 
                 });
@@ -325,6 +344,7 @@ searchModule.controller('searchController', ['$scope', '$translate', 'NgTablePar
 
                     });
                     //console.log('get_indicatorGroups refactored', temp);
+                    $scope.loaded.get_indicatorGroups = true;
                     $scope.allObjects = Object.keys(temp).map(function(key) { return temp[key]; });
 
                 });
@@ -333,8 +353,11 @@ searchModule.controller('searchController', ['$scope', '$translate', 'NgTablePar
         }
     });
 
-
-
-
-
+    $scope.exportToExcel = function(tableId){ // ex: '#my-table'
+        var exportHref = ExcelFactory.tableToExcel(tableId,'hmis_table');
+        var a = document.createElement('a');
+        a.href = exportHref;
+        a.download = 'hmis_table.xls';
+        a.click();
+    }
 }]);

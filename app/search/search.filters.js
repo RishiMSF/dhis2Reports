@@ -6,7 +6,17 @@
 searchModule.filter('highlight', function($sce) {
     return function(text, phrase_glo, phrase_col, name) {
         if ((phrase_glo || (phrase_col && name )) && text) {
-            text = text.replace(new RegExp('(' + phrase_glo + '|' + phrase_col[name] + ')', 'gi'), '<span class="highlighted">$&</span>');
+            if (phrase_glo) {
+                var mots_glo = phrase_glo.split('|');
+                mots_glo = mots_glo.map(function(s) { return s.trim() }).filter(function(t) { return t !== "" });
+                mots_glo = mots_glo.join('|');
+            }
+            if (phrase_col && name && phrase_col[name]) {
+                var mots_col = phrase_col[name].split('|');
+                mots_col = mots_col.map(function(s) { return s.trim() }).filter(function(t) { return t !== "" });
+                mots_col = mots_col.join('|');
+            }
+            text = text.replace(new RegExp('(' + mots_glo + '|' + mots_col + ')', 'gi'), '<span class="highlighted">$&</span>');
         }
         return $sce.trustAsHtml(text);
     }
@@ -26,7 +36,7 @@ searchModule.filter('filterOR', function() {
             var temp2 = false;
             //console.log(phrases, keys);
             keys.forEach(function(key) {
-                var mots = phrases[key].split('||');
+                var mots = phrases[key].split('|');
                 mots = mots.map(function(s) { return s.trim() });
                 //console.log(mots);
                 mots.forEach(function(mot) {
