@@ -96,7 +96,7 @@ searchModule.factory('ExcelFactory', ['$window', function($window){
         format=function(s,c){return s.replace(/{(\w+)}/g,function(m,p){return c[p];})};
     return {
         tableToExcel:function(tableId,worksheetName){
-            var table = $(tableId);
+            var table = $(tableId).clone();
             var xml = table['0'].childNodes[1];
             var xml_node = xml.childNodes[2];
             xml.removeChild(xml_node);
