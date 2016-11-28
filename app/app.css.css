@@ -1,0 +1,169 @@
+/*------------------------------------------------------------------------------------
+    List of contributors: https://github.com/MSFOCBA
+    Please refer to the LICENSE.md and LICENSES-DEP.md for complete licenses.
+------------------------------------------------------------------------------------*/
+
+body, span, p, div, ul, li, p, h1, h2, h3, h4, h5, h6 {
+    font-family: 'Rajdhani', sans-serif;
+}
+
+.nav>li>a {
+    color: #ddd;
+}
+.active {
+    color: black;
+}
+a:visited {
+    color: #bbb;
+}
+a {
+    text-decoration: underline;
+    color: #696969;
+}
+
+.col-md-12 {
+    padding-left: 0px;
+}
+
+.view-frame {
+    padding-left: 35px !important;
+}
+
+.clear-fix {
+    overflow: auto;
+}
+
+.loading {
+    display: none;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    width: 100%;
+    height: 100%;
+    background: url('../assets/img/spin.gif') no-repeat center center;
+}
+
+#view-container {
+    margin-top: 44px;
+    margin-left: 66px;
+    margin-right: 44px;
+}
+
+/*----------------------------------------------------------------------------*/
+/* Print                                                                      */
+/*----------------------------------------------------------------------------*/
+
+#print-foot {
+    display: none;
+}
+
+.printButton {
+    margin: 3px 0 0 -40px;
+    color: white;
+    border-style: none;
+}
+.printButton:hover, .printButton:focus, .printButton:active {
+    color: white;
+    background-color: #ddd;
+}
+
+@media print {
+    #header, #menu-container, #menu-background, #headerDossierPanel /*dossiers.view*/, #editDescButton /*dossiersReader.view*/, #backtotop {
+        display: none;
+    }
+    a[href]:after {
+        content: none !important;
+    }
+    
+    body {
+        zoom: 85%;
+    }
+
+    /* works only properly in firefox */
+    #print-foot {
+        display: block;
+        position: fixed;
+        bottom: 0pt;
+        right: 0pt;
+    }
+
+    .headerGroup {
+        page-break-before: always;
+    }
+
+    .service>.dataset:first-child, .indicatorGroup:first-child {
+        page-break-before: avoid;
+    }
+    .service>.dataset, .indicatorGroup {
+        page-break-before: always;
+    }
+    /* works only properly in firefox */
+    @-moz-document url-prefix() {
+        #print-foot:after {
+            content: counter(page);
+            counter-increment: page;
+        }
+    }
+    @page
+    {
+        /*size: auto;   /* auto is the initial value */
+
+        /* this affects the margin in the printer settings */
+        margin: 15mm 10mm 15mm -5mm;
+    }
+}
+
+/*----------------------------------------------------------------------------*/
+/* Header                                                                     */
+/*----------------------------------------------------------------------------*/
+
+#header {
+    background-color: #b40303;
+    height: 44px;
+    position: fixed;
+    z-index: 15;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    box-shadow: 0 0 3px #222;
+}
+
+#header-banner {
+    position: absolute;
+    top: 13px;
+    left: 55px;
+}
+
+#header-text {
+    position: absolute;
+    top: 12px;
+    left: 175px;
+    font-weight: bold;
+    color: #fff;
+    font-size: 16px;
+}
+
+/*----------------------------------------------------------------------------*/
+/* Menu                                                                       */
+/*----------------------------------------------------------------------------*/
+
+#menu-container {
+    margin-top: 1px !important;
+    margin-left: 6px !important;
+    background-color: #fff;
+    position: fixed;
+    height: 100%;
+    z-index: 9;
+}
+
+#menu-background {
+    margin-top: 0px !important;
+    left: 0px !important;
+    position: fixed;
+    background-color: transparent;
+    pointer-events: none;
+    height: 100%;
+    width: 48px;
+    border: 1px solid #dcdcdc;
+    z-index: 10;
+}

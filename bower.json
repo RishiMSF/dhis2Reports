@@ -1,21 +1,27 @@
 {
-  "name": "hmis dossier",
-  "description": "dossier report for HMIS",
+  "name": "HMIS dossier",
+  "description": "dossier repository for HMIS",
   "version": "0.0.0",
   "private": true,
   "resolutions"    : {
-    "angular": "1.4.x"
+    "angular": "1.5.8"
   },
   "dependencies": {
-    "angular-mocks": "1.4.x",
-    "angular-sanitize": "1.4.x",
-    "angular-animate": "1.4.x",
-    "jquery": "~2.x",
-    "bootstrap": "~3.x",
-    "angular-route": "1.4.x",
-    "angular-resource": "1.4.x",
+    "angucomplete-alt": "2.4.2",
+    "angular-animate": "1.5.8",
+    "angular-filter": "0.5.11",
+    "angular-resource": "1.5.8",
+    "angular-sanitize": "1.5.8",
+    "angular-table": "2.1.0",
     "angular-translate": "2.9.0",
     "angular-translate-loader-static-files": "2.9.0",
-    "angular-ui-tinymce": "latest"
+    "angular-ui-router": "0.2.18",
+    "angular-ui-tinymce": "0.0.16",
+    "angular-utils": "?",
+    "bootstrap": "3.3.6",
+    "bootstrap-vertical-tabs": "1.2.1",
+    "d3": "4.2.2",
+    "jquery": "2.2.0",
+    "tinymce": "4.4.1"
   }
 }
