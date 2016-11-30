@@ -3,13 +3,13 @@
     Please refer to the LICENSE.md and LICENSES-DEP.md for complete licenses.
 ------------------------------------------------------------------------------------*/
 
-var graphModule = angular.module('graphModule', ['angucomplete-alt']);
+/*var graphModule = angular.module('graphModule', ['angucomplete-alt']);*/
 var dossiersEditorModule = angular.module('dossiersEditorModule', ['ui.tinymce']);
 var dossiersReaderModule = angular.module('dossiersReaderModule', []);
-var searchModule = angular.module('searchModule', ['ngTable', 'angular.filter', 'ui.bootstrap']);
+var searchModule = angular.module('searchModule', ['ngTable', 'ui.bootstrap']);
 var dossiersModule = angular.module('dossiersModule', ['dossiersEditorModule','dossiersReaderModule']);
 
-var appModule = angular.module('appModule', ['ui.router', 'd2Menu', 'ngSanitize', 'pascalprecht.translate', 'ngResource', 'dossiersModule', 'searchModule', 'graphModule']);
+var appModule = angular.module('appModule', ['ui.router', 'd2Menu', 'ngSanitize', 'pascalprecht.translate', 'ngResource', 'dossiersModule', 'searchModule'/*, 'graphModule'*/]);
 
 /*
  * 	@alias appModule.config
