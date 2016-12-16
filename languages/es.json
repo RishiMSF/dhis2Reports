@@ -3,7 +3,7 @@
 
     "idx_Dossiers": "Dossiers",
     "idx_Search": "Busqueda",
-    "idx_Graph": "Graf",
+    "idx_Graph": "Grafico",
 
 
     "MODULE:DOSSIERS":  "****************************",
@@ -12,10 +12,10 @@
     "dos_Number of Services": "Número de Servicios",
     "dos_Number of DataSets in Service": "Número de Sets de Datos en el Servicio",
     "dos_Number of IndicatorGroups in Service": "Número de Grupos de Indicadores en el Servicio",
-    "dos_Select a service": "Selectionar un servico",
+    "dos_Select a service": "Seleccionar un servicio",
 
     "dos_Table of Content": "Tabla de Contenidos",
-    "dos_Description of Service": "Description of Service",
+    "dos_Description of Service": "Descripción del Servicio",
     "dos_Data Sets": "Sets de Datos > Sección > Elementos de Datos (Tabla 1)",
     "dos_Data Set": "Set de Datos",
     "dos_Section": "Sección",
@@ -40,19 +40,19 @@
 
     "MODULE:SEARCH":    "****************************",
 
-    "srch_SearchAll": "Busqueda",
+    "srch_SearchAll": "Búsqueda",
     "srch_SearchAll_Clear": "Reiniciar filtros",
     "srch_SearchAll_Row": "Mostrar / Esconder filtros de columnas",
     "srch_SearchAll_Here": "Escriba aquí...",
 
-    "srch_SelectColumns": "Eligir Columnas",
+    "srch_SelectColumns": "Elegir Columnas",
 
-    "srch_SelectColumns_objBasics": "Elementos de Datos o Indicadores - Basicos",
-    "object_type": "Typo",
+    "srch_SelectColumns_objBasics": "Elementos de Datos o Indicadores - Básicos",
+    "object_type": "Tipo",
     "object_name": "Nombre",
     "object_form": "Nombre en el Formulario",
     "object_id": "ID",
-    "object_code": "Codigo",
+    "object_code": "Código",
 
     "srch_SelectColumns_objDescs": "Elementos de Datos o Indicadores - Descripciones",
     "object_description": "Descripción",
@@ -64,15 +64,15 @@
     "srch_SelectColumns_grpBasics": "Sets de Datos o Grupos de Indicadores - Basicos",
     "objectGroup_name": "Nombre de Grupo",
     "objectGroup_id": "ID de Grupo",
-    "objectGroup_code": "Codigo de Grupo",
+    "objectGroup_code": "Código de Grupo",
 
-    "srch_SelectColumns_servBasics": "Servicios - Basicos",
+    "srch_SelectColumns_servBasics": "Servicios - Básicos",
     "service_name": "Nombre de Servicio",
     "service_id": "ID de Servicio",
     "service_code": "Codigo de Servicio",
 
     "srch_Help": "Ayuda",
-    "srch_Help_Text": "<p>Esta interfaz permite simplificar el acceso del usuario a la terminología asociada con la información recopilada con HMIS. <ul> <li> Mediante la pestaña <b>Buscar</b> puede buscar directamente un término en todas las columnas de la tabla. También puede mostrar filtros de columna, lo que le permite buscar información en una columna específica. Utilice 'Reiniciar filtros' para reiniciar todos los filtros. <i>Los usuarios expertos pueden usar la palabra clave '|' (OR) para buscar múltiples objetos.</i> </li> <li> A través de la pestaña <b>Seleccionar columnas</b> puede seleccionar las columnas que se mostrarán en la tabla. <i>Los usuarios expertos pueden utilizar las columnas avanzadas para realizar investigaciones detalladas a través los IDs.</i> </ li> </ ul>Finalmente puede exportar los resultados de su búsqueda a Excel (página por página, y no olvide guardar como .xls).</p>",
+    "srch_Help_Text": "<p>Ésta interfaz permite simplificar el acceso del usuario a la terminología asociada con la información recopilada con HMIS. <ul> <li> Mediante la pestaña <b>Buscar</b> puede buscar directamente un término en todas las columnas de la tabla. También puede mostrar filtros de columna, lo que le permite buscar información en una columna específica. Utilice 'Reiniciar filtros' para reiniciar todos los filtros. <i>Los usuarios expertos pueden usar la palabra clave '|' (OR) para buscar múltiples objetos.</i> </li> <li> A través de la pestaña <b>Seleccionar columnas</b> puede seleccionar las columnas que se mostrarán en la tabla. <i>Los usuarios expertos pueden utilizar las columnas avanzadas para realizar investigaciones detalladas a través los IDs.</i> </ li> </ ul>Finalmente puede exportar los resultados de su búsqueda a Excel (página por página, y no olvide guardar como .xls).</p>",
     "srch_exportToExcel": "Exportar esta página a Excel"
 
 }
