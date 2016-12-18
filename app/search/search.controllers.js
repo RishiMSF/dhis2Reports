@@ -38,7 +38,6 @@ searchModule.controller('searchController', ['ExcelFactory', '$timeout', '$scope
      * Filter dataElements and indicators that are not associated to a dataSet or an indicatorGroup
      */
     var blacklist_datasets = [
-        'bdvY3RdEQhr', // HIV
         'AjwuNAGMSFM', // HIV program
         'fWSy0WgqDHt', // EVD Screening - Weekly
         'kraMkBJg3JI', // Hospital Ward Multiservice SRH comp - Monthly
