@@ -50,7 +50,7 @@
     "srch_SelectColumns_objBasics": "pt - Data Elements or Indicators - Basics",
     "object_type": "pt - Type",
     "object_name": "pt - Name",
-    "object_form": "pt - Form name",
+    "object_form": "pt - Form name (datae. only)",
     "object_id": "pt - ID",
     "object_code": "pt - Code",
 

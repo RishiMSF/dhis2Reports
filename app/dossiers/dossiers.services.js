@@ -4,11 +4,13 @@
 ------------------------------------------------------------------------------------*/
 
 
-var qryServices = dhisUrl + 'organisationUnitGroupSets/BtFXTpKRl6n.json?fields=organisationUnitGroups[id,code,displayName]';
+var qryServices = dhisUrl + 'organisationUnitGroupSets/:ougsUID.json?fields=organisationUnitGroups[id,code,displayName]';
 
 dossiersModule.factory('dossiersServicesFactory', ['$resource',
     function($resource) {
-        return $resource(qryServices, {}, {
+        return $resource(qryServices, {
+            ougsUID: '@ougsUID'
+        }, {
             query: {
                 method: 'GET',
                 isArray: false

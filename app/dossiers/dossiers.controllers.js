@@ -46,7 +46,9 @@ dossiersModule.controller('dossiersMainController', ['$scope', '$translate', '$a
      *  @dependencies dossiersServicesFactory
      *  @scope dossiersMainController
      */
-    $scope.services = dossiersServicesFactory.get(function() {
+    $scope.services = dossiersServicesFactory.get({
+        ougsUID: $scope.ougsUID
+    }, function() {
         endLoadingState();
     });
 

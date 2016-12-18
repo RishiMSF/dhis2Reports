@@ -7,12 +7,14 @@ searchModule.filter('highlight', function($sce) {
     return function(text, phrase_glo, phrase_col, name) {
         if ((phrase_glo || (phrase_col && name )) && text) {
             if (phrase_glo) {
-                var mots_glo = phrase_glo.split('|');
+                var phrase_temp = phrase_glo.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
+                var mots_glo = phrase_temp.split('|');
                 mots_glo = mots_glo.map(function(s) { return s.trim() }).filter(function(t) { return t !== "" });
                 mots_glo = mots_glo.join('|');
             }
             if (phrase_col && name && phrase_col[name]) {
-                var mots_col = phrase_col[name].split('|');
+                var phrase_temp = phrase_col[name].replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
+                var mots_col = phrase_temp.split('|');
                 mots_col = mots_col.map(function(s) { return s.trim() }).filter(function(t) { return t !== "" });
                 mots_col = mots_col.join('|');
             }
@@ -36,7 +38,8 @@ searchModule.filter('filterOR', function() {
             var temp2 = false;
             //console.log(phrases, keys);
             keys.forEach(function(key) {
-                var mots = phrases[key].split('|');
+                var phrase_temp = phrases[key].replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
+                var mots = phrase_temp.split('|');
                 mots = mots.map(function(s) { return s.trim() });
                 //console.log(mots);
                 mots.forEach(function(mot) {

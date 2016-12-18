@@ -10,6 +10,11 @@
  *	@todo
  */
 appModule.controller('appSharedController', ['$scope', '$translate', '$state', '$location', '$stateParams', '$http', '$window', function($scope, $translate, $state, $location, $anchorScroll, $stateParams, $http, $window) {
+    
+    $scope.ougsUID = 'g7k6NQmqJY2';
+    $scope.userAdminGroup = 'Administrators';
+    
+    
 
     this.$route = $state;
     this.$location = $location;
@@ -92,5 +97,24 @@ appModule.controller('appSharedController', ['$scope', '$translate', '$state', '
         }
         $(".loading").hide();
     };
-
+    
+    /* For admin tab */
+    /*jQuery.ajax({
+        url: dhisUrl + 'me?fields=userGroups[name]',
+        contentType: 'json',
+        method: 'GET',
+        dataType: 'text',
+        async: false
+    }).success(function(me) {
+        me = jQuery.parseJSON(me);
+        console.log(me);
+        me = me.userGroups[0].name == $scope.userAdminGroup;
+        console.log('appModule: User authorised to administrate: ' + $scope.autho);
+        if (me) {
+            $scope.show_admin = true;
+        }
+    }).fail(function() {
+        console.log('appModule: Failed to check if user is authorised to administrate.')
+    });*/
+    
 }]);
