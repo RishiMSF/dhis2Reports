@@ -37,7 +37,13 @@ searchModule.controller('searchController', ['ExcelFactory', '$timeout', '$scope
     /*
      * Filter dataElements and indicators that are not associated to a dataSet or an indicatorGroup
      */
-    var blacklist_datasets = [];
+    var blacklist_datasets = [
+        'bdvY3RdEQhr', // HIV
+        'AjwuNAGMSFM', // HIV program
+        'fWSy0WgqDHt', // EVD Screening - Weekly
+        'kraMkBJg3JI', // Hospital Ward Multiservice SRH comp - Monthly
+        'Hp68S9muoCn'  // Intentional Violence
+    ];
     var blacklist_indicatorgroups = [
         'rD7MJ3LaakW' // Individual Indicators
     ];
@@ -231,9 +237,13 @@ searchModule.controller('searchController', ['ExcelFactory', '$timeout', '$scope
                                     var servicesCode = grp.dataSet.attributeValues[0].value.split('_');
                                     servicesCode.shift();
                                     servicesCode.forEach(function(code) {
-                                        temp_arr.service_id.push($scope.servicesList[code].service_id);
-                                        temp_arr.service_code.push($scope.servicesList[code].service_code);
-                                        temp_arr.service_name.push($scope.servicesList[code].service_name);
+                                        if($scope.servicesList[code]){
+                                            temp_arr.service_id.push($scope.servicesList[code].service_id);
+                                            temp_arr.service_code.push($scope.servicesList[code].service_code);
+                                            temp_arr.service_name.push($scope.servicesList[code].service_name);
+                                        }else{
+                                            console.log("search: Cannot find any service with code: " + code);
+                                        }
                                     });
                                 }
                                 temp_arr.objectGroup_id.push(grp.dataSet.id);
@@ -324,9 +334,13 @@ searchModule.controller('searchController', ['ExcelFactory', '$timeout', '$scope
                                     var servicesCode = grp.attributeValues[0].value.split('_');
                                     servicesCode.shift();
                                     servicesCode.forEach(function(code) {
-                                        temp_arr.service_id.push($scope.servicesList[code].service_id);
-                                        temp_arr.service_code.push($scope.servicesList[code].service_code);
-                                        temp_arr.service_name.push($scope.servicesList[code].service_name);
+                                        if ($scope.servicesList[code]) {
+                                            temp_arr.service_id.push($scope.servicesList[code].service_id);
+                                            temp_arr.service_code.push($scope.servicesList[code].service_code);
+                                            temp_arr.service_name.push($scope.servicesList[code].service_name);
+                                        }else{
+                                            console.log("search: Cannot find any service with code: " + code);
+                                        }
                                     });
                                 }
                                 temp_arr.objectGroup_id.push(grp.id);
