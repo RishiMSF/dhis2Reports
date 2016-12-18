@@ -52,18 +52,30 @@ searchModule.controller('searchController', ['ExcelFactory', '$timeout', '$scope
         if(type == 'dataElement'){
             var temp = obj.dataSetElements.length > 0;
             if (temp && blacklist_datasets.length > 0) {
-                 obj.dataSetElements.forEach(function(ds) {
-                    temp = temp && (blacklist_datasets.indexOf(ds.id) == -1);
+                 temp = false;
+                 obj.dataSetElements.forEach(function(dse) {
+                    temp = temp || (blacklist_datasets.indexOf(dse.dataSet.id) == -1);
                  });
             }
+            /*if (obj.dataSetElements.length == 0) {
+                console.log('search: dataElement filtered - empty: ', [obj]);
+            }else if (!temp) {
+                console.log('search: dataElement filtered - blacklisted: ', [obj]);
+            }*/
             return temp;
         }else if (type == 'indicator') {
             var temp = obj.indicatorGroups.length > 0;
             if (temp && blacklist_indicatorgroups.length > 0) {
+                temp = false;
                 obj.indicatorGroups.forEach(function(ig) {
-                    temp = temp && (blacklist_indicatorgroups.indexOf(ig.id) == -1);
+                    temp = temp || (blacklist_indicatorgroups.indexOf(ig.id) == -1);
                 });
             }
+            /*if (obj.indicatorGroups.length == 0) {
+                console.log('search: indicator filtered - empty: ', [obj]);
+            }else if (!temp) {
+                console.log('search: indicator filtered - blacklisted: ', [obj]);
+            }*/
             return temp;
         }
     };
