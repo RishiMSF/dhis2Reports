@@ -25,7 +25,7 @@ var qry_indicatorGroups = dhisUrl + 'indicators.json?fields=id,indicatorGroups[i
 
 
 //organisationUnitGroupSets - 231 B as of 20/11/2106
-var qry_organisationUnitGroupSets = dhisUrl + 'organisationUnitGroupSets/BtFXTpKRl6n?fields=organisationUnitGroups[id,code,displayName]&paging=false';
+var qry_organisationUnitGroupSets = dhisUrl + 'organisationUnitGroupSets/:ougsUID?fields=organisationUnitGroups[id,code,displayName]&paging=false';
 
 
 searchModule.factory('searchAllFactory', ['$resource',function($resource) {
@@ -42,7 +42,7 @@ searchModule.factory('searchAllFactory', ['$resource',function($resource) {
         get_indicatorGroups:            $resource(qry_indicatorGroups,          {}, { query: {    method: 'GET',  isArray: false  }   }),
 
         //organisationUnitGroupSet
-        get_organisationUnitGroupSets:  $resource(qry_organisationUnitGroupSets,{}, { query: {    method: 'GET',  isArray: false  }   }),
+        get_organisationUnitGroupSets:  $resource(qry_organisationUnitGroupSets,{ougsUID: '@ougsUID'}, { query: {    method: 'GET',  isArray: false  }   }),
     };
 }]);
 

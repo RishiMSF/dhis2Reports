@@ -28,9 +28,9 @@
 				                    			<span class="glyphicon glyphicon-search"></span>
 											</button>
 										</span>
-										<input type="text" class="form-control" placeholder="{{'srch_SearchAll_Here' | translate}}" name="searchTerm" ng-model="table.globalSearchTerm" required />
+										<input type="text" class="form-control" placeholder="{{'srch_SearchAll_Here' | translate}}" name="searchTerm" ng-model="table.globalSearchTerm" ng-change="table.applyGlobalSearch()" required />
 										<span class="input-group-btn">
-											<button class="btn btn-primary pull-right" ng-disabled="!table.tableParams.hasFilter()" ng-click="table.tableParams.filter({})">{{'srch_SearchAll_Clear' | translate}}</button>
+											<button class="btn btn-primary pull-right" ng-disabled="!table.tableParams.hasFilter()" ng-click="table.tableParams.filter({});table.globalSearchTerm=null;">{{'srch_SearchAll_Clear' | translate}}</button>
 										</span>
 
 									</div>
