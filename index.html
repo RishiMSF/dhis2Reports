@@ -6,34 +6,33 @@
 		<title>HMIS Dictionary</title>
 
 		<!-- dependencies: jQuery -->
-		<script src="bower_components/jquery/dist/jquery.min.js">							</script>
+		<script src="bower_components/jquery/jquery.min.js">								</script>
 
 		<!-- dependencies: Bootstrap -->
-		<script src="bower_components/bootstrap/dist/js/bootstrap.min.js">					</script>
-		<link 	href="bower_components/bootstrap/dist/css/bootstrap.min.css" 				type="text/css" rel="stylesheet" media="all">
+		<script src="bower_components/bootstrap/js/bootstrap.min.js">					</script>
+		<link 	href="bower_components/bootstrap/css/bootstrap.min.css" 				type="text/css" rel="stylesheet" media="all">
 		<link 	href="bower_components/bootstrap-vertical-tabs/bootstrap.vertical-tabs.css"	type="text/css" rel="stylesheet" media="all">
 
 		<!-- dependencies: Angular -->
 		<script src="bower_components/angular/angular.min.js">								</script>
-		<script src="bower_components/angular-animate/angular-animate.min.js">				</script>
 		<script src="bower_components/angular-resource/angular-resource.min.js">			</script>
 		<script src="bower_components/angular-sanitize/angular-sanitize.min.js">			</script>
 		<script src="bower_components/angular-table/ng-table.min.js">						</script>
 		<link 	href="bower_components/angular-table/ng-table.min.css"						type="text/css" rel="stylesheet" media="all">
 		<script src="bower_components/angular-translate/angular-translate.min.js">			</script>
 		<script src="bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.min.js"></script>
-		<script src="bower_components/angular-ui/ui-bootstrap-tpls-2.2.0.min.js">			</script>
+		<script src="bower_components/angular-ui-bootstrap/ui-bootstrap-tpls-2.3.0.min.js">	</script>
 		<script src="bower_components/angular-ui-router/angular-ui-router.min.js">			</script>
-		<script src="bower_components/angular-filter/angular-filter.min.js">				</script>
-		<script src="bower_components/angucomplete-alt/angucomplete-alt.min.js">			</script>
-		<link 	href="bower_components/angucomplete-alt/angucomplete-alt.css"				type="text/css" rel="stylesheet" media="all">
 
-		<!-- dependencies: d3 -->
-		<script src="bower_components/d3/d3.min.js">										</script>
+		<!-- dependencies: graph module # currently not used -->
+	<!--<script src="bower_components/angucomplete-alt/angucomplete-alt.min.js">			</script>
+		<link 	href="bower_components/angucomplete-alt/angucomplete-alt.css"				type="text/css" rel="stylesheet" media="all">
+		<script src="bower_components/d3/d3.min.js">										</script>-->
+
 
 		<!-- dependencies: TinyMCE -->
 		<script src="bower_components/tinymce/tinymce.min.js">								</script>
-		<script src="bower_components/angular-ui-tinymce/src/tinymce.js">					</script>
+		<script src="bower_components/angular-ui-tinymce/tinymce.min.js">					</script>
 
 		<!-- app: core -->
 		<script src="app/app.config.js">													</script>
@@ -59,9 +58,14 @@
 		<script src="app/search/search.services.js">										</script>
 		<script src="app/search/search.controllers.js">										</script>
 
-		<!-- app: module-graph -->
-		<link 	href="app/graph/graph.css.css"												type="text/css" rel="stylesheet" media="all">
-		<script src="app/graph/graph.controllers.js">										</script>
+		<!-- app: module-admin  # currently not used -->
+	<!--<link 	href="app/admin/admin.css.css" 												type="text/css" rel="stylesheet" media="all">
+		<script src="app/admin/admin.services.js">											</script>
+		<script src="app/admin/admin.controllers.js">										</script>-->
+		
+		<!-- app: module-graph # currently not used -->
+	<!--<link 	href="app/graph/graph.css.css"												type="text/css" rel="stylesheet" media="all">
+		<script src="app/graph/graph.controllers.js">										</script>-->
 
 	</head>
 
@@ -119,9 +123,11 @@
 
 			<!-- app: lateral menu -->
 			<ul id="menu-container" class="nav nav-tabs tabs-left sideways" onclick="tabSwitch()" role="tablist" >
-		      <li id="dossiers" class="active" role="presentation" style="margin-top:48px;"><a href="#dossiers" data-toggle="tab">{{'idx_Dossiers' | translate}}</a></li>
-			  <li id="search" role="presentation"><a href="#search" data-toggle="tab">{{'idx_Search' | translate}}</a></li>
-		    <!-- <li id="graph" role="presentation"><a href="#graph" data-toggle="tab">{{'idx_Graph' | translate}}</a></li> -->
+		      	<li id="dossiers" class="active" role="presentation" style="margin-top:48px;"><a href="#dossiers" data-toggle="tab">{{'idx_Dossiers' | translate}}</a></li>
+			  	<li id="search" role="presentation"><a href="#search" data-toggle="tab">{{'idx_Search' | translate}}</a></li>
+			<!--<li id="admin" ng-show=" show_admin" role="presentation"><a href="#admin" data-toggle="tab">{{'idx_Admin' | translate}}</a></li> -->
+		    <!--<li id="graph" role="presentation"><a href="#graph" data-toggle="tab">{{'idx_Graph' | translate}}</a></li> -->
+			 
 		    </ul>
 			<div id="menu-background"></div>
 

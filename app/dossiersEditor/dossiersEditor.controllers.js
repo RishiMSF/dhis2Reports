@@ -12,7 +12,7 @@ dossiersEditorModule.controller('dossiersEditorMainController', ['$scope', 'doss
      */
     $scope.tinymceOptions = {
         menu: {},
-        plugins: 'link image table textcolor preview wordcount',
+        plugins: 'link image table textcolor preview wordcount lists advlist',
         toolbar: 'insertfile undo redo | styleselect | fontsizeselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | table | preview',
         fontsize_formats: '8pt 10pt 12pt 14pt 18pt 24pt 36pt',
         //statusbar: false,
@@ -32,7 +32,7 @@ dossiersEditorModule.controller('dossiersEditorMainController', ['$scope', 'doss
      * @dependencies dossiersReaderMeFactory
      */
     var me = dossiersReaderMeFactory.get({},function() {
-        $scope.autho = me.userGroups[0].name == 'Administrators';
+        $scope.autho = me.userGroups[0].name == $scope.userAdminGroup;
         console.log('dossiersEditor: User authorised to edit: ' + $scope.autho);
     });
 

@@ -4,11 +4,11 @@
 ------------------------------------------------------------------------------------*/
 
 //dataElements - 255 KB as of 20/11/2106
-var qry_dataElements = dhisUrl + 'dataElements.json?fields=id,code,displayName,displayFormName,dataSetElements&paging=false&filter=domainType\\:eq\\:AGGREGATE';
+var qry_dataElements = dhisUrl + 'dataElements.json?fields=id,code,displayName,displayFormName,dataSetElements[dataSet[id]]&paging=false&filter=domainType\\:eq\\:AGGREGATE';
 
 
 //descriptions - 286 KB as of 20/11/2106
-var qry_dataElementsDescriptions = dhisUrl + 'dataElements.json?fields=id,displayDescription,dataSetElements&paging=false&filter=domainType\\:eq\\:AGGREGATE';
+var qry_dataElementsDescriptions = dhisUrl + 'dataElements.json?fields=id,displayDescription,dataSetElements[dataSet[id]]&paging=false&filter=domainType\\:eq\\:AGGREGATE';
 
 //dataSets - 258 KB as of 20/11/2106
 var qry_dataElementsGroups = dhisUrl + 'dataElements.json?fields=id,dataSetElements[dataSet[displayName,id,code,attributeValues[value]]]&paging=false&filter=domainType\\:eq\\:AGGREGATE';
@@ -25,7 +25,7 @@ var qry_indicatorGroups = dhisUrl + 'indicators.json?fields=id,indicatorGroups[i
 
 
 //organisationUnitGroupSets - 231 B as of 20/11/2106
-var qry_organisationUnitGroupSets = dhisUrl + 'organisationUnitGroupSets/BtFXTpKRl6n?fields=organisationUnitGroups[id,code,displayName]&paging=false';
+var qry_organisationUnitGroupSets = dhisUrl + 'organisationUnitGroupSets/:ougsUID?fields=organisationUnitGroups[id,code,displayName]&paging=false';
 
 
 searchModule.factory('searchAllFactory', ['$resource',function($resource) {
@@ -42,7 +42,7 @@ searchModule.factory('searchAllFactory', ['$resource',function($resource) {
         get_indicatorGroups:            $resource(qry_indicatorGroups,          {}, { query: {    method: 'GET',  isArray: false  }   }),
 
         //organisationUnitGroupSet
-        get_organisationUnitGroupSets:  $resource(qry_organisationUnitGroupSets,{}, { query: {    method: 'GET',  isArray: false  }   }),
+        get_organisationUnitGroupSets:  $resource(qry_organisationUnitGroupSets,{ougsUID: '@ougsUID'}, { query: {    method: 'GET',  isArray: false  }   }),
     };
 }]);
 
