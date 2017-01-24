@@ -39,12 +39,13 @@ searchModule.controller('searchController', ['ExcelFactory', '$timeout', '$scope
      */
     var blacklist_datasets = [
         'AjwuNAGMSFM', // HIV program
-        'fWSy0WgqDHt', // EVD Screening - Weekly
         'kraMkBJg3JI', // Hospital Ward Multiservice SRH comp - Monthly
-        'Hp68S9muoCn'  // Intentional Violence
+        'Hp68S9muoCn', // Intentional Violence
     ];
     var blacklist_indicatorgroups = [
-        'rD7MJ3LaakW' // Individual Indicators
+        'rD7MJ3LaakW', // Individual Indicators
+        'vnoUusJDY1Z', // Vaccination
+        'vCfO0z5igGT'  // Vaccination 2015
     ];
 
     var filterObjects = function(obj,type) {
