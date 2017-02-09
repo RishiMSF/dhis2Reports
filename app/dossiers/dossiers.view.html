@@ -10,8 +10,8 @@
 		<p>{{'dos_Number of Services' | translate}}: {{services.organisationUnitGroups.length}}</p>
 		<p>{{'dos_Number of DataSets in Service' | translate}}: {{serviceDataSets.dataSets.length}}</p>
 		<p>{{'dos_Number of IndicatorGroups in Service' | translate}}: {{indicatorGroups.indicatorGroups.length}}</p>
-		<div class="col-md-12">
-			<select class="col-md-2" ng-options="service.displayName for service in services.organisationUnitGroups | orderBy: 'displayName'" name="selectService" id="drpBoxServices" ng-model="selectedService">
+		<div class="col-md-2">
+			<select class="form-control col-md-2" ng-options="service.displayName for service in services.organisationUnitGroups | orderBy: 'displayName'" name="selectService" id="drpBoxServices" ng-model="selectedService">
 				<option value="" disabled selected>{{'dos_Select a service' | translate}}</option>
 			</select>
 		</div>

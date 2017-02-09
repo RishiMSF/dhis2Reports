@@ -3,15 +3,15 @@
     Please refer to the LICENSE.md and LICENSES-DEP.md for complete licenses.
 ------------------------------------------------------------------------------------*/
 
-/*var graphModule = angular.module('graphModule', ['angucomplete-alt']);
-var adminModule = angular.module('adminModule', []);*/
+/*var graphModule = angular.module('graphModule', ['angucomplete-alt']);*/
+var adminModule = angular.module('adminModule', []);
 
 var dossiersEditorModule = angular.module('dossiersEditorModule', ['ui.tinymce']);
 var dossiersReaderModule = angular.module('dossiersReaderModule', []);
 var searchModule = angular.module('searchModule', ['ngTable', 'ui.bootstrap']);
 var dossiersModule = angular.module('dossiersModule', ['dossiersEditorModule','dossiersReaderModule']);
 
-var appModule = angular.module('appModule', ['ui.router', 'd2Menu', 'ngSanitize', 'pascalprecht.translate', 'ngResource', 'dossiersModule', 'searchModule'/*, 'adminModule', 'graphModule'*/]);
+var appModule = angular.module('appModule', ['ui.router', 'd2Menu', 'ngSanitize', 'pascalprecht.translate', 'ngResource', 'dossiersModule', 'searchModule', 'adminModule'/*, 'graphModule'*/]);
 
 /*
  * 	@alias appModule.config
@@ -41,11 +41,11 @@ appModule.config(['$stateProvider', '$urlRouterProvider', '$translateProvider', 
             url:'/search',
             templateUrl: 'app/search/search.view.html',
         })
-        /*.state('admin', {
+        .state('admin', {
             url:'/admin',
             templateUrl: 'app/admin/admin.view.html'
         })
-        .state('graph', {
+        /*.state('graph', {
             url:'/graph',
             templateUrl: 'app/graph/graph.view.html',
         })*/;

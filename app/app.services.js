@@ -57,3 +57,5 @@ appModule.factory('csv_to_json', [
         return JSON.stringify(result); //JSON
     }
 ]);
+
+//http://127.0.0.1:8989/dhis/api/dataStore/HMIS_Dictionary/
