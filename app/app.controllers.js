@@ -10,15 +10,116 @@
  *	@todo
  */
 appModule.controller('appSharedController', ['$scope', '$translate', '$state', '$location', '$stateParams', '$http', '$window', function($scope, $translate, $state, $location, $anchorScroll, $stateParams, $http, $window) {
+
     
-    $scope.ougsUID = 'g7k6NQmqJY2'; //BtFXTpKRl6n//
-    $scope.userAdminGroup = 'Administrators';
-    
-    
+    //$scope.ougsUID = 'g7k6NQmqJY2'; //BtFXTpKRl6n//
+    //$scope.userAdminGroup = 'Administrators';    
 
     this.$route = $state;
     this.$location = $location;
     this.$routeParams = $stateParams;
+
+    console.log("appModule: Checking user's rights...");
+
+    jQuery.ajax({
+        url: dhisUrl + 'dataStore/HMIS_Dictionary/setup_userGroup',
+        contentType: 'json',
+        method: 'GET',
+        dataType: 'text',
+        async: false
+    }).success(function(admin) {
+        admin = jQuery.parseJSON(admin);
+        $scope.userAdminGroup = admin.value;
+        if ($scope.userAdminGroup) {
+            console.log('appModule: Group of users authorised to administrate: ' + admin.value);
+        }else{
+            console.log('appModule: Group of users authorised to administrate has not been identified.');
+        }
+    }).fail(function() {
+        console.log('appModule: Group of users authorised to administrate has not been defined yet, go to the admin panel!');
+        $scope.show_admin = true;
+        window.location.href = dhisUrl + 'apps/HMIS_Dictionary/index.html#/admin';
+    });
+    
+    /* For services list */
+    jQuery.ajax({
+        url: dhisUrl + 'dataStore/HMIS_Dictionary/setup_organisationUnitGroupSet',
+        contentType: 'json',
+        method: 'GET',
+        dataType: 'text',
+        async: false
+    }).success(function(servicelist) {
+        servicelist = jQuery.parseJSON(servicelist);
+        $scope.ougsUID = servicelist.value;
+        if ($scope.ougsUID) {
+            console.log('appModule: List of services taken from organisationUnitGroupSet: ' + servicelist.value);
+        }else{
+            console.log('appModule: organisationUnitGroupSet to take the list of services has not been defined yet, go to the admin panel!');
+        }
+    }).fail(function() {
+        console.log('appModule: organisationUnitGroupSet to take the list of services has not been identified.');
+    });
+
+    /* For DS blacklist */
+    jQuery.ajax({
+        url: dhisUrl + 'dataStore/HMIS_Dictionary/blacklist_dataSets',
+        contentType: 'json',
+        method: 'GET',
+        dataType: 'text',
+        async: false
+    }).success(function(DSlist) {
+        DSlist = jQuery.parseJSON(DSlist);
+        console.log(DSlist);
+        $scope.blacklist_datasets = DSlist;
+        if ($scope.blacklist_datasets) {
+            console.log('appModule: List of blacklisted dataSets: ' + DSlist.value);
+        }else{
+            console.log('appModule: List of blacklisted dataSets has not been defined yet, go to the admin panel!');
+            $scope.blacklist_datasets = [];
+        }
+    }).fail(function() {
+        console.log('appModule: List of blacklisted dataSets has not been identified.');
+        $scope.blacklist_datasets = [];
+    });
+    
+    /* For IG blacklist */
+    jQuery.ajax({
+        url: dhisUrl + 'dataStore/HMIS_Dictionary/blacklist_indicatorGroups',
+        contentType: 'json',
+        method: 'GET',
+        dataType: 'text',
+        async: false
+    }).success(function(IGlist) {
+        IGlist = jQuery.parseJSON(IGlist);
+        $scope.blacklist_indicatorgroups = IGlist;
+        if ($scope.blacklist_indicatorgroups) {
+            console.log('appModule: List of blacklisted indicatorGroups: ' + IGlist.value);
+        }else{
+            console.log('appModule: List of blacklisted indicatorGroups has not been defined yet, go to the admin panel!');
+            $scope.blacklist_indicatorgroups = [];
+        }
+    }).fail(function() {
+        console.log('appModule: List of blacklisted indicatorGroups has not been identified.');
+        $scope.blacklist_indicatorgroups = [];
+    });
+    
+    /* For admin tab */
+    jQuery.ajax({
+        url: dhisUrl + 'me?fields=userGroups[name]',
+        contentType: 'json',
+        method: 'GET',
+        dataType: 'text',
+        async: false
+    }).success(function(me) {
+        me = jQuery.parseJSON(me);
+        me = me.userGroups[0].name == $scope.userAdminGroup;
+        console.log('appModule: User authorised to administrate: ' + me);
+        if (me) {
+            $scope.show_admin = true;
+        }
+    }).fail(function() {
+        console.log('appModule: Failed to check if user is authorised to administrate.');
+    });
 
     /*
      * 	@alias appModule.controller~ping
@@ -97,24 +198,5 @@ appModule.controller('appSharedController', ['$scope', '$translate', '$state', '
         }
         $(".loading").hide();
     };
-    
-    /* For admin tab */
-    /*jQuery.ajax({
-        url: dhisUrl + 'me?fields=userGroups[name]',
-        contentType: 'json',
-        method: 'GET',
-        dataType: 'text',
-        async: false
-    }).success(function(me) {
-        me = jQuery.parseJSON(me);
-        console.log(me);
-        me = me.userGroups[0].name == $scope.userAdminGroup;
-        console.log('appModule: User authorised to administrate: ' + $scope.autho);
-        if (me) {
-            $scope.show_admin = true;
-        }
-    }).fail(function() {
-        console.log('appModule: Failed to check if user is authorised to administrate.')
-    });*/
     
 }]);

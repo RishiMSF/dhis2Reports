@@ -36,7 +36,7 @@ searchModule.controller('searchController', ['ExcelFactory', '$timeout', '$scope
 
     /*
      * Filter dataElements and indicators that are not associated to a dataSet or an indicatorGroup
-     */
+     
     var blacklist_datasets = [
         'AjwuNAGMSFM', // HIV program
         'kraMkBJg3JI', // Hospital Ward Multiservice SRH comp - Monthly
@@ -47,14 +47,16 @@ searchModule.controller('searchController', ['ExcelFactory', '$timeout', '$scope
         'vnoUusJDY1Z', // Vaccination
         'vCfO0z5igGT'  // Vaccination 2015
     ];
-
+    */
+    console.log("searchModule: Blacklisted dataSets: " + $scope.blacklist_datasets);
+    console.log("searchModule: Blacklisted indicatorGroups: " + $scope.blacklist_indicatorgroups);
     var filterObjects = function(obj,type) {
         if(type == 'dataElement'){
             var temp = obj.dataSetElements.length > 0;
-            if (temp && blacklist_datasets.length > 0) {
+            if (temp && $scope.blacklist_datasets.length > 0) {
                  temp = false;
                  obj.dataSetElements.forEach(function(dse) {
-                    temp = temp || (blacklist_datasets.indexOf(dse.dataSet.id) == -1);
+                    temp = temp || ($scope.blacklist_datasets.indexOf(dse.dataSet.id) == -1);
                  });
             }
             /*if (obj.dataSetElements.length == 0) {
@@ -65,10 +67,10 @@ searchModule.controller('searchController', ['ExcelFactory', '$timeout', '$scope
             return temp;
         }else if (type == 'indicator') {
             var temp = obj.indicatorGroups.length > 0;
-            if (temp && blacklist_indicatorgroups.length > 0) {
+            if (temp && $scope.blacklist_indicatorgroups.length > 0) {
                 temp = false;
                 obj.indicatorGroups.forEach(function(ig) {
-                    temp = temp || (blacklist_indicatorgroups.indexOf(ig.id) == -1);
+                    temp = temp || ($scope.blacklist_indicatorgroups.indexOf(ig.id) == -1);
                 });
             }
             /*if (obj.indicatorGroups.length == 0) {

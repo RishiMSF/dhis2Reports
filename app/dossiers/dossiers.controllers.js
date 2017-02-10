@@ -9,7 +9,7 @@
  */
 dossiersModule.controller('dossiersMainController', ['$scope', '$translate', '$anchorScroll', 'dossiersServicesFactory', 'dossiersServiceDataSetsFactory', 'dossiersDossierFactory', 'dossiersServiceIndicatorGrpsFactory', function($scope, $translate, $anchorScroll, dossiersServicesFactory, dossiersServiceDataSetsFactory, dossiersDossierFactory, dossiersServiceIndicatorGrpsFactory) {
     $('#dossiers').tab('show');
-
+    
     /*
      * 	@name addtoTOC
      * 	@description Add an element (section or indicator group) to the Dossier Table Of Content (TOC)

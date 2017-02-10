@@ -1,5 +1,5 @@
 {
-	"version":"0.8.6",
+	"version":"1.0.0-preRelease",
 	"name":"HMIS Dictionary",
 	"description":"HMIS Dictionary",
 	"launch_path":"index.html",
@@ -21,7 +21,8 @@
 	"default_locale":"en",
 	"activities": {
 		"dhis": {
-	  		"href": "*"
+	  		"href": "*",
+			"namespace": "HMIS_Dictionary"
 		}
 	}
 }
