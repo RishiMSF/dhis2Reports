@@ -31,7 +31,7 @@ var qry_set_DS = dhisUrl + 'dataStore/HMIS_Dictionary/blacklist_dataSets';
 
 adminModule.factory('adminDSFactory', ['$resource', function($resource) {
     return {
-        get_DS_set:   $resource(qry_set_DS, {}, { query: { method: 'GET', isArray: false  } }),
+        get_DS_set:   $resource(qry_set_DS, {}, { query: { method: 'GET', isArray: true  } }),
         set_DS:       $resource(qry_set_DS, {}, { query: { method: 'POST', isArray: false  } }),
         upd_DS:       $resource(qry_set_DS, {}, { query: { method: 'PUT', isArray: false  } }),
     };
@@ -41,7 +41,7 @@ var qry_set_IG = dhisUrl + 'dataStore/HMIS_Dictionary/blacklist_indicatorGroups'
 
 adminModule.factory('adminIGFactory', ['$resource', function($resource) {
     return {
-        get_IG_set:   $resource(qry_set_IG, {}, { query: { method: 'GET', isArray: false  } }),
+        get_IG_set:   $resource(qry_set_IG, {}, { query: { method: 'GET', isArray: true  } }),
         set_IG:       $resource(qry_set_IG, {}, { query: { method: 'POST', isArray: false  } }),
         upd_IG:       $resource(qry_set_IG, {}, { query: { method: 'PUT', isArray: false  } }),
     };

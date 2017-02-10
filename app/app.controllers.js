@@ -71,13 +71,15 @@ appModule.controller('appSharedController', ['$scope', '$translate', '$state', '
         DSlist = jQuery.parseJSON(DSlist);
         console.log(DSlist);
         $scope.blacklist_datasets = DSlist;
-        if ($scope.ougsUID) {
+        if ($scope.blacklist_datasets) {
             console.log('appModule: List of blacklisted dataSets: ' + DSlist.value);
         }else{
             console.log('appModule: List of blacklisted dataSets has not been defined yet, go to the admin panel!');
+            $scope.blacklist_datasets = [];
         }
     }).fail(function() {
         console.log('appModule: List of blacklisted dataSets has not been identified.');
+        $scope.blacklist_datasets = [];
     });
     
     /* For IG blacklist */
@@ -90,13 +92,15 @@ appModule.controller('appSharedController', ['$scope', '$translate', '$state', '
     }).success(function(IGlist) {
         IGlist = jQuery.parseJSON(IGlist);
         $scope.blacklist_indicatorgroups = IGlist;
-        if ($scope.ougsUID) {
+        if ($scope.blacklist_indicatorgroups) {
             console.log('appModule: List of blacklisted indicatorGroups: ' + IGlist.value);
         }else{
             console.log('appModule: List of blacklisted indicatorGroups has not been defined yet, go to the admin panel!');
+            $scope.blacklist_indicatorgroups = [];
         }
     }).fail(function() {
         console.log('appModule: List of blacklisted indicatorGroups has not been identified.');
+        $scope.blacklist_indicatorgroups = [];
     });
     
     /* For admin tab */
