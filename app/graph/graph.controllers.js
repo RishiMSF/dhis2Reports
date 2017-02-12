@@ -9,20 +9,23 @@ graphModule.controller('graphMainController', ['$scope', '$translate', 'dossiers
     $('#graph').tab('show');
     $scope.loaded = false;
 
-    var createNode = function(id, group, name) {
+    var createNode = function(id, group, name, description) {
         return {
-            "id": id,
-            "group": group,
-            "name": name,
+            "id":           id,
+            "group":        group,
+            "name":         name,
+            "description":  description
         }
     }
     var nodeList = [];
     var nodeExist = {};
 
-    var createLink = function(idsource, idtarget) {
+    var createLink = function(sourceNode, targetNode) {
         return {
-            "source": idsource,
-            "target": idtarget,
+            "source":       sourceNode.id,
+            "sourceGroup":  sourceNode.group,
+            "target":       targetNode.id,
+            "targetGroup":  targetNode.group
         }
     }
     var linkList = [];
@@ -50,7 +53,21 @@ graphModule.controller('graphMainController', ['$scope', '$translate', 'dossiers
             return element;
         };
 
+        /*
+         * 1) Get services
+         *
+         * 2) a. Get datasets
+         * 2) b. Get sections
+         *
+         * 3) a. Get indicatorgroups
+         * 3) b. Get indicators
+         *
+         * 4) Get dataelements
+         */
+
         services.organisationUnitGroups.forEach(function(oug, oug_num) {
+
+            // 1) Get services
             nodeList.push(createNode(oug.id, "Services", oug.displayName));
 
             dossiersServiceDataSetsFactory.get({
@@ -63,6 +80,8 @@ graphModule.controller('graphMainController', ['$scope', '$translate', 'dossiers
                         queriesStatus[1000 * oug_num + ds_num] = false;
 
                         nodeExist[ds.id] = true;
+
+                        // 2) a. Get datasets
                         nodeList.push(createNode(ds.id, "dataSets", ds.displayName));
 
                         dossiersSectionsFactory.get({
@@ -73,6 +92,8 @@ graphModule.controller('graphMainController', ['$scope', '$translate', 'dossiers
 
                                 if (!nodeExist[sec.id]) {
                                     nodeExist[sec.id] = true;
+
+                                    // 2) b. Get sections
                                     nodeList.push(createNode(sec.id, "Sections", sec.displayName));
                                 }
                                 linkList.push(createLink(ds.id, sec.id));
