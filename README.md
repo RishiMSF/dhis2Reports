@@ -8,8 +8,8 @@ NB: HMIS refers to Health Information Management System
 
 - **Dossiers**: complies names, descriptions, etc. of data elements and indicators by service as medical reference for MSF OCBA HMIS users
 - **Search**: a search tool to access directly any piece of medical reference within MSF OCBA HMIS
-- **Graph**: graphical visualiser of MSF OCBA HMIS data model, in development...
 - **Admin**: administration of HMIS Dictionary App
+- **Graph**: graphical visualiser of MSF OCBA HMIS data model, in development...
 
 ##Configuration
 
