@@ -191,16 +191,49 @@ searchModule.controller('searchController', ['ExcelFactory', '$timeout', '$scope
     }
 
     $scope.$watch('servicesList', function(){
+
+        var start = new Date();
         //console.log('servicesList available?', $scope.servicesList);
         if ($scope.servicesList) {
 
             var temp = {};
 
-            searchAllFactory.get_dataElements.query(function(response){
+            searchAllFactory.qry_dataElementsAll.query(function(response){
                 //console.log('get_dataElements', response);
                 response.dataElements.forEach(function(obj) {
 
                     if(filterObjects(obj,"dataElement")){
+
+                        //objectGroup + service
+                        var temp_arr = {
+                            objectGroup_id: [],
+                            objectGroup_code: [],
+                            objectGroup_name: [],
+                            service_id: [],
+                            service_code: [],
+                            service_name: []
+                        };
+
+                        obj.dataSetElements.forEach(function(grp) {
+                            if(grp.dataSet.attributeValues.length > 0 && grp.dataSet.attributeValues[0].value){
+                                var servicesCode = grp.dataSet.attributeValues[0].value.split('_');
+                                servicesCode.shift();
+                                servicesCode.forEach(function(code) {
+                                    if($scope.servicesList[code]){
+                                        temp_arr.service_id.push($scope.servicesList[code].service_id);
+                                        temp_arr.service_code.push($scope.servicesList[code].service_code);
+                                        temp_arr.service_name.push($scope.servicesList[code].service_name);
+                                    }else{
+                                        console.log("search: Cannot find any service with code: " + code);
+                                    }
+                                });
+                            }
+                            temp_arr.objectGroup_id.push(grp.dataSet.id);
+                            temp_arr.objectGroup_code.push(grp.dataSet.code);
+                            temp_arr.objectGroup_name.push(grp.dataSet.displayName);
+
+
+                        });
 
                         temp[obj.id] = {
                             object_type: 'dataElement',
@@ -208,89 +241,61 @@ searchModule.controller('searchController', ['ExcelFactory', '$timeout', '$scope
                             object_code: obj.code,
                             object_name: obj.displayName,
                             object_form: obj.displayFormName,
+                            object_description: obj.displayDescription,
+                            objectGroup_id: temp_arr.objectGroup_id.join(', '),
+                            objectGroup_code: temp_arr.objectGroup_code.join(', '),
+                            objectGroup_name: temp_arr.objectGroup_name.join(', '),
+                            service_id: temp_arr.service_id.join(', '),
+                            service_code: temp_arr.service_code.join(', '),
+                            service_name: temp_arr.service_name.join(', ')
                         };
                     }
                 });
+
                 //console.log('get_dataElements refactored', temp);
                 $scope.loaded.get_dataElements = true;
+                $scope.loaded.get_dataElementsDescriptions = true;
+                $scope.loaded.get_dataElementsGroups = true;
                 $scope.allObjects = Object.keys(temp).map(function(key) { return temp[key]; });
 
-                searchAllFactory.get_dataElementsDescriptions.query(function(response){
-                    //console.log('get_dataElementsDescriptions', response);
-                    response.dataElements.forEach(function(obj) {
-
-                        if(filterObjects(obj,"dataElement")){
-
-                            temp[obj.id].object_description = obj.displayDescription;
-
-                        };
-                    });
-                    //console.log('get_dataElementsDescriptions refactored', temp);
-                    $scope.loaded.get_dataElementsDescriptions = true;
-                    $scope.allObjects = Object.keys(temp).map(function(key) { return temp[key]; });
-
-                });
-                searchAllFactory.get_dataElementsGroups.query(function(response){
-                    //console.log('get_dataElementsGroups', response);
-                    response.dataElements.forEach(function(obj) {
-
-                        if(filterObjects(obj,"dataElement")){
-
-                            //objectGroup + service
-                            var temp_arr = {
-                                objectGroup_id: [],
-                                objectGroup_code: [],
-                                objectGroup_name: [],
-                                service_id: [],
-                                service_code: [],
-                                service_name: []
-                            };
-
-                            obj.dataSetElements.forEach(function(grp) {
-                                if(grp.dataSet.attributeValues.length > 0 && grp.dataSet.attributeValues[0].value){
-                                    var servicesCode = grp.dataSet.attributeValues[0].value.split('_');
-                                    servicesCode.shift();
-                                    servicesCode.forEach(function(code) {
-                                        if($scope.servicesList[code]){
-                                            temp_arr.service_id.push($scope.servicesList[code].service_id);
-                                            temp_arr.service_code.push($scope.servicesList[code].service_code);
-                                            temp_arr.service_name.push($scope.servicesList[code].service_name);
-                                        }else{
-                                            console.log("search: Cannot find any service with code: " + code);
-                                        }
-                                    });
-                                }
-                                temp_arr.objectGroup_id.push(grp.dataSet.id);
-                                temp_arr.objectGroup_code.push(grp.dataSet.code);
-                                temp_arr.objectGroup_name.push(grp.dataSet.displayName);
-
-
-                            });
-
-                            temp[obj.id].objectGroup_id = temp_arr.objectGroup_id.join(', ');
-                            temp[obj.id].objectGroup_code = temp_arr.objectGroup_code.join(', ');
-                            temp[obj.id].objectGroup_name = temp_arr.objectGroup_name.join(', ');
-                            temp[obj.id].service_id = temp_arr.service_id.join(', ');
-                            temp[obj.id].service_code = temp_arr.service_code.join(', ');
-                            temp[obj.id].service_name =temp_arr.service_name.join(', ');
-
-                        }
-
-                    });
-                    //console.log('get_dataElementsGroups refactored', temp);
-                    $scope.loaded.get_dataElementsGroups = true;
-                    $scope.allObjects = Object.keys(temp).map(function(key) { return temp[key]; });
-
-                });
+                console.log("Total time " + (Date.now() - start));
             });
 
-
-
-            searchAllFactory.get_indicators.query(function(response){
+            searchAllFactory.get_indicatorsAll.query(function(response){
                 //console.log('get_indicators', response);
                 response.indicators.forEach(function(obj) {
 
                     if(filterObjects(obj,"indicator")){
+
+                        //objectGroup + service
+                        var temp_arr = {
+                            objectGroup_id: [],
+                            objectGroup_code: [],
+                            objectGroup_name: [],
+                            service_id: [],
+                            service_code: [],
+                            service_name: []
+                        };
+
+                        obj.indicatorGroups.forEach(function(grp) {
+                            if(grp.attributeValues.length > 0 && grp.attributeValues[0].value){
+                                var servicesCode = grp.attributeValues[0].value.split('_');
+                                servicesCode.shift();
+                                servicesCode.forEach(function(code) {
+                                    if ($scope.servicesList[code]) {
+                                        temp_arr.service_id.push($scope.servicesList[code].service_id);
+                                        temp_arr.service_code.push($scope.servicesList[code].service_code);
+                                        temp_arr.service_name.push($scope.servicesList[code].service_name);
+                                    }else{
+                                        console.log("search: Cannot find any service with code: " + code);
+                                    }
+                                });
+                            }
+                            temp_arr.objectGroup_id.push(grp.id);
+                            temp_arr.objectGroup_code.push(grp.code);
+                            temp_arr.objectGroup_name.push(grp.displayName);
+
+                        });
 
                         temp[obj.id] = {
                             object_type: 'indicator',
@@ -298,6 +303,17 @@ searchModule.controller('searchController', ['ExcelFactory', '$timeout', '$scope
                             object_code: obj.code,
                             object_name: obj.displayName,
                             object_form: obj.displayFormName,
+                            object_den_description: $scope.getDenominator(obj),
+                            object_den_ids: obj.denominator,
+                            object_num_description: $scope.getNumerator(obj),
+                            object_num_ids: obj.numerator,
+                            object_description: $scope.getDescription(obj),
+                            objectGroup_id: temp_arr.objectGroup_id.join(', '),
+                            objectGroup_code: temp_arr.objectGroup_code.join(', '),
+                            objectGroup_name: temp_arr.objectGroup_name.join(', '),
+                            service_id: temp_arr.service_id.join(', '),
+                            service_code: temp_arr.service_code.join(', '),
+                            service_name: temp_arr.service_name.join(', ')
                         };
 
                     }
@@ -305,79 +321,9 @@ searchModule.controller('searchController', ['ExcelFactory', '$timeout', '$scope
                 });
                 //console.log('get_indicators refactored', temp);
                 $scope.loaded.get_indicators = true;
+                $scope.loaded.get_indicatorsDescriptions = true;
+                $scope.loaded.get_indicatorGroups = true;
                 $scope.allObjects = Object.keys(temp).map(function(key) { return temp[key]; });
-
-                searchAllFactory.get_indicatorsDescriptions.query(function(response){
-                    //console.log('get_indicatorsDescriptions', response);
-                    response.indicators.forEach(function(obj) {
-
-                        if(filterObjects(obj,"indicator")){
-
-                            temp[obj.id].object_den_description = $scope.getDenominator(obj);
-                            temp[obj.id].object_den_ids = obj.denominator;
-                            temp[obj.id].object_num_description = $scope.getNumerator(obj);
-                            temp[obj.id].object_num_ids = obj.numerator;
-                            temp[obj.id].object_description = $scope.getDescription(obj);
-
-                        }
-
-                    });
-                    //console.log('get_indicatorsDescriptions refactored', temp);
-                    $scope.loaded.get_indicatorsDescriptions = true;
-                    $scope.allObjects = Object.keys(temp).map(function(key) { return temp[key]; });
-
-                });
-                searchAllFactory.get_indicatorGroups.query(function(response){
-                    //console.log('get_indicatorGroups', response);
-                    response.indicators.forEach(function(obj) {
-
-                        if(filterObjects(obj,"indicator")){
-
-                            //objectGroup + service
-                            var temp_arr = {
-                                objectGroup_id: [],
-                                objectGroup_code: [],
-                                objectGroup_name: [],
-                                service_id: [],
-                                service_code: [],
-                                service_name: []
-                            };
-
-                            obj.indicatorGroups.forEach(function(grp) {
-                                if(grp.attributeValues.length > 0 && grp.attributeValues[0].value){
-                                    var servicesCode = grp.attributeValues[0].value.split('_');
-                                    servicesCode.shift();
-                                    servicesCode.forEach(function(code) {
-                                        if ($scope.servicesList[code]) {
-                                            temp_arr.service_id.push($scope.servicesList[code].service_id);
-                                            temp_arr.service_code.push($scope.servicesList[code].service_code);
-                                            temp_arr.service_name.push($scope.servicesList[code].service_name);
-                                        }else{
-                                            console.log("search: Cannot find any service with code: " + code);
-                                        }
-                                    });
-                                }
-                                temp_arr.objectGroup_id.push(grp.id);
-                                temp_arr.objectGroup_code.push(grp.code);
-                                temp_arr.objectGroup_name.push(grp.displayName);
-
-                            });
-
-                            temp[obj.id].objectGroup_id = temp_arr.objectGroup_id.join(', ');
-                            temp[obj.id].objectGroup_code = temp_arr.objectGroup_code.join(', ');
-                            temp[obj.id].objectGroup_name = temp_arr.objectGroup_name.join(', ');
-                            temp[obj.id].service_id = temp_arr.service_id.join(', ');
-                            temp[obj.id].service_code = temp_arr.service_code.join(', ');
-                            temp[obj.id].service_name =temp_arr.service_name.join(', ');
-
-                        }
-
-                    });
-                    //console.log('get_indicatorGroups refactored', temp);
-                    $scope.loaded.get_indicatorGroups = true;
-                    $scope.allObjects = Object.keys(temp).map(function(key) { return temp[key]; });
-
-                });
 
             });
         }
