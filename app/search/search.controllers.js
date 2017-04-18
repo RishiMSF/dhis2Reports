@@ -170,7 +170,7 @@ searchModule.controller('searchController', ['ExcelFactory', '$timeout', '$scope
         if (result !== null) {
             return result.length > 1 ? result[2] : "x";
         }
-    }
+    };
 
     $scope.getDenominator = function(indicator) {
         var re = /(DENOM:)(.*)/;
@@ -178,7 +178,7 @@ searchModule.controller('searchController', ['ExcelFactory', '$timeout', '$scope
         if (result !== null) {
             return result.length > 1 ? result[2] : "x";
         }
-    }
+    };
 
     $scope.getDescription = function(indicator) {
         var re = /(.*)(NUM:)/;
@@ -188,7 +188,15 @@ searchModule.controller('searchController', ['ExcelFactory', '$timeout', '$scope
         } else {
             return indicator.displayDescription;
         }
-    }
+    };
+
+    $scope.parseFormula = function(formula, dataElements) {
+        var idRegex = /\w*/g;
+        return formula.replace(idRegex, function (dataElementId) {
+            var dataElement = dataElements[dataElementId];
+            return dataElement ? dataElement.object_name : dataElementId;
+        });
+    };
 
     $scope.$watch('servicesList', function(){
 
@@ -256,7 +264,6 @@ searchModule.controller('searchController', ['ExcelFactory', '$timeout', '$scope
                 $scope.loaded.get_dataElements = true;
                 $scope.loaded.get_dataElementsDescriptions = true;
                 $scope.loaded.get_dataElementsGroups = true;
-                $scope.allObjects = Object.keys(temp).map(function(key) { return temp[key]; });
 
                 return "done";
 
@@ -304,9 +311,9 @@ searchModule.controller('searchController', ['ExcelFactory', '$timeout', '$scope
                                 object_name: obj.displayName,
                                 object_form: obj.displayFormName,
                                 object_den_description: $scope.getDenominator(obj),
-                                object_den_ids: obj.denominator,
+                                object_den_ids: $scope.parseFormula(obj.denominator, temp),
                                 object_num_description: $scope.getNumerator(obj),
-                                object_num_ids: obj.numerator,
+                                object_num_ids: $scope.parseFormula(obj.numerator,temp),
                                 object_description: $scope.getDescription(obj),
                                 objectGroup_id: temp_arr.objectGroup_id.join(', '),
                                 objectGroup_code: temp_arr.objectGroup_code.join(', '),
@@ -328,7 +335,7 @@ searchModule.controller('searchController', ['ExcelFactory', '$timeout', '$scope
                     return "done";
                 });
             }).then(function log(){
-                console.log("Total time " + (Date.now() - start));
+                console.log("Loading time of search table: " + (Date.now() - start) + " milliseconds.");
             });
         }
     });
