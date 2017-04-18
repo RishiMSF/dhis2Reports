@@ -198,7 +198,7 @@ searchModule.controller('searchController', ['ExcelFactory', '$timeout', '$scope
 
             var temp = {};
 
-            searchAllFactory.qry_dataElementsAll.query(function(response){
+            searchAllFactory.qry_dataElementsAll.query().$promise.then(function(response){
                 //console.log('get_dataElements', response);
                 response.dataElements.forEach(function(obj) {
 
@@ -258,73 +258,77 @@ searchModule.controller('searchController', ['ExcelFactory', '$timeout', '$scope
                 $scope.loaded.get_dataElementsGroups = true;
                 $scope.allObjects = Object.keys(temp).map(function(key) { return temp[key]; });
 
-                console.log("Total time " + (Date.now() - start));
-            });
+                return "done";
 
-            searchAllFactory.get_indicatorsAll.query(function(response){
-                //console.log('get_indicators', response);
-                response.indicators.forEach(function(obj) {
+            }).then(function(){
+                return searchAllFactory.get_indicatorsAll.query().$promise.then(function(response){
+                    //console.log('get_indicators', response);
+                    response.indicators.forEach(function(obj) {
 
-                    if(filterObjects(obj,"indicator")){
+                        if(filterObjects(obj,"indicator")){
 
-                        //objectGroup + service
-                        var temp_arr = {
-                            objectGroup_id: [],
-                            objectGroup_code: [],
-                            objectGroup_name: [],
-                            service_id: [],
-                            service_code: [],
-                            service_name: []
-                        };
+                            //objectGroup + service
+                            var temp_arr = {
+                                objectGroup_id: [],
+                                objectGroup_code: [],
+                                objectGroup_name: [],
+                                service_id: [],
+                                service_code: [],
+                                service_name: []
+                            };
 
-                        obj.indicatorGroups.forEach(function(grp) {
-                            if(grp.attributeValues.length > 0 && grp.attributeValues[0].value){
-                                var servicesCode = grp.attributeValues[0].value.split('_');
-                                servicesCode.shift();
-                                servicesCode.forEach(function(code) {
-                                    if ($scope.servicesList[code]) {
-                                        temp_arr.service_id.push($scope.servicesList[code].service_id);
-                                        temp_arr.service_code.push($scope.servicesList[code].service_code);
-                                        temp_arr.service_name.push($scope.servicesList[code].service_name);
-                                    }else{
-                                        console.log("search: Cannot find any service with code: " + code);
-                                    }
-                                });
-                            }
-                            temp_arr.objectGroup_id.push(grp.id);
-                            temp_arr.objectGroup_code.push(grp.code);
-                            temp_arr.objectGroup_name.push(grp.displayName);
+                            obj.indicatorGroups.forEach(function(grp) {
+                                if(grp.attributeValues.length > 0 && grp.attributeValues[0].value){
+                                    var servicesCode = grp.attributeValues[0].value.split('_');
+                                    servicesCode.shift();
+                                    servicesCode.forEach(function(code) {
+                                        if ($scope.servicesList[code]) {
+                                            temp_arr.service_id.push($scope.servicesList[code].service_id);
+                                            temp_arr.service_code.push($scope.servicesList[code].service_code);
+                                            temp_arr.service_name.push($scope.servicesList[code].service_name);
+                                        }else{
+                                            console.log("search: Cannot find any service with code: " + code);
+                                        }
+                                    });
+                                }
+                                temp_arr.objectGroup_id.push(grp.id);
+                                temp_arr.objectGroup_code.push(grp.code);
+                                temp_arr.objectGroup_name.push(grp.displayName);
 
-                        });
+                            });
 
-                        temp[obj.id] = {
-                            object_type: 'indicator',
-                            object_id: obj.id,
-                            object_code: obj.code,
-                            object_name: obj.displayName,
-                            object_form: obj.displayFormName,
-                            object_den_description: $scope.getDenominator(obj),
-                            object_den_ids: obj.denominator,
-                            object_num_description: $scope.getNumerator(obj),
-                            object_num_ids: obj.numerator,
-                            object_description: $scope.getDescription(obj),
-                            objectGroup_id: temp_arr.objectGroup_id.join(', '),
-                            objectGroup_code: temp_arr.objectGroup_code.join(', '),
-                            objectGroup_name: temp_arr.objectGroup_name.join(', '),
-                            service_id: temp_arr.service_id.join(', '),
-                            service_code: temp_arr.service_code.join(', '),
-                            service_name: temp_arr.service_name.join(', ')
-                        };
+                            temp[obj.id] = {
+                                object_type: 'indicator',
+                                object_id: obj.id,
+                                object_code: obj.code,
+                                object_name: obj.displayName,
+                                object_form: obj.displayFormName,
+                                object_den_description: $scope.getDenominator(obj),
+                                object_den_ids: obj.denominator,
+                                object_num_description: $scope.getNumerator(obj),
+                                object_num_ids: obj.numerator,
+                                object_description: $scope.getDescription(obj),
+                                objectGroup_id: temp_arr.objectGroup_id.join(', '),
+                                objectGroup_code: temp_arr.objectGroup_code.join(', '),
+                                objectGroup_name: temp_arr.objectGroup_name.join(', '),
+                                service_id: temp_arr.service_id.join(', '),
+                                service_code: temp_arr.service_code.join(', '),
+                                service_name: temp_arr.service_name.join(', ')
+                            };
 
-                    }
+                        }
 
+                    });
+                    //console.log('get_indicators refactored', temp);
+                    $scope.loaded.get_indicators = true;
+                    $scope.loaded.get_indicatorsDescriptions = true;
+                    $scope.loaded.get_indicatorGroups = true;
+                    $scope.allObjects = Object.keys(temp).map(function(key) { return temp[key]; });
+
+                    return "done";
                 });
-                //console.log('get_indicators refactored', temp);
-                $scope.loaded.get_indicators = true;
-                $scope.loaded.get_indicatorsDescriptions = true;
-                $scope.loaded.get_indicatorGroups = true;
-                $scope.allObjects = Object.keys(temp).map(function(key) { return temp[key]; });
-
+            }).then(function log(){
+                console.log("Total time " + (Date.now() - start));
             });
         }
     });
