@@ -192,10 +192,16 @@ searchModule.controller('searchController', ['ExcelFactory', '$timeout', '$scope
 
     $scope.parseFormula = function(formula, dataElements) {
         var idRegex = /\w*/g;
-        return formula.replace(idRegex, function (dataElementId) {
-            var dataElement = dataElements[dataElementId];
-            return dataElement ? dataElement.object_name : dataElementId;
-        });
+        var operatorRegex = /\}\s*[\+\-\*]\s*#/g;
+        return formula
+            .replace(idRegex, function (dataElementId) {
+                var dataElement = dataElements[dataElementId];
+                return dataElement ? dataElement.object_name : dataElementId;
+            })
+            .replace(operatorRegex, function (nexus) {
+                var operator = nexus.split("}")[1].trim().charAt(0);
+                return "} <b>" + operator + "</b> #";
+            });
     };
 
     $scope.$watch('servicesList', function(){
