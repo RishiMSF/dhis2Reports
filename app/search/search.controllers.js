@@ -190,13 +190,22 @@ searchModule.controller('searchController', ['ExcelFactory', '$timeout', '$scope
         }
     };
 
-    $scope.parseFormula = function(formula, dataElements) {
+    $scope.parseFormula = function(formula, dataElements, categoryOptionCombos) {
         var idRegex = /\w*/g;
         var operatorRegex = /\}\s*[\+\-\*]\s*#/g;
         return formula
-            .replace(idRegex, function (dataElementId) {
-                var dataElement = dataElements[dataElementId];
-                return dataElement ? dataElement.object_name : dataElementId;
+            .replace(idRegex, function (objectId) {
+                var dataElement = dataElements[objectId];
+                if (dataElement) {
+                    return dataElement.object_name;
+                }
+
+                var categoryOptionCombo = categoryOptionCombos[objectId];
+                if (categoryOptionCombo) {
+                    return " <i>(" + categoryOptionCombo.object_name + ")</i>";
+                }
+
+                return objectId;
             })
             .replace(operatorRegex, function (nexus) {
                 var operator = nexus.split("}")[1].trim().charAt(0);
@@ -211,6 +220,7 @@ searchModule.controller('searchController', ['ExcelFactory', '$timeout', '$scope
         if ($scope.servicesList) {
 
             var temp = {};
+            var categoryOptionCombosTemp = {};
 
             searchAllFactory.qry_dataElementsAll.query().$promise.then(function(response){
                 //console.log('get_dataElements', response);
@@ -273,6 +283,15 @@ searchModule.controller('searchController', ['ExcelFactory', '$timeout', '$scope
 
                 return "done";
 
+            }).then(function() {
+                return searchAllFactory.get_categoryOptionCombosAll.query().$promise.then(function(response){
+                    response.categoryOptionCombos.forEach(function(obj) {
+                        categoryOptionCombosTemp[obj.id] = {
+                            id: obj.id,
+                            object_name: obj.displayName
+                        }
+                    });
+                });
             }).then(function(){
                 return searchAllFactory.get_indicatorsAll.query().$promise.then(function(response){
                     //console.log('get_indicators', response);
@@ -317,9 +336,9 @@ searchModule.controller('searchController', ['ExcelFactory', '$timeout', '$scope
                                 object_name: obj.displayName,
                                 object_form: obj.displayFormName,
                                 object_den_description: $scope.getDenominator(obj),
-                                object_den_ids: $scope.parseFormula(obj.denominator, temp),
+                                object_den_ids: $scope.parseFormula(obj.denominator, temp, categoryOptionCombosTemp),
                                 object_num_description: $scope.getNumerator(obj),
-                                object_num_ids: $scope.parseFormula(obj.numerator,temp),
+                                object_num_ids: $scope.parseFormula(obj.numerator,temp, categoryOptionCombosTemp),
                                 object_description: $scope.getDescription(obj),
                                 objectGroup_id: temp_arr.objectGroup_id.join(', '),
                                 objectGroup_code: temp_arr.objectGroup_code.join(', '),

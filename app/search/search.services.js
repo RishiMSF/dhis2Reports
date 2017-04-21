@@ -32,6 +32,10 @@ var qry_indicatorsAll = dhisUrl + 'indicators.json?' +
     '&paging=false';
 
 
+var qry_categoryComobosAll = dhisUrl + 'categoryOptionCombos.json?' +
+    'fields=id,displayName' +
+    '&paging=false';
+
 //organisationUnitGroupSets - 231 B as of 20/11/2106
 var qry_organisationUnitGroupSets = dhisUrl + 'organisationUnitGroupSets/:ougsUID?fields=organisationUnitGroups[id,code,displayName]&paging=false';
 
@@ -43,14 +47,17 @@ searchModule.factory('searchAllFactory', ['$resource',function($resource) {
         get_dataElements:               $resource(qry_dataElements,             {}, { query: {    method: 'GET',  isArray: false  }   }),
         get_dataElementsDescriptions:   $resource(qry_dataElementsDescriptions, {}, { query: {    method: 'GET',  isArray: false  }   }),
         get_dataElementsGroups:         $resource(qry_dataElementsGroups,       {}, { query: {    method: 'GET',  isArray: false  }   }),
-        qry_dataElementsAll:            $resource(qry_dataElementsAll,       {}, { query: {    method: 'GET',  isArray: false  }   }),
+        qry_dataElementsAll:            $resource(qry_dataElementsAll,          {}, { query: {    method: 'GET',  isArray: false  }   }),
 
         //indicators
         get_indicators:                 $resource(qry_indicators,               {}, { query: {    method: 'GET',  isArray: false  }   }),
         get_indicatorsDescriptions:     $resource(qry_indicatorsDescriptions,   {}, { query: {    method: 'GET',  isArray: false  }   }),
         get_indicatorGroups:            $resource(qry_indicatorGroups,          {}, { query: {    method: 'GET',  isArray: false  }   }),
-        get_indicatorsAll:              $resource(qry_indicatorsAll,          {}, { query: {    method: 'GET',  isArray: false  }   }),
-        
+        get_indicatorsAll:              $resource(qry_indicatorsAll,            {}, { query: {    method: 'GET',  isArray: false  }   }),
+
+        //categoryOptionCombos
+        get_categoryOptionCombosAll:    $resource(qry_categoryComobosAll,       {}, { query: {    method: 'GET',  isArray: false  }   }),
+
         //organisationUnitGroupSet
         get_organisationUnitGroupSets:  $resource(qry_organisationUnitGroupSets,{ougsUID: '@ougsUID'}, { query: {    method: 'GET',  isArray: false  }   }),
     };
