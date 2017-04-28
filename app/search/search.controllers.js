@@ -191,25 +191,27 @@ searchModule.controller('searchController', ['ExcelFactory', '$timeout', '$scope
     };
 
     $scope.parseFormula = function(formula, dataElements, categoryOptionCombos) {
-        var idRegex = /\w*/g;
-        var operatorRegex = /\}\s*[\+\-\*]\s*#/g;
+        var operatorRegex = /}\s*[\+\-\*]\s*#/g;
+        var dataElementRegex = /#\{\w*}/g;
+        var dataElementCatRegex = /#\{\w*.\w*}/g;
         return formula
-            .replace(idRegex, function (objectId) {
-                var dataElement = dataElements[objectId];
-                if (dataElement) {
-                    return dataElement.object_name;
-                }
-
-                var categoryOptionCombo = categoryOptionCombos[objectId];
-                if (categoryOptionCombo) {
-                    return " <i>(" + categoryOptionCombo.object_name + ")</i>";
-                }
-
-                return objectId;
-            })
             .replace(operatorRegex, function (nexus) {
                 var operator = nexus.split("}")[1].trim().charAt(0);
-                return "} <b>" + operator + "</b> #";
+                return "}<br><b>" + operator + "</b> #";
+            })
+            .replace(dataElementRegex, function (dataElementWithCurlyBraces) {
+                var deId = dataElementWithCurlyBraces.substr(0, dataElementWithCurlyBraces.length - 1).substr(2);
+
+                return dataElements[deId] ? dataElements[deId].object_name : deId;;
+            })
+            .replace(dataElementCatRegex, function (dataElementCatWithCurlyBraces) {
+                var deId = dataElementCatWithCurlyBraces.split("{")[1].split(".")[0];
+                var catId = dataElementCatWithCurlyBraces.split(".")[1].split("}")[0];
+
+                var dataElement = dataElements[deId] ? dataElements[deId].object_name : deId;
+                var categoryOptionCombo = categoryOptionCombos[catId] ? categoryOptionCombos[catId].object_name : catId;
+
+                return dataElement + " <i>(" + categoryOptionCombo + ")</i>";
             });
     };
 
